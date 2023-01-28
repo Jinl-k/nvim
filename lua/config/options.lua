@@ -1,6 +1,7 @@
 -- -- -- Remap space as leader key
 vim.g.mapleader = " "
 -- vim.g.maplocalleader = " "
+vim.opt.diffopt = "filler,iwhite,internal,algorithm:patience"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.sessionoptions = "buffers,curdir,folds,help,tabpages,terminal,globals,winsize"

@@ -1,8 +1,9 @@
 local M =  {
     'sindrets/diffview.nvim',
+    lazy = true,
     dependencies = 'nvim-lua/plenary.nvim',
     cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles' },
-		enabled = false,
+		-- enabled = false,
     -- config = function() require('config.diffview') end
   }
   return M
