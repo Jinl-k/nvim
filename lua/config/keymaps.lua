@@ -84,7 +84,7 @@ keymap("n", "<D-]>", "g,")
 -- Navigate buffers
 -- keymap({"n","i"}, "<M-h>", "<CMD>bprevious<CR>")
 -- keymap({"n","i"}, "<M-l>", "<CMD>bnext<CR>")
-keymap("n", "<c-q>", "<cmd>BufferDelete<cr>",{ silent = true })
+keymap({"n","i","t"}, "<c-q>", "<cmd>BufferDelete<cr>",{ silent = true })
 keymap("n", "<leader>bq", 
 						function() 
 							vim.cmd("BufferLinePick") 
@@ -177,18 +177,31 @@ keymap({"n", "t"}, "<leader>th", "<Cmd>ToggleTerm direction=horizontal<CR>",{ si
 keymap({"n", "t"}, "<leader>tv", "<Cmd>ToggleTerm direction=vertical<CR>",{ silent = true })
 keymap({"n", "t"}, "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>",{ silent = true })
 keymap({"n", "t"}, "<leader>tt", "<Cmd>ToggleTerm<CR>",{ silent = true })
-function _G.set_terminal_keymaps()
-  local opts = {buffer = 0}
-  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+keymap({"n", "t"}, "<leader>tg", "<Cmd>lua toggle_lazygit()<CR>",{ silent = true })
+local _lazygit = nil
+_G.toggle_lazygit = function()
+	if not _lazygit then
+		local Terminal = require("toggleterm.terminal").Terminal
+		_lazygit = Terminal:new({
+			cmd = "lazygit",
+			hidden = true,
+			direction = "float",
+		})
+	end
+	_lazygit:toggle()
 end
+-- function _G.set_terminal_keymaps()
+--   local opts = {buffer = 0}
+--   vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+--   vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+--   vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+--   vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+--   vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+--   vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+-- end
 
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+-- -- if you only want these mappings for toggle term use term://*toggleterm#* instead
+-- vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 
 
@@ -202,7 +215,6 @@ keymap("n","<leader>fr", "<Cmd>lua require('telescope').extensions.frecency.frec
 keymap("n","<leader>F", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>" ,{ noremap = true, silent = true })
 -- 当前文件查找字符
 keymap("n","<C-f>", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>" ,{ noremap = true, silent = true })
-
 
 
 
