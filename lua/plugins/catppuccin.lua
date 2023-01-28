@@ -102,7 +102,7 @@ return {
 						return {
 							-- For base configs.
 							NormalFloat = { fg = cp.text, bg = transparent_background and cp.none},
-							CursorLineNr = { fg = cp.green },
+							CursorLineNr = { fg = cp.blue},
 							Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
 							IncSearch = { bg = cp.pink, fg = cp.surface1 },
 							Keyword = { fg = cp.pink },
@@ -171,7 +171,7 @@ return {
 							["@namespace"] = { fg = cp.rosewater, style = {} },
 
 							["@punctuation.delimiter"] = { fg = cp.teal },
-							["@punctuation.bracket"] = { fg = cp.overlay2 },
+							-- ["@punctuation.bracket"] = { fg = cp.overlay2 },
 							-- ["@string"] = { fg = cp.green },
 							-- ["@string.regex"] = { fg = cp.peach },
 							["@type"] = { fg = cp.yellow },

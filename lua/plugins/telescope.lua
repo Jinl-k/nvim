@@ -105,6 +105,7 @@ local M = {
 			end,
 		}
 		local lga_actions = require("telescope-live-grep-args.actions")
+		local fb_actions = require("telescope").extensions.file_browser.actions
 		return {
 			defaults = {
 				initial_mode = "insert",
@@ -187,6 +188,15 @@ local M = {
 					hidden = false,
 					hijack_netrw = true,
 					respect_gitignore = true,
+					mappings = {
+						["i"] = {
+							-- remap to going to home directory
+							["<C-h>"] = fb_actions.change_cwd
+							-- ["<C-x>"] = function(prompt_bufnr)
+								-- your custom function
+							-- end
+						},
+					},
 				},
 			},
 		}
