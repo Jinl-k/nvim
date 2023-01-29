@@ -39,9 +39,8 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
 
 -- 保存自动格式化
 vim.api.nvim_create_autocmd({ "InsertLeave"}, {
-		pattern = { "*" },
+		pattern = { "*.ts","*.js","*.vue","*.json","*.css","*.scss","*.html","*.md","*.lua" },
 		command = "lua vim.lsp.buf.format({ async = true })",
-		nested = true,
 })
 
 

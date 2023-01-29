@@ -138,8 +138,6 @@ keymap({"n","i"}, "<M-h>", "<cmd>BufferLineCyclePrev<cr>",{ silent = true })
 	 })
 
 
-
-
 vim.keymap.set('n', 'gd', '<cmd>lua require("goto-preview").goto_preview_definition()<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', 'gt', '<cmd>lua require("goto-preview").goto_preview_type_definition()<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', 'gi', '<cmd>lua require("goto-preview").goto_preview_implementation()<CR>', { noremap = true, silent = true })
@@ -159,14 +157,10 @@ keymap("n", "<leader>sl", "<cmd>Lspsaga show_line_diagnostics<CR>")
 -- -- Show cursor diagnostic
 -- -- also like show_line_diagnostics  support pass ++unfocus
 -- keymap("n", "<leader>sc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
-
 -- Show buffer diagnostic
 -- keymap("n", "<leader>sb", "<cmd>Lspsaga show_buf_diagnostics<CR>")
-
--- Diagnostic jump can use `<c-o>` to jump back
 keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
 keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
-
 -- -- Diagnostic jump with filter like Only jump to error
 -- keymap("n", "[E", function()
 --   require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
@@ -174,20 +168,7 @@ keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
 -- keymap("n", "]E", function()
 --   require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
 -- end)
-
--- Toggle Outline
 keymap("n","<leader>o", "<cmd>Lspsaga outline<CR>")
-
--- Hover Doc
--- if there has no hover will have a notify no information available
--- to disable it just Lspsaga hover_doc ++quiet
--- press twice it will jump into hover window
-keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
--- if you want keep hover window in right top you can use ++keep arg
--- notice if you use hover with ++keep you press this keymap it will
--- close the hover window .if you want jump to hover window must use
--- wincmd command <C-w>w
--- keymap("n", "K", "<cmd>Lspsaga hover_doc ++keep<CR>")
 
 -- Float terminal
 keymap({"n", "t"}, "<leader>tt", "<cmd>Lspsaga term_toggle<CR>")
@@ -240,10 +221,10 @@ keymap("n","<C-f>", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_
 
 
 -- Lsp formatting
-keymap("n", "<C-M-f>", function()
-	vim.lsp.buf.format({ async = false })
-	vim.api.nvim_command("write")
-end, { desc = "Lsp formatting" })
+-- keymap("n", "<C-M-f>", function()
+-- 	vim.lsp.buf.format({ async = false })
+-- 	vim.api.nvim_command("write")
+-- end, { desc = "Lsp formatting" })
 
 -- -- Open quickfix list
 -- keymap("n", "<leader>q", function()
