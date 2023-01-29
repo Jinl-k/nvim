@@ -37,6 +37,13 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
 		nested = true,
 })
 
+-- 保存自动格式化
+vim.api.nvim_create_autocmd({ "InsertLeave"}, {
+		pattern = { "*" },
+		command = "lua vim.lsp.buf.format({ async = true })",
+		nested = true,
+})
+
 
 vim.api.nvim_create_user_command("BufferDelete", function()
     ---@diagnostic disable-next-line: missing-parameter

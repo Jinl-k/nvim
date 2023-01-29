@@ -1,6 +1,5 @@
 local M = {
     "jose-elias-alvarez/null-ls.nvim",
-		enabled = false,
     event = "BufReadPre",
     opts = function()
         local null_ls = require("null-ls")
@@ -28,7 +27,7 @@ local M = {
                 --     end,
                 -- }),
                 code_actions.gitsigns,
-            },
+            }
         }
     end,
 }
