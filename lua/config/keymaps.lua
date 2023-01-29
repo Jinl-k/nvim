@@ -16,11 +16,19 @@ keymap("n", "<leader>W", "<C-w>o") -- 关闭除当前的其他窗口
 -- keymap("n", "<leader>rv", "<C-w>v") -- 水平新增窗口 
 -- keymap("n", "<leader>rh", "<C-w>s") -- 垂直新增窗口
 
+-- code run
 keymap("n", '<c-i>', '<cmd>RunCode<CR>', { noremap = true, silent = true })
-keymap('n', '<leader>rf', '<cmd>RunFile<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>rF', '<cmd>RunFile<CR>', { noremap = true, silent = true })
 keymap('n', '<leader>rtf', '<cmd>RunFile tab<CR>', { noremap = true, silent = true })
-keymap('n', '<leader>rp', '<cmd>RunProject<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>rP', '<cmd>RunProject<CR>', { noremap = true, silent = true })
 keymap('n', '<leader>rc', '<cmd>RunClose<CR>', { noremap = true, silent = true })
+
+-- 全局替换字符
+keymap('n', '<leader>rp', "<cmd>lua require('spectre').open()<CR>", {  silent = true })
+keymap('n', '<leader>rf', "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", {  silent = true })
+keymap('n', '<leader>rwf', "viw:lua require('spectre').open_file_search()<cr>", {  silent = true })
+
+
 
 keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>",{silent = true, noremap = true})
 keymap("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>"  )
