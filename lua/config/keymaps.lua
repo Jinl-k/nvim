@@ -34,7 +34,7 @@ keymap('n', '<leader>rf', "<cmd>lua require('spectre').open_visual({select_word=
 keymap('n', '<leader>rwf', "viw:lua require('spectre').open_file_search()<cr>", {  silent = true })
 
 
-
+-- trouble
 keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>",{silent = true, noremap = true})
 keymap("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>"  )
 keymap("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>" ,{silent = true, noremap = true} )
@@ -221,10 +221,10 @@ keymap("n","<C-f>", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_
 
 
 -- Lsp formatting
--- keymap("n", "<C-M-f>", function()
--- 	vim.lsp.buf.format({ async = false })
--- 	vim.api.nvim_command("write")
--- end, { desc = "Lsp formatting" })
+keymap("n", "<leader>fa", function()
+	vim.lsp.buf.format({ async = false })
+	-- vim.api.nvim_command("write")
+end, { noremap = true, silent = true },{ desc = "Lsp formatting" })
 
 -- -- Open quickfix list
 -- keymap("n", "<leader>q", function()

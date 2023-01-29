@@ -6,6 +6,7 @@ local M = {
         "hrsh7th/cmp-nvim-lsp",
         "williamboman/mason-lspconfig.nvim",
 				'ray-x/lsp_signature.nvim',
+				"lvimuser/lsp-inlayhints.nvim",
     },
 		-- keys ={
 		-- 		{ "<leader>gd","<cmd>Telescope lsp_definitions<cr>"},
@@ -21,6 +22,7 @@ local M = {
         mason_lspconfig.setup({
             ensure_installed = utils.lsp_servers,
         })
+
         mason_lspconfig.setup_handlers({
             function(server_name)
                 lspconfig[server_name].setup({
@@ -114,6 +116,30 @@ local M = {
             end,
 						["tsserver"] = function()
                 lspconfig.tsserver.setup({
+									settings = {
+										javascript = {
+											inlayHints = {
+												includeInlayEnumMemberValueHints = true,
+												includeInlayFunctionLikeReturnTypeHints = true,
+												includeInlayFunctionParameterTypeHints = true,
+												includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+												includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+												includeInlayPropertyDeclarationTypeHints = true,
+												includeInlayVariableTypeHints = true,
+											},
+										},
+										typescript = {
+											inlayHints = {
+												includeInlayEnumMemberValueHints = true,
+												includeInlayFunctionLikeReturnTypeHints = true,
+												includeInlayFunctionParameterTypeHints = true,
+												includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+												includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+												includeInlayPropertyDeclarationTypeHints = true,
+												includeInlayVariableTypeHints = true,
+											},
+										},
+									},
 									cmd = { "typescript-language-server", "--stdio" },
 									filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
 									init_options = { 
@@ -154,6 +180,54 @@ local M = {
 									on_new_config = function(new_config, new_root_dir)
 										new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
 									end,
+									settings = {
+										typescript = {
+											inlayHints = {
+												parameterNames = {
+													enabled = "all",
+													suppressWhenArgumentMatchesName = true,
+												},
+												parameterTypes = {
+													enabled = true,
+												},
+												functionLikeReturnTypes = {
+													enabled = true,
+												},
+												variableTypes = {
+													enabled = true,
+												},
+												enumMemberValues = {
+													enabled = true,
+												},
+												propertyDeclarationTypes = {
+													enabled = true,
+												},
+											},
+										},
+										javascript = {
+											inlayHints = {
+												parameterNames = {
+													enabled = "all",
+													suppressWhenArgumentMatchesName = true,
+												},
+												parameterTypes = {
+													enabled = true,
+												},
+												functionLikeReturnTypes = {
+													enabled = true,
+												},
+												variableTypes = {
+													enabled = true,
+												},
+												enumMemberValues = {
+													enabled = true,
+												},
+												propertyDeclarationTypes = {
+													enabled = true,
+												},
+											},
+										},
+									},
 									filetypes = {'vue'},
 									-- filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
 									init_options = {

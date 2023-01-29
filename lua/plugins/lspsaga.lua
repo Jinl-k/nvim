@@ -6,20 +6,37 @@ return {
     event = 'BufRead',
 		dependencies = { {'nvim-tree/nvim-web-devicons'} },
     config = function()
-				-- local function set_sidebar_icons()
-				-- 	-- Set icons for sidebar.
-				-- 	local diagnostic_icons = {
-				-- 		Error = "",
-				-- 		Warn = "",
-				-- 		Hint = "",
-				-- 		Info = "",
-				-- 	}
-				-- 	for type, icon in pairs(diagnostic_icons) do
-				-- 		local hl = "DiagnosticSign" .. type
-				-- 		vim.fn.sign_define(hl, { text = icon, texthl = hl })
-				-- 	end
-				-- end
-				-- set_sidebar_icons()
+				local function set_sidebar_icons()
+					-- Set icons for sidebar.
+					local diagnostic_icons = {
+						Error = "",
+						Warn = "",
+						Hint = "",
+						Info = "",
+					}
+					for type, icon in pairs(diagnostic_icons) do
+						local hl = "DiagnosticSign" .. type
+						vim.fn.sign_define(hl, { text = icon, texthl = hl })
+					end
+				end
+				local function get_palette()
+					if vim.g.colors_name == "catppuccin" then
+						-- If the colorscheme is catppuccin then use the palette.
+						return require("catppuccin.palettes").get_palette()
+					else
+						-- Default behavior: return lspsaga's default palette.
+						local palette = require("lspsaga.lspkind").colors
+						palette.peach = palette.orange
+						palette.flamingo = palette.orange
+						palette.rosewater = palette.yellow
+						palette.mauve = palette.violet
+						palette.sapphire = palette.blue
+						palette.maroon = palette.orange
+
+						return palette
+					end
+				end
+				set_sidebar_icons()
 
         require('lspsaga').setup({
 					preview = {

@@ -101,6 +101,7 @@ return {
 					mocha = function(cp)
 						return {
 							-- For base configs.
+							LspInlayHint = { bg = cp.none, fg = "#474A5C" },
 							NormalFloat = { fg = cp.text, bg = transparent_background and cp.none},
 							CursorLineNr = { fg = cp.blue},
 							Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },

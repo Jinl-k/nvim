@@ -1,6 +1,6 @@
 return {
 		"hrsh7th/vim-vsnip",
-		lazy = false,
+		event = "InsertEnter",
     config = function()
 				function join(...)
 						return table.concat(vim.tbl_flatten({ ... }), "/")

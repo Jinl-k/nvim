@@ -4,7 +4,7 @@ return {
 	event = 'BufRead',
   config = function()
 
-		 vim.keymap.set("n", "<leader>w", "<C-w>w")
+		--  vim.keymap.set("n", "<leader>w", "<C-w>w")
 		--  vim.keymap.set("n", "<leader>pk", "<cmd>lua require('goto-preview').goto_preview_definition(false, true)<CR>") 
     require('goto-preview').setup {
 			default_mappings = false,

@@ -1,6 +1,7 @@
 local M = {
     "jose-elias-alvarez/null-ls.nvim",
     event = "BufReadPre",
+		-- enabled = false,
     opts = function()
         local null_ls = require("null-ls")
         local formatting = null_ls.builtins.formatting
@@ -12,15 +13,9 @@ local M = {
             sources = {
                 completion.vsnip,
                 -- formatter
-                formatting.shfmt,
                 formatting.stylua,
                 formatting.prettier,
-                formatting.clang_format,
-                formatting.taplo,
-                formatting.black,
-                formatting.fish_indent,
-                diagnostics.fish,
-                diagnostics.trail_space,
+                -- diagnostics.trail_space,	
                 -- diagnostics.cspell.with({
                 --     diagnostics_postprocess = function(diagnostic)
                 --         diagnostic.severity = vim.diagnostic.severity["WARN"]

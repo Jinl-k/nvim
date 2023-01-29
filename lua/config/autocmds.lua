@@ -39,9 +39,16 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
 
 -- 保存自动格式化
 vim.api.nvim_create_autocmd({ "InsertLeave"}, {
-		pattern = { "*.ts","*.js","*.vue","*.json","*.css","*.scss","*.html","*.md","*.lua" },
+		pattern = { "*.ts","*.js","*.json","*.css","*.scss","*.md","*.lua" },
 		command = "lua vim.lsp.buf.format({ async = true })",
 })
+
+-- vim.cmd [[
+-- 	augroup FormatAutogroup
+-- 		autocmd!
+-- 		autocmd InsertLeave *.lua,*.ts,*.vue,*.js lua vim.lsp.buf.format({ async = true })
+-- 	augroup END
+-- ]]
 
 
 vim.api.nvim_create_user_command("BufferDelete", function()
