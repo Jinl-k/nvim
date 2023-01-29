@@ -1,3 +1,4 @@
+-- :echo &filetype 查看文件类型
 local utils = require("utils")
 local keymap = vim.keymap.set
 -- 取消高亮
@@ -15,6 +16,10 @@ keymap("n", "qw", "<C-w>c") -- 关闭当前窗口
 keymap("n", "<leader>W", "<C-w>o") -- 关闭除当前的其他窗口 
 -- keymap("n", "<leader>rv", "<C-w>v") -- 水平新增窗口 
 -- keymap("n", "<leader>rh", "<C-w>s") -- 垂直新增窗口
+
+-- 多光标
+keymap("n", '<m-j>', ':call vm#commands#add_cursor_down(0, v:count1)<cr>', { noremap = true, silent = true })
+keymap("n", '<m-k>', ':call vm#commands#add_cursor_up(0, v:count1)<cr>', { noremap = true, silent = true })
 
 -- code run
 keymap("n", '<c-i>', '<cmd>RunCode<CR>', { noremap = true, silent = true })
@@ -235,10 +240,10 @@ keymap("n","<C-f>", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_
 
 
 -- Lsp formatting
--- keymap("n", "<C-M-f>", function()
--- 	vim.lsp.buf.format({ async = false })
--- 	vim.api.nvim_command("write")
--- end, { desc = "Lsp formatting" })
+keymap("n", "<C-M-f>", function()
+	vim.lsp.buf.format({ async = false })
+	vim.api.nvim_command("write")
+end, { desc = "Lsp formatting" })
 
 -- -- Open quickfix list
 -- keymap("n", "<leader>q", function()

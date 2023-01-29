@@ -1,7 +1,7 @@
 -- https://github.com/olimorris/persisted.nvim
+-- https://github.com/rmagatti/auto-session
 return {
   "olimorris/persisted.nvim",
-  --module = "persisted", -- For lazy loading
 	lazy = false,
 	keys = {
 					{ "<leader>4", "<CMD>SessionSave<CR>"},

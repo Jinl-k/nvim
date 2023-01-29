@@ -18,11 +18,9 @@ local M = {
         local lsp_utils = require("plugins.lsp.lsp-utils")
 				local util = require("lspconfig.util")
         lsp_utils.setup()
-
         mason_lspconfig.setup({
             ensure_installed = utils.lsp_servers,
         })
-
         mason_lspconfig.setup_handlers({
             function(server_name)
                 lspconfig[server_name].setup({

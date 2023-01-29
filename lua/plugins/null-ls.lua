@@ -11,7 +11,7 @@ local M = {
         return {
             debug = true,
             sources = {
-                completion.luasnip,
+                completion.vsnip,
                 -- formatter
                 formatting.shfmt,
                 formatting.stylua,

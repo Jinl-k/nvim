@@ -95,7 +95,7 @@ return {
 					all = function(cp)
 						return {
 							-- For lspsaga.nvim
-							-- SagaBeacon = { bg = cp.surface0 },
+						-- SagaBeacon = { bg = "green" },
 						}
 					end,
 					mocha = function(cp)
