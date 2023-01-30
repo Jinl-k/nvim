@@ -30,14 +30,14 @@ vim.api.nvim_create_autocmd("TermOpen", {
     command = "startinsert",
 })
 
--- 自动保存
-vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+-- 自动保存 , "TextChanged" 
+vim.api.nvim_create_autocmd({ "InsertLeave"}, {
 		pattern = { "*" },
 		command = "silent! wall",
 		nested = true,
 })
 
--- 保存自动格式化
+-- 保存自动格式化 BufWritePre
 vim.api.nvim_create_autocmd({ "InsertLeave"}, {
 		pattern = { "*.ts","*.js","*.json","*.css","*.scss","*.md","*.lua" },
 		command = "lua vim.lsp.buf.format({ async = true })",

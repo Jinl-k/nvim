@@ -44,14 +44,16 @@ keymap("n", "gR", "<cmd>TroubleToggle lsp_references<cr>" ,{silent = true, norem
 -- Better up/down
 keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
 -- 单行或多行移动
 -- Move Lines
-keymap("n", "<C-M-j>", ":m .+1<cr>==", { desc = "Move down" })
-keymap("v", "<C-M-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-keymap("i", "<C-M-j>", "<Esc>:m .+1<cr>==gi", { desc = "Move down" })
-keymap("n", "<C-M-k>", ":m .-2<cr>==", { desc = "Move up" })
-keymap("v", "<C-M-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
-keymap("i", "<C-M-k>", "<Esc>:m .-2<cr>==gi", { desc = "Move up" })
+-- keymap("n", "<C-M-j>", ":m .+1<cr>==", { desc = "Move down" })
+-- keymap("v", "<C-M-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
+-- keymap("i", "<C-M-j>", "<Esc>:m .+1<cr>==gi", { desc = "Move down" })
+-- keymap("n", "<C-M-k>", ":m .-2<cr>==", { desc = "Move up" })
+-- keymap("v", "<C-M-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
+-- keymap("i", "<C-M-k>", "<Esc>:m .-2<cr>==gi", { desc = "Move up" })
+-- 移到行头尾
 keymap({"n", "x" }, "H",
 				function()
             return vim.v.count > 0 and "^" or "g^"
@@ -62,6 +64,7 @@ keymap({"n", "x" }, "L",
         end, { silent = true, expr = true })
 keymap({ "i","c", "t" }, "<m-w>", "<c-right>", { desc = "next word" })
 keymap({ "i","c", "t" }, "<m-b>", "<c-left>", { desc = "previous word" })
+-- 插入模式下移动
 keymap({ "i","c", "t" }, "<c-k>", "<up>")
 keymap({ "i","c", "t" }, "<c-j>", "<down>")	
 keymap({ "i","c", "t" }, "<c-l>", "<right>")
@@ -108,8 +111,8 @@ keymap("n", "<leader>bq",
 							vim.cmd("BufferLinePick") 
 							vim.cmd("BufferDelete")
             end,{ silent = true })
-keymap({"n","i"}, "<M-l>", "<cmd>BufferLineCycleNext<cr>",{ silent = true })
-keymap({"n","i"}, "<M-h>", "<cmd>BufferLineCyclePrev<cr>",{ silent = true })
+keymap({"n","i"}, "<d-j>", "<cmd>BufferLineCycleNext<cr>",{ silent = true })
+keymap({"n","i"}, "<d-k>", "<cmd>BufferLineCyclePrev<cr>",{ silent = true })
 
 -- lsp
 	local wk = require("which-key")

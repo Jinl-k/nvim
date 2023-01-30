@@ -1,22 +1,22 @@
-local M = {
+local M ={
     "hrsh7th/nvim-cmp",
     event = "BufReadPre",
     dependencies = {
 			"rafamadriz/friendly-snippets",
 			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/nvim-cmp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-vsnip",
+			'hrsh7th/vim-vsnip',
 			{
 					"zbirenbaum/copilot-cmp",
 					after = "copilot.lua",
-			},
+			}, 	
     },
     opts = function()
 			 	local  complete_window_settings = {
-						fixed = false,
+						fixed = true,
 						min_width = 20,
 						max_width = 20,
 				}
@@ -30,8 +30,6 @@ local M = {
         --     local line, col = vim.F.unpack_len(vim.api.nvim_win_get_cursor(0))
         --     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
         -- end
-
-
 				local has_words_before = function()
 					if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then 
 						return false 
@@ -53,15 +51,73 @@ local M = {
             formatting = {
 								insert_text = require("copilot_cmp.format").remove_existing,
                 format = function(entry, vim_item)
-                    if vim.tbl_contains({ "path" }, entry.source.name) then
-                        local icon, hl_group = require("nvim-web-devicons").get_icon(entry:get_completion_item().label)
-                        if icon then
-                            vim_item.kind = icon
-                            vim_item.kind_hl_group = hl_group
-                            return vim_item
-                        end
-                    end
-                    vim_item.kind = (cmp_kinds[vim_item.kind] or "") .. vim_item.kind
+                    -- if vim.tbl_contains({ "path" }, entry.source.name) then
+                    --     local icon, hl_group = require("nvim-web-devicons").get_icon(entry:get_completion_item().label)
+                    --     if icon then
+                    --         vim_item.kind = icon
+                    --         vim_item.kind_hl_group = hl_group
+                    --         return vim_item
+                    --     end
+                    -- end
+                    -- vim_item.kind = (cmp_kinds[vim_item.kind] or "") .. vim_item.kind
+										-- -- determine if it is a fixed window size
+										-- if complete_window_settings.fixed and vim.fn.mode() == "i" then
+										-- 		local label = vim_item.abbr
+										-- 		local min_width = complete_window_settings.min_width
+										-- 		local max_width = complete_window_settings.max_width
+										-- 		local truncated_label = vim.fn.strcharpart(label, 0, max_width)
+
+										-- 		if truncated_label ~= label then
+										-- 				vim_item.abbr = string.format("%s %s", truncated_label, "…")
+										-- 		elseif string.len(label) < min_width then
+										-- 				local padding = string.rep(" ", min_width - string.len(label))
+										-- 				vim_item.abbr = string.format("%s %s", label, padding)
+										-- 		end
+										-- end
+                    -- return vim_item
+										local icons ={
+												-- lsp type
+												String = "",
+												Number = "",
+												Boolean = "◩",
+												Array = "",
+												Object = "",
+												Key = "",
+												Null = "ﳠ",
+												-- lsp kind
+												Text = "",
+												Method = "",
+												Function = "",
+												Constructor = "",
+												Namespace = "",
+												Field = "ﰠ",
+												Variable = "ﳋ",
+												Class = "",
+												Interface = "",
+												Module = "ﰪ",
+												Property = "",
+												Unit = "塞",
+												Value = "",
+												Enum = "練",
+												Keyword = "",
+												Snippet = "",
+												Color = "",
+												File = "",
+												Reference = "",
+												Folder = "",
+												EnumMember = "",
+												Constant = "",
+												Struct = "﬌",
+												Event = "",
+												Operator = "",
+												TypeParameter = "",
+										}
+										local kind = vim_item.kind
+										local source = entry.source.name
+
+										vim_item.kind = string.format("%s %s", icons[kind], kind)
+										vim_item.menu = string.format("<%s>", string.upper(source))
+
 										-- determine if it is a fixed window size
 										if complete_window_settings.fixed and vim.fn.mode() == "i" then
 												local label = vim_item.abbr
@@ -76,7 +132,8 @@ local M = {
 														vim_item.abbr = string.format("%s %s", label, padding)
 												end
 										end
-                    return vim_item
+
+										return vim_item
                 end,
             },
 						sorting = {
@@ -138,14 +195,24 @@ local M = {
 										winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
 								}),
             },
-            experimental = { ghost_text = {
+            experimental = { 
+							ghost_text = {
                 hl_group = "LspCodeLens",
-            } },
+            	}	 
+						},
         }
     end,
     config = function(_, opts)
         local cmp = require("cmp")
         cmp.setup(opts)
+				 -- Set configuration for specific filetype.
+				-- cmp.setup.filetype('gitcommit', {
+				-- 	sources = cmp.config.sources({
+				-- 		{ name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+				-- 	}, {
+				-- 		{ name = 'buffer' },
+				-- 	})
+				-- })
         cmp.setup.cmdline({ "/", "?" }, {
             mapping = cmp.mapping.preset.cmdline(),
             sources = {
