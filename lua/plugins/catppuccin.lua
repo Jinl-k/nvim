@@ -12,24 +12,15 @@ return {
 		local float_bg = cp.base
 		local remaps = {
 			NormalFloat = { bg = float_bg }, -- NOTE: catppuccin needs a bg colour
-			CursorLine = { bg = ucolors.darken(cp.surface0, 0.64, cp.base) },
-			ColorColumn = { link = "CursorLine" },
+			-- CursorLine = { bg = ucolors.darken(cp.surface0, 0.64, cp.base) },
+			-- ColorColumn = { link = "CursorLine" },
 			WhichKeyFloat = { link = "NormalFloat" },
-			SpellBad = { fg = cp.red, style = { "italic", "undercurl" } },
-			SpellCap = { fg = cp.red, style = { "italic", "undercurl" } },
-			SpellLocal = { fg = cp.red, style = { "italic", "undercurl" } },
-			SpellRare = { fg = cp.red, style = { "italic", "undercurl" } },
 			CmpItemMenu = { fg = cp.surface2 },
 			Pmenu = { bg = cp.surface0 },
 			WinBar = { bg = float_bg },
 			WinBarNC = { bg = float_bg },
 			WinBarModified = { fg = cp.yellow, bg = float_bg }, -- same as BufferCurrentMod
 			NavicIconsFileNC = { fg = cp.flamingo, bg = float_bg },
-			-- VertSplit = { fg = cp.overlay1 },
-			-- SpellBad = { fg = cp.maroon },
-			-- SpellCap = { fg = cp.peach },
-			-- SpellLocal = { fg = cp.lavender },
-			-- SpellRare = { fg = cp.teal },
 		}
 		local telescope_results = cp.base
 		-- local telescope_prompt = cp.surface0
@@ -104,9 +95,9 @@ return {
 							LspInlayHint = { bg = cp.none, fg = "#474A5C" },
 							NormalFloat = { fg = cp.text, bg = transparent_background and cp.none},
 							CursorLineNr = { fg = cp.blue},
-							Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
-							IncSearch = { bg = cp.pink, fg = cp.surface1 },
-							Keyword = { fg = cp.pink },
+							-- Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
+							-- IncSearch = { bg = cp.pink, fg = cp.surface1 },
+							-- Keyword = { fg = cp.pink },
 							Type = { fg = cp.blue },
 							Typedef = { fg = cp.yellow },
 							StorageClass = { fg = cp.red, style = { "italic" } },

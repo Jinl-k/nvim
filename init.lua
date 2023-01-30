@@ -1,6 +1,3 @@
--- local util = require("utils")
--- local require = util.require
-
 require("config.options")
 require("config.lazy")
 

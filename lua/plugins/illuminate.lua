@@ -5,11 +5,11 @@ return {
 		lazy = false,
 	config = function()
 		require('illuminate').configure({
-        delay = 100,
+        delay = 300,
         under_cursor = true,
         modes_denylist = { "i" },
         providers = {
-            --[[ "lsp", ]]
+            [[ "lsp", ]],
             "regex",
             "treesitter",
         },

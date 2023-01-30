@@ -12,7 +12,6 @@
     -- config = function() require('config.testing') end,
   }
 	return M
--- local signs = require("utils").signs
 
 -- neotest.setup({
 --   adapters = {

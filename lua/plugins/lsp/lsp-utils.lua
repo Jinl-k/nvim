@@ -18,12 +18,12 @@ M.setup = function()
 		},
 		signs = true,
 		underline = true,
-		update_in_insert = true,
-		severity_sort = false,
+		update_in_insert = false,
+		severity_sort = true,
 	})
 
 	---- sign column
-	local signs = require("utils").lsp_signs
+	local signs = require("config.utils").lsp_signs
 
 	for type, icon in pairs(signs) do
 		local hl = "DiagnosticSign" .. type

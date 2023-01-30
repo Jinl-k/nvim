@@ -13,7 +13,7 @@ local M = {
 		-- 		{ "<leader>gD","<cmd>lua vim.lsp.buf.declaration()<cr>" },
 		-- },
     config = function(_, opts)
-        local utils = require("utils")
+        local utils = require("config.utils")
         local mason_lspconfig = require("mason-lspconfig")
         local lspconfig = require("lspconfig")
         local lsp_utils = require("plugins.lsp.lsp-utils")

@@ -12,7 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
-local signs = require("tools").signs
+local signs = require("config.utils").signs
 
 -- load lazy
 require("lazy").setup("plugins", {

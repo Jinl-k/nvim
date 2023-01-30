@@ -7,7 +7,6 @@ local M =  {
     -- config = function() require('config.diffview') end
   }
   return M
--- local signs = require("utils").signs
 
 -- diffview.setup({
 --   diff_binaries = false, -- Show diffs for binaries

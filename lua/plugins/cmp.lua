@@ -21,7 +21,7 @@ local M ={
 						max_width = 20,
 				}
         local cmp = require("cmp")
-        local cmp_kinds = require("utils").cmp_kinds
+        local cmp_kinds = require("config.utils").cmp_kinds
 
         -- local has_words_before = function()
         --     if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
@@ -41,6 +41,7 @@ local M ={
 				require("copilot_cmp").setup({
 						method = "getCompletionsCycling"	
 				})
+				local Icons = require("config.utils").cmp_kinds
 
         return {
             snippet = {
@@ -75,48 +76,12 @@ local M ={
 										-- 		end
 										-- end
                     -- return vim_item
-										local icons ={
-												-- lsp type
-												String = "",
-												Number = "",
-												Boolean = "◩",
-												Array = "",
-												Object = "",
-												Key = "",
-												Null = "ﳠ",
-												-- lsp kind
-												Text = "",
-												Method = "",
-												Function = "",
-												Constructor = "",
-												Namespace = "",
-												Field = "ﰠ",
-												Variable = "ﳋ",
-												Class = "",
-												Interface = "",
-												Module = "ﰪ",
-												Property = "",
-												Unit = "塞",
-												Value = "",
-												Enum = "練",
-												Keyword = "",
-												Snippet = "",
-												Color = "",
-												File = "",
-												Reference = "",
-												Folder = "",
-												EnumMember = "",
-												Constant = "",
-												Struct = "﬌",
-												Event = "",
-												Operator = "",
-												TypeParameter = "",
-										}
 										local kind = vim_item.kind
-										local source = entry.source.name
+										--  显示代码来源的名称
+										-- local source = entry.source.name
 
-										vim_item.kind = string.format("%s %s", icons[kind], kind)
-										vim_item.menu = string.format("<%s>", string.upper(source))
+										vim_item.kind = string.format("%s %s", Icons[kind], kind)
+										-- vim_item.menu = string.format("<%s>", string.upper(source))
 
 										-- determine if it is a fixed window size
 										if complete_window_settings.fixed and vim.fn.mode() == "i" then
@@ -176,8 +141,8 @@ local M ={
 							end),
             }),
             sources = {
-							  { name = "vsnip" },
 								{ name = "copilot"},
+							  { name = "vsnip" },
 								{ name = "nvim_lsp" },
 								{ name = "nvim_lua" },
 								-- Other Sources
