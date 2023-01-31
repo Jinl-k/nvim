@@ -23,8 +23,8 @@ return {
 					border = "rounded",
 					-- Num from `0 - 1` for measurements
 					height = 0.4,
-					width = 0.4,
-					x = 0.5,
+					width = 0.3,
+					x = 0.9,
 					y = 0.1,
 					-- Highlight group for floating window/border (see ':h winhl')
 					border_hl = "FloatBorder",

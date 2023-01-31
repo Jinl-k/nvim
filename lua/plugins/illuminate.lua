@@ -5,7 +5,7 @@ return {
 		lazy = false,
 	config = function()
 		require('illuminate').configure({
-        delay = 300,
+        delay = 200,
         under_cursor = true,
         modes_denylist = { "i" },
         providers = {

@@ -7,5 +7,10 @@
 			"}"
 		],
 		"description": "Code snippet for 'fori' loop"
-	}
+	},
+	"console": {
+    "prefix": "clg",
+    "body": ["console.log(\"$1\",$2);"],
+    "description": "Logs a message to the console"
+  }
 }

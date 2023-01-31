@@ -18,9 +18,9 @@ keymap("n", "<leader>W", "<C-w>o") -- 关闭除当前的其他窗口
 -- keymap("n", "<leader>rh", "<C-w>s") -- 垂直新增窗口
 
 -- 多光标
-keymap("n", '<m-j>', ':call vm#commands#add_cursor_down(0, v:count1)<cr>', { noremap = true, silent = true })
-keymap("n", '<m-k>', ':call vm#commands#add_cursor_up(0, v:count1)<cr>', { noremap = true, silent = true })
-
+keymap("n", '<d-s-j>', ':call vm#commands#add_cursor_down(0, v:count1)<cr>', { silent = true })
+keymap("n", '<d-s-k>', ':call vm#commands#add_cursor_up(0, v:count1)<cr>', { silent = true })
+vim.api.nvim_set_keymap("i", '<d-v>', '<esc>\"+pa', { noremap = true, silent = true })
 -- code run
 keymap("n", '<c-i>', '<cmd>RunCode<CR>', { noremap = true, silent = true })
 keymap('n', '<leader>rF', '<cmd>RunFile<CR>', { noremap = true, silent = true })
@@ -65,10 +65,10 @@ keymap({"n", "x" }, "L",
 keymap({ "i","c", "t" }, "<m-w>", "<c-right>", { desc = "next word" })
 keymap({ "i","c", "t" }, "<m-b>", "<c-left>", { desc = "previous word" })
 -- 插入模式下移动
-keymap({ "i","c", "t" }, "<c-k>", "<up>")
-keymap({ "i","c", "t" }, "<c-j>", "<down>")	
-keymap({ "i","c", "t" }, "<c-l>", "<right>")
-keymap({ "i","c", "t" }, "<c-h>", "<left>")
+-- keymap({ "i","c", "t" }, "<c-k>", "<up>")
+-- keymap({ "i","c", "t" }, "<c-j>", "<down>")	
+-- keymap({ "i","c", "t" }, "<c-l>", "<right>")
+-- keymap({ "i","c", "t" }, "<c-h>", "<left>")
 -- Select all
 keymap("n", "<C-a>", "ggVG<cr>", { desc = "Select all" })
 
@@ -219,10 +219,13 @@ keymap("n","<leader>F", ":lua require('telescope').extensions.live_grep_args.liv
 -- 当前文件查找字符
 keymap("n","<C-f>", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>" ,{ noremap = true, silent = true })
 
-
-
-
-
+-- 剪切板
+keymap("n", "<leader>fy", function()
+	require("telescope").extensions.neoclip.default()
+end, { noremap = true, silent = true })
+keymap("n", "<leader>fc", function()
+	require("neoclip").clear_history()
+end, { noremap = true, silent = true })
 
 -- Lsp formatting
 keymap("n", "<leader>fa", function()

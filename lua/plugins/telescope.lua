@@ -71,6 +71,7 @@
 -- }
 -- https://github.com/nvim-telescope/telescope.nvim
 -- https://github.com/nvim-telescope/telescope-file-browser.nvim
+-- https://github.com/ahmedkhalf/project.nvim
 local M = {
 	"nvim-telescope/telescope.nvim",
 	lazy = true,
@@ -234,7 +235,7 @@ local M = {
 			exclude_dirs = {"~/.cargo/*","node_modules",".cache/*",".git/*",".idea/*",".DS_Store","pnpm-lock.yaml"},
 
 			-- Show hidden files in telescope
-			show_hidden = false,
+			show_hidden = true,
 
 			-- When set to false, you will get a message when project.nvim changes your
 			-- directory.

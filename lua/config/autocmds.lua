@@ -38,10 +38,10 @@ vim.api.nvim_create_autocmd({ "InsertLeave","TextChanged" }, {
 })
 
 -- 保存自动格式化 BufWritePre
-vim.api.nvim_create_autocmd({ "InsertLeave"}, {
-		pattern = { "*.ts","*.js","*.json","*.css","*.scss","*.md","*.lua" },
-		command = "lua vim.lsp.buf.format({ async = true })",
-})
+-- vim.api.nvim_create_autocmd({ "InsertLeave"}, {
+-- 		pattern = { "*.ts","*.js","*.json","*.css","*.scss","*.md","*.lua" },
+-- 		command = "lua vim.lsp.buf.format({ async = true })",
+-- })
 
 -- vim.cmd [[
 -- 	augroup FormatAutogroup
@@ -50,12 +50,12 @@ vim.api.nvim_create_autocmd({ "InsertLeave"}, {
 -- 	augroup END
 -- ]]
 
-vim.api.nvim_create_autocmd("OptionSet", {
-  pattern = "background",
-  callback = function()
-    vim.cmd("Catppuccin " .. (vim.v.option_new == "light" and "latte" or "mocha"))
-  end,
-})
+-- vim.api.nvim_create_autocmd("OptionSet", {
+--   pattern = "background",
+--   callback = function()
+--     vim.cmd("Catppuccin " .. (vim.v.option_new == "light" and "latte" or "mocha"))
+--   end,
+-- })
 
 
 vim.api.nvim_create_user_command("BufferDelete", function()

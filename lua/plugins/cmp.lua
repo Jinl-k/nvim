@@ -1,3 +1,9 @@
+-- https://github.com/hrsh7th/nvim-cmp
+-- https://github.com/hrsh7th/cmp-path
+-- https://github.com/hrsh7th/cmp-buffer
+-- https://github.com/hrsh7th/cmp-cmdline
+-- https://github.com/hrsh7th/cmp-nvim-lsp
+-- https://github.com/saadparwaiz1/cmp_luasnip
 local M ={
     "hrsh7th/nvim-cmp",
     event = "BufReadPre",
@@ -7,8 +13,7 @@ local M ={
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-vsnip",
-			'hrsh7th/vim-vsnip',
+			{ "saadparwaiz1/cmp_luasnip" },
 			{
 					"zbirenbaum/copilot-cmp",
 					after = "copilot.lua",
@@ -23,13 +28,6 @@ local M ={
         local cmp = require("cmp")
         local cmp_kinds = require("config.utils").cmp_kinds
 
-        -- local has_words_before = function()
-        --     if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
-        --         return false
-        --     end
-        --     local line, col = vim.F.unpack_len(vim.api.nvim_win_get_cursor(0))
-        --     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-        -- end
 				local has_words_before = function()
 					if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then 
 						return false 
@@ -44,43 +42,19 @@ local M ={
 				local Icons = require("config.utils").cmp_kinds
 
         return {
+					 
             snippet = {
                 expand = function(args)
-                    vim.fn["vsnip#anonymous"](args.body)
+										require("luasnip").lsp_expand(args.body)
                 end,
             },
             formatting = {
 								insert_text = require("copilot_cmp.format").remove_existing,
                 format = function(entry, vim_item)
-                    -- if vim.tbl_contains({ "path" }, entry.source.name) then
-                    --     local icon, hl_group = require("nvim-web-devicons").get_icon(entry:get_completion_item().label)
-                    --     if icon then
-                    --         vim_item.kind = icon
-                    --         vim_item.kind_hl_group = hl_group
-                    --         return vim_item
-                    --     end
-                    -- end
-                    -- vim_item.kind = (cmp_kinds[vim_item.kind] or "") .. vim_item.kind
-										-- -- determine if it is a fixed window size
-										-- if complete_window_settings.fixed and vim.fn.mode() == "i" then
-										-- 		local label = vim_item.abbr
-										-- 		local min_width = complete_window_settings.min_width
-										-- 		local max_width = complete_window_settings.max_width
-										-- 		local truncated_label = vim.fn.strcharpart(label, 0, max_width)
-
-										-- 		if truncated_label ~= label then
-										-- 				vim_item.abbr = string.format("%s %s", truncated_label, "…")
-										-- 		elseif string.len(label) < min_width then
-										-- 				local padding = string.rep(" ", min_width - string.len(label))
-										-- 				vim_item.abbr = string.format("%s %s", label, padding)
-										-- 		end
-										-- end
-                    -- return vim_item
 										local kind = vim_item.kind
+										vim_item.kind = string.format("%s %s", Icons[kind], kind)
 										--  显示代码来源的名称
 										-- local source = entry.source.name
-
-										vim_item.kind = string.format("%s %s", Icons[kind], kind)
 										-- vim_item.menu = string.format("<%s>", string.upper(source))
 
 										-- determine if it is a fixed window size
@@ -133,26 +107,24 @@ local M ={
 									end
 								end),
 								["<S-Tab>"] = vim.schedule_wrap(function(fallback)
-								if cmp.visible() and has_words_before() then
-									cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-								else
-									fallback()
-								end
-							end),
+									if cmp.visible() and has_words_before() then
+										cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+									else
+										fallback()
+									end
+								end),
             }),
-            sources = {
+            sources = cmp.config.sources({
 								{ name = "copilot"},
-							  { name = "vsnip" },
+								{ name = "luasnip" },
 								{ name = "nvim_lsp" },
 								{ name = "nvim_lua" },
 								-- Other Sources
 								{ name = "path"},
                 { name = "nvim_lsp_signature_help" },
                 { name = "buffer" },
-            },
+            }),
             window = {
-                -- completion = cmp.config.window.bordered(),
-                -- documentation = cmp.config.window.bordered(),
 								completion = cmp.config.window.bordered({
                 		winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
 								}),

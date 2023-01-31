@@ -189,5 +189,8 @@ function M.toggle(option, silent, values)
 
 end
 
+function M.join(...)
+    return table.concat(vim.tbl_flatten({ ... }), "/")
+end
 
 return M

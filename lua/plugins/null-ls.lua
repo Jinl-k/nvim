@@ -11,7 +11,6 @@ local M = {
         return {
             debug = true,
             sources = {
-                completion.vsnip,
                 -- formatter
                 formatting.stylua,
                 formatting.prettier,

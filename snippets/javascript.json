@@ -1,6 +1,6 @@
 {
   "console": {
-    "prefix": "clg",
+    "prefix": "cccc",
     "body": ["console.log($1);"],
     "description": "Logs a message to the console"
   }
