@@ -9,10 +9,10 @@ return {
 				local function set_sidebar_icons()
 					-- Set icons for sidebar.
 					local diagnostic_icons = {
-						Error = "",
-						Warn = "",
-						Hint = "",
-						Info = "",
+						  Error = "",
+							Warn = "",
+							Info = "ﬤ",
+							Hint = "",
 					}
 					for type, icon in pairs(diagnostic_icons) do
 						local hl = "DiagnosticSign" .. type

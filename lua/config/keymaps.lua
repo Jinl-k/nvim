@@ -3,9 +3,10 @@ local keymap = vim.keymap.set
 -- 取消高亮
 keymap("n", "<leader>nh", ":nohl<CR>")
 -- Remap command key
-keymap("n", "<leader><leader>", ":")
-keymap("n", "<leader><esc>", ":qa!<cr>")
-
+keymap("n", "<leader><leader>", ":",{ silent = true })
+keymap("n", "<leader><esc>", ":qa!<cr>",{ silent = true })
+keymap("i", "<d-z>", "<cmd>undo<cr>", { silent = true })
+keymap("i", "<d-s-z>", "<cmd>redo<cr>", { silent = true })
 -- 窗口
 vim.api.nvim_set_keymap('n', '<leader>h', ':FocusSplitLeft<CR>', { silent = true })
 vim.api.nvim_set_keymap('n', '<leader>j', ':FocusSplitDown<CR>', { silent = true })
@@ -75,14 +76,14 @@ keymap("n", "<C-a>", "ggVG<cr>", { desc = "Select all" })
 -- keymap({ "i", "v", "n" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 
 -- Clear search results
-keymap("n", "<esc>", "<cmd>noh<cr>")
+keymap("n", "<esc>", "<cmd>noh<cr>",{ silent = true })
 
 -- Better indenting
-keymap("v", "<", "<gv")
-keymap("v", ">", ">gv")
+keymap("v", "<", "<gv",{ silent = true })
+keymap("v", ">", ">gv",{ silent = true })
 
 -- Paste without replace clipboard
-keymap("v", "p", '"_dP')
+keymap("v", "p", '"_dP',{ silent = true })
 
 
 
@@ -96,10 +97,11 @@ keymap({ "i", "v", "n","t"}, "<C-M-q>", "<cmd>qa!<cr>", { desc = "Exit Vim" })
 -- neo-tree
 -- keymap({ "i", "v", "n" }, "<leader>1", "<cmd>Neotree toggle<cr>", { desc = "Exit Vim" })
 -- Better move
-keymap("n", "<C-d>", "<C-d>zz")
-keymap("n", "<C-u>", "<C-u>zz")
-keymap("n", "<D-[>", "g;")
-keymap("n", "<D-]>", "g,")
+keymap("n", "<C-d>", "<C-d>zz",{ silent = true })
+keymap("n", "<C-u>", "<C-u>zz",{ silent = true })
+-- 上次光标编辑位置
+keymap("n", "<D-[>", "g;",{ silent = true })
+keymap("n", "<D-]>", "g,",{ silent = true })
 
 -- Navigate buffers
 -- keymap({"n","i"}, "<M-h>", "<CMD>bprevious<CR>")
@@ -110,8 +112,8 @@ keymap("n", "<leader>bq",
 							vim.cmd("BufferLinePick") 
 							vim.cmd("BufferDelete")
             end,{ silent = true })
-keymap({"n","i"}, "<d-j>", "<cmd>BufferLineCycleNext<cr>",{ silent = true })
-keymap({"n","i"}, "<d-k>", "<cmd>BufferLineCyclePrev<cr>",{ silent = true })
+keymap({"n","i"}, "<d-k>", "<cmd>BufferLineCycleNext<cr>",{ silent = true })
+keymap({"n","i"}, "<d-j>", "<cmd>BufferLineCyclePrev<cr>",{ silent = true })
 
 -- lsp
 	local wk = require("which-key")
@@ -173,7 +175,7 @@ keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
 keymap("n","<leader>o", "<cmd>Lspsaga outline<CR>")
 
 -- Float terminal
-keymap({"n", "t"}, "<leader>tt", "<cmd>Lspsaga term_toggle<CR>")
+keymap({"n", "t"}, "<leader>tt", "<cmd>Lspsaga term_toggle<CR>",{ silent = true })
 keymap({"n", "t"}, "<leader>th", "<Cmd>ToggleTerm direction=horizontal<CR>",{ silent = true })
 keymap({"n", "t"}, "<leader>tv", "<Cmd>ToggleTerm direction=vertical<CR>",{ silent = true })
 keymap({"n", "t"}, "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>",{ silent = true })
@@ -241,16 +243,43 @@ end, { noremap = true, silent = true },{ desc = "Lsp formatting" })
 
 
 -- DAP
--- keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
--- keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
--- keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", opts)
--- keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", opts)
--- keymap("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", opts)
--- keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
--- keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
--- keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
--- keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 
+keymap("n", "<leader>de", function()
+                for _, opts in ipairs(public.get_all_win_buf_ft()) do
+                    if opts.buf_ft == "dapui_hover" then
+                        ---@diagnostic disable-next-line: missing-parameter
+                        require("dapui").eval()
+                        return
+                    end
+                end
+                ---@diagnostic disable-next-line: missing-parameter
+                require("dapui").eval(vim.fn.input("Enter debug expression: "))
+            end, { silent = true },{desc = "Execute debug expressions"})
+
+    --     {
+    --         mode = { "n" },
+    --         lhs = "<leader>dc",
+    --         rhs = function()
+    --             require("dap").clear_breakpoints()
+    --         end,
+    --         options = { silent = true },
+    --         description = "Clear breakpoints in the current buffer",
+    --     },
+
+
+    --     require("dap").run_last() description = "Rerun debug",
+-- rhs = function() require("dap").toggle_breakpoint() end,
+keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", { silent = true })
+keymap("n", "<f1>", "<cmd>lua require'dap'.continue()<cr>", { silent = true })
+keymap("n", "<f2>", "<cmd>lua require'dap'.step_into()<cr>", { silent = true })
+keymap("n", "<f3>", "<cmd>lua require'dap'.step_over()<cr>", { silent = true })
+keymap("n", "<f4>", "<cmd>lua require'dap'.step_out()<cr>", { silent = true })
+keymap("n", "<f5>", "<cmd>lua require'dap'.repl.toggle()<cr>", { silent = true })
+keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", { silent = true })
+keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", { silent = true })
+keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", { silent = true })
+
+keymap("n", "<leader>lu", ":Lazy update<cr>", { silent = true })
 
 -- local wk = require("which-key")
 

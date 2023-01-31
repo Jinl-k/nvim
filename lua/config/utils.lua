@@ -5,7 +5,12 @@ M.git_colors = {
     GitChange = "#74ADEA",
     GitDelete = "#FE747A",
 }
-M.lsp_signs = { Error = "✖ ", Warn = "! ", Hint = " ", Info = " " }
+M.lsp_signs = {     
+		Error = "",
+    Warn = "",
+    Info = "ﬤ",
+    Hint = "", 
+	}
 
 M.cmp_kinds = {
 		String = "",
@@ -65,10 +70,10 @@ M.powerline = {
 }
 
 M.signs = {
-  Error = "",
-  Warn = "",
-  Hint = "",
-  Info = "",
+  Error = "",
+  Warn = "",
+  Info = "ﬤ",
+  Hint = "",
   GitAdded = "",
   GitModified = "",
   GitRemoved = "",
@@ -126,31 +131,6 @@ M.colors = {
   grey17 = "#0f1115",
   grey18 = "#0d0e11",
   grey19 = "#020203",
-}
-
-M.mason_packages = {
-    -- "bash-language-server",
-    -- "black",
-    -- "clang-format",
-    -- "clangd",
-    -- "codelldb",
-    "css-lsp",
-    -- "eslint-lsp",
-    -- "graphql-language-service-cli",
-    "html-lsp",
-    -- "jdtls",
-    "json-lsp",
-    -- "lua-language-server",
-    -- "markdownlint",
-    "prettier",
-    -- "pyright",
-    -- "shfmt",
-    -- "stylua",
-    -- "tailwindcss-language-server",
-    -- "taplo",
-    "typescript-language-server",
-		"vue-language-server",
-    -- "yaml-language-server",
 }
 
 M.lsp_servers = {

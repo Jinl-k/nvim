@@ -13,14 +13,29 @@ local M = {
 		-- 		{ "<leader>gD","<cmd>lua vim.lsp.buf.declaration()<cr>" },
 		-- },
     config = function(_, opts)
-        local utils = require("config.utils")
         local mason_lspconfig = require("mason-lspconfig")
         local lspconfig = require("lspconfig")
         local lsp_utils = require("plugins.lsp.lsp-utils")
 				local util = require("lspconfig.util")
         lsp_utils.setup()
         mason_lspconfig.setup({
-            ensure_installed = utils.lsp_servers,
+            ensure_installed = {
+							-- "clangd",
+							"tsserver",
+							-- "pyright",
+							"sumneko_lua",
+							-- "eslint",
+							-- "bashls",
+							-- "yamlls",
+							"jsonls",
+							"cssls",
+							-- "taplo",
+							"html",
+							-- "graphql",
+							-- "tailwindcss",
+							"volar",
+							-- "jdtls",
+					},
         })
 
         mason_lspconfig.setup_handlers({

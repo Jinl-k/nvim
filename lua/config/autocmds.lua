@@ -31,7 +31,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
 })
 
 -- 自动保存 , "TextChanged" 
-vim.api.nvim_create_autocmd({ "InsertLeave"}, {
+vim.api.nvim_create_autocmd({ "InsertLeave","TextChanged" }, {
 		pattern = { "*" },
 		command = "silent! wall",
 		nested = true,

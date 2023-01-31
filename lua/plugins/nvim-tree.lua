@@ -62,13 +62,13 @@ return {
 			},
 			diagnostics = {
             enable = true,
-            show_on_dirs = false,
+            show_on_dirs = true,
 						debounce_delay = 50,
             icons = {
-								-- hint = "",
-								-- info = "",
-								warning = "",
-								error = "",
+								error = "",
+								warning = "",
+								-- info = "ﬤ",
+								-- hint = "",
             },
         },
 			actions = {
@@ -128,7 +128,7 @@ return {
 					-- root_folder_label = ":.:s?.*?/..?",
 					icons = {
 						webdev_colors = true,
-						git_placement = "before",
+						git_placement = "after",
 							show = {
 									file = true,
 									folder = true,
@@ -165,7 +165,7 @@ return {
 			filters = {
             dotfiles = false,
             custom = { "node_modules", "\\.cache", "__pycache__",".DS_Store","thumbs.db",".idea",
-								".git", },
+								".git", "^.git$" },
             exclude = {},
         },
 		})
