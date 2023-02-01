@@ -56,27 +56,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
--- 保存自动格式化 BufWritePre
--- vim.api.nvim_create_autocmd({ "InsertLeave"}, {
--- 		pattern = { "*.ts","*.js","*.json","*.css","*.scss","*.md","*.lua" },
--- 		command = "lua vim.lsp.buf.format({ async = true })",
--- })
-
--- vim.cmd [[
--- 	augroup FormatAutogroup
--- 		autocmd!
--- 		autocmd InsertLeave *.lua,*.ts,*.vue,*.js lua vim.lsp.buf.format({ async = true })
--- 	augroup END
--- ]]
-
--- vim.api.nvim_create_autocmd("OptionSet", {
---   pattern = "background",
---   callback = function()
---     vim.cmd("Catppuccin " .. (vim.v.option_new == "light" and "latte" or "mocha"))
---   end,
--- })
-
-
 vim.api.nvim_create_user_command("BufferDelete", function()
     ---@diagnostic disable-next-line: missing-parameter
     local file_exists = vim.fn.filereadable(vim.fn.expand("%p"))

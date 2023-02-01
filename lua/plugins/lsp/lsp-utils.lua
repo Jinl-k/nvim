@@ -43,6 +43,7 @@ M.on_attach = function(client, bufnr)
 				border = "rounded",
 			},
 		})
+
 	-- Enable inlay hints
 	-- if client.server_capabilities["documentSymbolProvider"] then
   --     require("nvim-navic").attach(client, bufnr)

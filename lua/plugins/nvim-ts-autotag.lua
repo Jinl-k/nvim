@@ -1,14 +1,20 @@
 return {
 	"windwp/nvim-ts-autotag",
+	lazy = false,
 	config = function()
 		require("nvim-ts-autotag").setup({
 			filetypes = {
-				"html",
-				"xml",
-				"javascript",
-				"typescriptreact",
-				"javascriptreact",
-				"vue",
+				 'html', 
+				 'javascript',
+				 'typescript', 
+				 'javascriptreact', 
+				 'typescriptreact', 
+				 'svelte', 
+				 'vue', 
+				 'tsx', 
+				 'jsx', 
+				 'rescript',
+				 "xml",
 			},
 			skip_tags = {
 			'area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'slot',

@@ -42,7 +42,7 @@ keymap({"n","i","t"}, "<c-q>", "<cmd>BufferDelete<cr>",opt)
 -- -- 关闭除当前外的其他标签页
 keymap("n", "<leader>bo", ":BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>", opt)
 -- 选择一个标签页关闭
-keymap("n", "<leader>bp", ":BufferLinePickClose<CR>", opt)
+keymap("n", "<leader>bq", ":BufferLinePickClose<CR>", opt)
 -- Navigate buffers
 keymap({"n","i"}, "<d-k>", "<cmd>BufferLineCycleNext<cr>",opt)
 keymap({"n","i"}, "<d-j>", "<cmd>BufferLineCyclePrev<cr>",opt)
@@ -51,7 +51,7 @@ keymap("n", "qw", "<C-w>c",opt) -- 关闭当前窗口
 keymap("n", "<leader>W", "<C-w>o",opt) -- 关闭除当前的其他窗口 
 -- keymap("n", "<leader>rv", "<C-w>v",opt) -- 水平新增窗口 
 -- keymap("n", "<leader>rh", "<C-w>s",opt) -- 垂直新增窗口
-
+keymap("n", "<leader>bp", ":BrowserPreview<CR>", opt)
 -- 多光标
 keymap("n", '<d-s-n>', ':call vm#commands#add_cursor_down(0, v:count1)<cr>', opt)
 keymap("n", '<d-s-p>', ':call vm#commands#add_cursor_up(0, v:count1)<cr>', opt)

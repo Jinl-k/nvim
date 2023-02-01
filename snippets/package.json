@@ -19,6 +19,12 @@
         "language": [
           "lua"
         ]
+      },
+			{
+        "path": "./vue.json",
+        "language": [
+          "vue"
+        ]
       }
     ]
   }
