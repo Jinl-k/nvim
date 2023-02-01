@@ -20,6 +20,8 @@ return{
 
 	end
 }
+
+-- https://browsersync.io/docs/command-line
 -- BrowserSync {args}	run browser-sync server with args
 -- BrowserOpen {args}	open browser-sync, if browser-sync is not start, start it with args
 -- BrowserPreview {-f --port 3000}	preview current file with browser sync

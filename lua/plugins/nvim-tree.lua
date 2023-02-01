@@ -14,7 +14,7 @@ return {
 	config =function()
 	require("nvim-tree").setup({
 			create_in_closed_folder = false,
-			respect_buf_cwd = false,
+			respect_buf_cwd = true,
 			auto_reload_on_write = true,
 			hijack_netrw = true,
 			hijack_unnamed_buffer_when_opening = true,
@@ -23,7 +23,7 @@ return {
 			open_on_setup_file = false,
 			open_on_tab = false,
 			sync_root_with_cwd = true,
-			disable_netrw = false,
+			disable_netrw = true,
 			hijack_cursor = true,
 			update_cwd = true,
 			ignore_ft_on_setup = { "dashboard","alpha" },
@@ -75,7 +75,7 @@ return {
 					use_system_clipboard = true,
 					change_dir = {
 							enable = true,
-							global = false,
+							global = true,
 							restrict_above_cwd = false,
 					},
 					open_file = {

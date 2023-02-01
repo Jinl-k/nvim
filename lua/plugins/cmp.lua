@@ -13,7 +13,7 @@ local M ={
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-path",
-			{ "saadparwaiz1/cmp_luasnip" },
+			"saadparwaiz1/cmp_luasnip",
 			{
 					"zbirenbaum/copilot-cmp",
 					after = "copilot.lua",
@@ -42,7 +42,6 @@ local M ={
 				local Icons = require("config.utils").cmp_kinds
 
         return {
-					 
             snippet = {
                 expand = function(args)
 										require("luasnip").lsp_expand(args.body)

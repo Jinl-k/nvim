@@ -4,22 +4,23 @@ local M = {
         "rafamadriz/friendly-snippets",
     },
     config = function()
-			local api = require("config.utils")
-			local luasnip = require("luasnip")
-			luasnip.setup({
-        history = true,
+			local snippet_path = os.getenv("HOME") .. "/.config/nvim/snippets/"
+			if not vim.tbl_contains(vim.opt.rtp:get(), snippet_path) then
+				vim.opt.rtp:append(snippet_path)
+			end
+			
+			require("luasnip").setup({
+				history = true,
 				updateevents = "TextChanged,TextChangedI",
 				delete_check_events = "TextChanged,InsertLeave",
-    	})
-			require("luasnip.loaders.from_vscode").lazy_load({
-				paths = {
-            api.join(vim.fn.stdpath("config"), "snippets"),
-            api.join(api.join(vim.fn.stdpath("data"), "store"), "friendly-snippets"),
-        },
 			})
-			luasnip.filetype_extend("javascript", { "typescript" })
-    	luasnip.filetype_extend("typescript", { "javascript" })
-    	luasnip.filetype_extend("vue", { "javascript", "typescript" })
+			require("luasnip.loaders.from_lua").lazy_load()
+			require("luasnip.loaders.from_vscode").lazy_load()
+			require("luasnip.loaders.from_snipmate").lazy_load()
+
+			-- luasnip.filetype_extend("javascript", { "typescript" })
+    	-- luasnip.filetype_extend("typescript", { "javascript" })
+    	-- luasnip.filetype_extend("vue", { "javascript", "typescript" })
 		end,
 }
 

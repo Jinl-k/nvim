@@ -1,13 +1,25 @@
+
+-- 边输入边搜索
+vim.o.incsearch = true
+-- 当文件被外部程序修改时，自动加载
+vim.o.autoread = true
+-- 禁止折行
+vim.o.wrap = false
+-- vim.opt.whichwrap:append("<,>,[,],h,l")         -- keys allowed to move to the previous/next line when the beginning/end of line is reached
+-- 补全增强
+vim.o.wildmenu = true
+-- command completion
+vim.opt.wildmode = "longest:full:full"
+vim.opt.wildignore = "*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx,*DS_STORE,*.db"
 -- -- -- Remap space as leader key
 vim.g.mapleader = " "
--- vim.g.maplocalleader = " "
+vim.g.maplocalleader = " "
 vim.opt.diffopt = "filler,iwhite,internal,algorithm:patience"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.sessionoptions = "buffers,curdir,folds,help,tabpages,terminal,globals,winsize"
 vim.opt.viewoptions = "folds,cursor,curdir,slash,unix"
 vim.opt.jumpoptions = "view"
-vim.opt.list = true
 vim.opt.foldlevel = 99
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
@@ -30,29 +42,29 @@ vim.opt.syntax = "on"
 -- })
 
 -- disable built-in plugins
--- local disabled_built_ins = {
---   "2html_plugin",
---   "getscript",
---   "getscriptPlugin",
---   "gzip",
---   "logipat",
---   "netrw",
---   "netrwPlugin",
---   "netrwSettings",
---   "netrwFileHandlers",
---   "matchit",
---   "tar",
---   "tarPlugin",
---   "rrhelper",
---   "spellfile_plugin",
---   "vimball",
---   "vimballPlugin",
---   "zip",
---   "zipPlugin",
--- }
--- for _, plugin in pairs(disabled_built_ins) do
---   vim.g["loaded_" .. plugin] = 1
--- end
+local disabled_built_ins = {
+  "2html_plugin",
+  "getscript",
+  "getscriptPlugin",
+  "gzip",
+  "logipat",
+  "netrw",
+  "netrwPlugin",
+  "netrwSettings",
+  "netrwFileHandlers",
+  "matchit",
+  "tar",
+  "tarPlugin",
+  "rrhelper",
+  "spellfile_plugin",
+  "vimball",
+  "vimballPlugin",
+  "zip",
+  "zipPlugin",
+}
+for _, plugin in pairs(disabled_built_ins) do
+  vim.g["loaded_" .. plugin] = 1
+end
 
 -- 行号
 vim.opt.relativenumber = true
@@ -63,9 +75,6 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.autoindent = true
-
--- 防止包裹
-vim.opt.wrap = false
 
 -- 光标行
 vim.opt.cursorline = true
@@ -91,10 +100,11 @@ vim.opt.backup = false                          -- creates a backup file
 vim.opt.cmdheight = 1                           -- more space in the neovim command line for displaying messages
 vim.opt.completeopt = { "menu","menuone", "noselect" } -- mostly just for cmp
 vim.opt.conceallevel = 0                        -- so that `` is visible in markdown files
+vim.g.encoding = "UTF-8"
 vim.opt.fileencoding = "utf-8"                  -- the encoding written to a file
 vim.opt.hlsearch = true      
 vim.opt.pumheight = 10                          -- pop up menu height
-vim.opt.showmode = false                        -- we don't need to see things like -- INSERT -- anymore
+vim.opt.showmode = true                        -- we don't need to see things like -- INSERT -- anymore
 vim.opt.showtabline = 0                         -- always show tabs
 vim.opt.smartindent = true                      -- make indenting smarter again
 vim.opt.swapfile = false                        -- creates a swapfile
@@ -120,7 +130,6 @@ vim.opt.fillchars = {
     eob = " ",
 }
 vim.opt.shortmess:append "c"                    -- hide all the completion messages, e.g. "-- XXX completion (YYY)", "match 1 of 2", "The only match", "Pattern not found"
-vim.opt.whichwrap:append("<,>,[,],h,l")         -- keys allowed to move to the previous/next line when the beginning/end of line is reached
 vim.opt.iskeyword:append("-")                   -- treats words with `-` as single words
 vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters which describes how automatic formatting is to be done
 vim.opt.linebreak = true

@@ -8,7 +8,7 @@
       'antoinemadec/FixCursorHold.nvim',
       'haydenmeade/neotest-jest'
     },
-		Enabled =false,
+		enabled =false,
     -- config = function() require('config.testing') end,
   }
 	return M

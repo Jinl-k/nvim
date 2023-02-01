@@ -2,27 +2,26 @@ return {
 	'echasnovski/mini.move',
 	 version = false ,
 	 lazy = false,
-	opts =  {
-			mappings = {
+	config = function()
+			require("mini.move").setup({
+				mappings = {
 					-- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
-					left = '<M-h>',
-					right = '<M-l>',
-					down = '<M-j>',
-					up = '<M-k>',
+					left = '<c-m-h>',
+					right = '<c-m-l>',
+					down = '<c-m-j>',
+					up = '<c-m-k>',
 
 					-- Move current line in Normal mode
-					line_left = '<M-h>',
-					line_right = '<M-l>',
-					line_down = '<M-j>',
-					line_up = '<M-k>',
+					line_left = '<c-m-h>',
+					line_right = '<c-m-l>',
+					line_down = '<c-m-j>',
+					line_up = '<c-m-k>',
 				},
 				-- Options which control moving behavior
 				options = {
 					-- Automatically reindent selection during linewise vertical move
 					reindent_linewise = true,
 				},
-		},
-		config = function(opts)
-			require("mini.move").setup(opts)
+			})
 		end,
 	}

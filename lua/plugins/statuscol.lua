@@ -12,6 +12,7 @@
 --   DiagnosticSignWarn = handler
 -- })
 -- https://github.com/luukvbaal/statuscol.nvim
+-- https://github.com/ibhagwan/smartyank.nvim
 local M = {
 	"luukvbaal/statuscol.nvim",
 	enabled = false,

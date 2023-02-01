@@ -37,6 +37,25 @@ vim.api.nvim_create_autocmd({ "InsertLeave","TextChanged" }, {
 		nested = true,
 })
 
+
+-- Highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  pattern = "*",
+})
+
+-- 用o换行不要延续注释
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*",
+  callback = function()
+    vim.opt.formatoptions = vim.opt.formatoptions
+      - "o" -- O and o, don't continue comments
+      + "r" -- But do continue when pressing enter.
+  end,
+})
+
 -- 保存自动格式化 BufWritePre
 -- vim.api.nvim_create_autocmd({ "InsertLeave"}, {
 -- 		pattern = { "*.ts","*.js","*.json","*.css","*.scss","*.md","*.lua" },
