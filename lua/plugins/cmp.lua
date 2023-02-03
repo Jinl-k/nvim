@@ -13,6 +13,7 @@ local M ={
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-path",
+			"onsails/lspkind.nvim" ,
 			"saadparwaiz1/cmp_luasnip",
 			{
 					"zbirenbaum/copilot-cmp",
@@ -20,26 +21,29 @@ local M ={
 			}, 	
     },
     opts = function()
-			 	local  complete_window_settings = {
-						fixed = true,
-						min_width = 20,
-						max_width = 20,
-				}
         local cmp = require("cmp")
-        local cmp_kinds = require("config.utils").cmp_kinds
-
-				local has_words_before = function()
-					if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then 
-						return false 
+				local lspkind = require("lspkind")
+				local compare = require("cmp.config.compare")
+				
+				compare.lsp_scores = function(entry1, entry2)
+					local diff
+					if entry1.completion_item.score and entry2.completion_item.score then
+						diff = (entry2.completion_item.score * entry2.score) - (entry1.completion_item.score * entry1.score)
+					else
+						diff = entry2.score - entry1.score
 					end
-					local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-					return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+					return (diff < 0)
 				end
 
 				require("copilot_cmp").setup({
 						method = "getCompletionsCycling"	
 				})
-				local Icons = require("config.utils").cmp_kinds
+		
+				local icons = {
+						kind = require("config.icons").get("kind", false),
+						type = require("config.icons").get("type", false),
+						cmp = require("config.icons").get("cmp", false),
+				}
 
         return {
             snippet = {
@@ -49,45 +53,37 @@ local M ={
             },
             formatting = {
 								insert_text = require("copilot_cmp.format").remove_existing,
-                format = function(entry, vim_item)
-										local kind = vim_item.kind
-										vim_item.kind = string.format("%s %s", Icons[kind], kind)
-										--  显示代码来源的名称
-										-- local source = entry.source.name
-										-- vim_item.menu = string.format("<%s>", string.upper(source))
-
-										-- determine if it is a fixed window size
-										if complete_window_settings.fixed and vim.fn.mode() == "i" then
-												local label = vim_item.abbr
-												local min_width = complete_window_settings.min_width
-												local max_width = complete_window_settings.max_width
-												local truncated_label = vim.fn.strcharpart(label, 0, max_width)
-
-												if truncated_label ~= label then
-														vim_item.abbr = string.format("%s %s", truncated_label, "…")
-												elseif string.len(label) < min_width then
-														local padding = string.rep(" ", min_width - string.len(label))
-														vim_item.abbr = string.format("%s %s", label, padding)
-												end
-										end
-
-										return vim_item
-                end,
+								fields = { "kind", "abbr", "menu" },
+								format = lspkind.cmp_format({
+									-- mode = 'symbol_text', -- show only symbol annotations
+									-- maxwidth = 20,
+      						ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+									before = function(entry, vim_item)
+											local kind = lspkind.cmp_format({
+												mode = "symbol_text",
+												maxwidth = 20,
+												symbol_map = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp),
+											})(entry, vim_item)
+											local strings = vim.split(kind.kind, "%s", { trimempty = true })
+											kind.kind = strings[1]
+											kind.menu = "(" .. strings[2] .. ")"
+											return kind
+									end,
+								}),
             },
 						sorting = {
 								priority_weight = 2,
 								comparators = {
+										compare.recently_used,
 										require("copilot_cmp.comparators").prioritize,
-      							require("copilot_cmp.comparators").score,
-										cmp.config.compare.offset,
-										cmp.config.compare.exact,
-										cmp.config.compare.score,
-										cmp.config.compare.recently_used,
-										cmp.config.compare.locality,
-										cmp.config.compare.kind,
-										cmp.config.compare.sort_text,
-										cmp.config.compare.length,
-										cmp.config.compare.order,
+										require("copilot_cmp.comparators").score,
+										compare.offset,
+										compare.exact,
+										compare.lsp_scores,
+										compare.kind,
+										compare.sort_text,
+										compare.length,
+										compare.order,
 								},
 						},
             mapping = cmp.mapping.preset.insert({
@@ -98,27 +94,30 @@ local M ={
                 ["<C-f>"] = cmp.mapping.scroll_docs(4),
                 ["<C-Space>"] = cmp.mapping.complete(),
                 ["<C-e>"] = cmp.mapping.close(),
-								["<Tab>"] = vim.schedule_wrap(function(fallback)
-									if cmp.visible() and has_words_before() then
-										cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+								["<Tab>"] = cmp.mapping(function(fallback)
+									if cmp.visible() then
+										cmp.select_next_item()
+									elseif require("luasnip").expand_or_jumpable() then
+										vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
 									else
 										fallback()
 									end
-								end),
-								["<S-Tab>"] = vim.schedule_wrap(function(fallback)
-									if cmp.visible() and has_words_before() then
-										cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+								end, { "i", "s" }),
+								["<S-Tab>"] = cmp.mapping(function(fallback)
+									if cmp.visible() then
+										cmp.select_prev_item()
+									elseif require("luasnip").jumpable(-1) then
+										vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
 									else
 										fallback()
 									end
-								end),
+								end, { "i", "s" }),
             }),
             sources = cmp.config.sources({
 								{ name = "copilot"},
 								{ name = "luasnip" },
 								{ name = "nvim_lsp" },
 								{ name = "nvim_lua" },
-								-- Other Sources
 								{ name = "path"},
                 { name = "nvim_lsp_signature_help" },
                 { name = "buffer" },

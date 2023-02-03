@@ -2,10 +2,10 @@
 -- https://github.com/yamatsum/nvim-cursorline
 return {
 	"RRethy/vim-illuminate",
-		lazy = false,
+	lazy = false,
 	config = function()
 		require('illuminate').configure({
-        delay = 200,
+        delay = 100,
         under_cursor = true,
         modes_denylist = { "i" },
         providers = {

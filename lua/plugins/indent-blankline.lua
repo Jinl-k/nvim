@@ -1,8 +1,5 @@
 local M = {
 	"lukas-reineke/indent-blankline.nvim",
-	dependencies = {
-         "mrjones2014/nvim-ts-rainbow" ,
-    },
 	event = "BufReadPre",
 	opts = function()
 		return {

@@ -2,7 +2,7 @@
 return { 
 	"catppuccin/nvim", 
 	name = "catppuccin",
-		lazy = false,
+	lazy = false,
 	priority = 1000,
 	config = function()
 		local catppuccin = require("catppuccin")
@@ -262,8 +262,7 @@ return {
 					gitgutter = false,
 					gitsigns = true,
 					harpoon = false,
-					hop = true,
-					illuminate = true,
+					illuminate = false,
 					indent_blankline = { enabled = false, colored_indent_levels = false },
 					leap = true,
 					lightspeed = false,
@@ -285,11 +284,11 @@ return {
 					symbols_outline = false,
 					telekasten = false,
 					telescope = true,
-					treesitter_context = false,
+					treesitter_context = true,
 					ts_rainbow = true,
 					vim_sneak = false,
 					vimwiki = false,
-					which_key = true,
+					which_key = false,
 						-- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
 				},
 		})

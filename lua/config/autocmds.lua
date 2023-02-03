@@ -56,6 +56,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
+-- dap-repl buffer should not be listed
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "dap-repl",
+	callback = function(args)
+		vim.api.nvim_buf_set_option(args.buf, "buflisted", false)
+	end,
+})
+
 vim.api.nvim_create_user_command("BufferDelete", function()
     ---@diagnostic disable-next-line: missing-parameter
     local file_exists = vim.fn.filereadable(vim.fn.expand("%p"))

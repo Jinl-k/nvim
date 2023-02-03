@@ -6,11 +6,7 @@ vim.o.autoread = true
 -- 禁止折行
 vim.o.wrap = false
 -- vim.opt.whichwrap:append("<,>,[,],h,l")         -- keys allowed to move to the previous/next line when the beginning/end of line is reached
--- 补全增强
-vim.o.wildmenu = true
--- command completion
-vim.opt.wildmode = "longest:full:full"
-vim.opt.wildignore = "*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx,*DS_STORE,*.db"
+
 -- -- -- Remap space as leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -24,8 +20,12 @@ vim.opt.foldlevel = 99
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = true
+-- 补全增强
+vim.o.wildmenu = true
+-- command completion
+-- vim.opt.wildmode = "longest:full:full"
 vim.opt.wildignorecase = true
-vim.opt.wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**"
+vim.opt.wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,*DS_STORE,*.db,**/node_modules/**,**/bower_modules/**"
 -- vim.opt.ffs = unix
 vim.opt.syntax = "on"
 -- vim.filetype.add({
