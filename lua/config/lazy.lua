@@ -16,9 +16,8 @@ local signs = require("config.utils").signs
 
 -- load lazy
 require("lazy").setup("plugins", {
-  install = { colorscheme = { "catppuccin" } },
-	-- install = { colorscheme = { "rose-pine" } },
-	-- install = { colorscheme = { "material" } },
+  -- install = { colorscheme = { "catppuccin" } },
+	install = { colorscheme = { "starlight" } },
   defaults = { lazy = true },
   checker = { enabled = true },
   performance = {

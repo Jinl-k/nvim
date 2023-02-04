@@ -15,8 +15,7 @@ local M ={
 			"hrsh7th/cmp-path",
 			"onsails/lspkind.nvim" ,
 			"saadparwaiz1/cmp_luasnip",
-			{
-					"zbirenbaum/copilot-cmp",
+			{					"zbirenbaum/copilot-cmp",
 					after = "copilot.lua",
 			}, 	
     },

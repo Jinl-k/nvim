@@ -8,6 +8,10 @@ vim.o.wrap = false
 -- vim.opt.whichwrap:append("<,>,[,],h,l")         -- keys allowed to move to the previous/next line when the beginning/end of line is reached
 
 -- -- -- Remap space as leader key
+vim.o.foldcolumn = '0' -- '0' is not bad
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.diffopt = "filler,iwhite,internal,algorithm:patience"
@@ -16,10 +20,8 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.sessionoptions = "buffers,curdir,folds,help,tabpages,terminal,globals,winsize"
 vim.opt.viewoptions = "folds,cursor,curdir,slash,unix"
 vim.opt.jumpoptions = "view"
-vim.opt.foldlevel = 99
-vim.opt.foldmethod = "expr"
+vim.opt.foldmethod = "indent" -- indent,expr
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.foldenable = true
 -- 补全增强
 vim.o.wildmenu = true
 -- command completion
@@ -97,7 +99,7 @@ vim.opt.smartcase = true
 vim.opt.termguicolors = true
 vim.opt.signcolumn = "yes"
 vim.opt.backup = false                          -- creates a backup file
-vim.opt.cmdheight = 1                           -- more space in the neovim command line for displaying messages
+vim.opt.cmdheight = 0                           -- more space in the neovim command line for displaying messages
 vim.opt.completeopt = { "menu","menuone", "noselect" } -- mostly just for cmp
 vim.opt.conceallevel = 0                        -- so that `` is visible in markdown files
 vim.g.encoding = "UTF-8"

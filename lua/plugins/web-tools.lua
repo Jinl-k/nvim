@@ -2,11 +2,12 @@
 return{
 	'ray-x/web-tools.nvim',
 	event = 'BufRead',
+	-- enabled = false,
 	config = function()
 		require'web-tools'.setup({
 			keymaps = {
-				rename = nil,  -- by default use same setup of lspconfig
-				repeat_rename = '.', -- . to repeat
+				rename = false,  -- by default use same setup of lspconfig
+				-- repeat_rename = '.', -- . to repeat
 			},
 			hurl = {  -- hurl default
 				show_headers = false, -- do not show http headers

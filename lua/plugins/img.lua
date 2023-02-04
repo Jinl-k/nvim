@@ -4,7 +4,7 @@ return{
     "nvim-lua/plenary.nvim",
     "m00qek/baleia.nvim"
   },
-	lazy = false,
+	event = "VeryLazy",
 	config = function()
 		require("chafa").setup({
 			render = {

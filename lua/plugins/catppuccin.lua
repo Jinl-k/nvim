@@ -9,37 +9,6 @@ return {
 		local cp = require("catppuccin.palettes").get_palette()
 		local ucolors = require("catppuccin.utils.colors")
 
-		-- local float_bg = cp.base
-		-- local remaps = {
-		-- 	NormalFloat = { bg = float_bg }, -- NOTE: catppuccin needs a bg colour
-		-- 	CursorLine = { bg = ucolors.darken(cp.surface0, 0.64, cp.base) },
-		-- 	ColorColumn = { link = "CursorLine" },
-		-- 	WhichKeyFloat = { link = "NormalFloat" },
-		-- 	CmpItemMenu = { fg = cp.surface2 },
-		-- 	Pmenu = { bg = cp.surface0 },
-		-- 	WinBar = { bg = float_bg },
-		-- 	WinBarNC = { bg = float_bg },
-		-- 	WinBarModified = { fg = cp.yellow, bg = float_bg }, -- same as BufferCurrentMod
-		-- 	NavicIconsFileNC = { fg = cp.flamingo, bg = float_bg },
-		-- }
-		-- local telescope_results = cp.base
-		-- -- local telescope_prompt = cp.surface0
-		-- local telescope_prompt = "#302D41" -- black3 from original palette
-		-- local fg = cp.surface2
-		-- local purple = cp.green -- or mauve
-		-- remaps = vim.tbl_extend("force", remaps, {
-		-- 	TelescopeBorder = { fg = telescope_results, bg = telescope_results },
-		-- 	TelescopePromptBorder = { fg = telescope_prompt, bg = telescope_prompt },
-		-- 	TelescopePromptCounter = { fg = fg },
-		-- 	TelescopePromptNormal = { fg = fg, bg = telescope_prompt },
-		-- 	TelescopePromptPrefix = { fg = purple, bg = telescope_prompt },
-		-- 	TelescopePromptTitle = { fg = telescope_prompt, bg = purple },
-		-- 	TelescopePreviewTitle = { fg = telescope_prompt, bg = purple },
-		-- 	TelescopeResultsTitle = { fg = telescope_results, bg = telescope_results },
-		-- 	TelescopeMatching = { fg = purple },
-		-- 	TelescopeNormal = { bg = telescope_results },
-		-- 	TelescopeSelection = { bg = telescope_prompt },
-		-- })
 		require("catppuccin").setup({
 				flavour = "mocha", -- latte, frappe, macchiato, mocha
 				background = { -- :h background
@@ -104,18 +73,32 @@ return {
 							crust = "#161320",
 						},
 				},
-				custom_highlights = function(colors)
-						return {
-							-- NeoTreeStatusLineNC = { fg = colors.green, bg =colors.green  },
-								-- Comment = { fg = colors.flamingo },
-								-- ["@constant.builtin"] = { fg = colors.peach, style = {} },
-								-- ["@comment"] = { fg = colors.surface2, style = { "italic" } },
-						}
-				end,
 				highlight_overrides = {
 					mocha = function(cp)
 						return {
-							-- For base configs.
+							-- 多光标
+							VM_Mono_hl = { fg = cp.base, bg = cp.blue },
+							VM_insert_hl = { fg = cp.base, bg = cp.red },
+
+							IndentBlanklineChar = { fg = cp.none },
+        			IndentBlanklineContextChar = { fg = cp.blue },
+
+							rainbowcol1 = { fg = cp.peach, bg = "none" },
+							rainbowcol2 = { fg = cp.mauve, bg = "none" },
+							rainbowcol3 = { fg = cp.teal, bg = "none" },
+							rainbowcol4 = { fg = cp.peach, bg = "none" },
+							rainbowcol5 = { fg = cp.mauve, bg = "none" },
+							rainbowcol6 = { fg = cp.teal, bg = "none" },
+							rainbowcol7 = { fg = cp.peach, bg = "none" },
+
+							TelescopeBorder = { fg = cp.blue },
+							TelescopeSelectionCaret = { fg = cp.flamingo },
+							TelescopeMatching = { fg = cp.blue },
+							NullLsInfoBorder = { link = "FloatBorder" },
+							-- For base configos.
+							FloatBorder = { fg = cp.blue },
+							TabLineFill = { bg = cp.black },
+        			TabLineSel = { fg = cp.green, bg = cp.surface1 },
 							LspInlayHint = { bg = cp.none, fg = "#474A5C" },
 							NormalFloat = { fg = cp.text, bg = transparent_background and cp.none},
 							CursorLineNr = { fg = cp.blue},
@@ -126,6 +109,12 @@ return {
 							Typedef = { fg = cp.yellow },
 							StorageClass = { fg = cp.red, style = { "italic" } },
 
+							BufferLineIndicatorSelected = { fg = cp.peach, bg = cp.none },
+							BufferLineSeparatorSelected = { fg = cp.peach, bg = cp.none },
+							BufferLineSeparator = { fg = cp.base, bg = cp.none },
+							BufferLineSeparatorVisible = { fg = cp.base, bg = cp.mantle },
+							BufferLineCloseButtonSelected = { fg = cp.red, bg = cp.none },
+							BufferLineModifiedSelected = { fg = cp.green, bg = cp.none },
 							-- For native lsp configs.
 							DiagnosticVirtualTextError = { bg = cp.none },
 							DiagnosticVirtualTextWarn = { bg = cp.none },
@@ -138,6 +127,7 @@ return {
 							LspDiagnosticsVirtualTextHint = { fg = cp.rosewater },
 							LspDiagnosticsUnderlineHint = { sp = cp.rosewater },
 
+ 							PmenuSel = { fg = cp.crust, bg = cp.green, bold = false },
 							-- For fidget.
 							FidgetTask = { bg = cp.none, fg = cp.surface2 },
 							FidgetTitle = { fg = cp.blue, style = { "bold" } },
@@ -263,7 +253,7 @@ return {
 					gitsigns = true,
 					harpoon = false,
 					illuminate = false,
-					indent_blankline = { enabled = false, colored_indent_levels = false },
+					indent_blankline = { enabled = true, colored_indent_levels = false },
 					leap = true,
 					lightspeed = false,
 					lsp_saga = true,
@@ -275,7 +265,7 @@ return {
 					neogit = false,
 					neotest = false,
 					neotree = { enabled = false, show_root = true, transparent_panel = false },
-					noice = false,
+					noice = true,
 					notify = true,
 					nvimtree = true,
 					overseer = false,

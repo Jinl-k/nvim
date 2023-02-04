@@ -163,10 +163,11 @@ return {
 					},
         },
 			filters = {
+				-- "^.git$" ".git",
             dotfiles = false,
             custom = { "node_modules", "\\.cache", "__pycache__",".DS_Store","thumbs.db",".idea",
-								".git", "^.git$" },
-            exclude = {},
+							"^.git" },
+            exclude = {".gitignore"},
         },
 		})
 	end

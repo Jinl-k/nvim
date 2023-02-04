@@ -2,7 +2,7 @@
 -- https://github.com/rmagatti/auto-session
 return {
   "olimorris/persisted.nvim",
-	lazy = false,
+	event = "VeryLazy",
 	keys = {
 					{ "<leader>4", "<CMD>SessionSave<CR>"},
 					{ "<leader>5","<CMD>SessionLoad<CR>"},

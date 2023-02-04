@@ -2,9 +2,8 @@
 local M = {
 	"nvim-lualine/lualine.nvim",
 	event = "VeryLazy",
-	-- enabled = false,
 	opts = function()
-		local navic = require("nvim-navic")
+		-- local navic = require("nvim-navic")
 		local function diff_source()
 			local gitsigns = vim.b.gitsigns_status_dict
 			if gitsigns then

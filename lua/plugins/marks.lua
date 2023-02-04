@@ -2,6 +2,7 @@
 return{
 	'chentoast/marks.nvim',
 	lazy = false,
+	event = "VeryLazy",
 	config = function()
 		require'marks'.setup {
 			-- whether to map keybinds or not. default true

@@ -1,7 +1,6 @@
 return {
 	"chrisgrieser/nvim-various-textobjs",
-	lazy = false,
-	-- enabled = false, 
+	event = "VeryLazy",
 	config = function () 
 		require("various-textobjs").setup({ lookForwardLines = 50,useDefaultKeymaps = true })
 	end,

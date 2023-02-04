@@ -2,5 +2,5 @@
 return {
     'akinsho/git-conflict.nvim',
     cmd = { 'GitConflictListQf' },
-    config = true
+    config = true,
   }

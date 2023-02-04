@@ -7,6 +7,12 @@ local opt = {noremap = true,silent = true}
 --   mapbuf("n", "gR", ":TSLspRenameFile<CR>", opt)
 --   mapbuf("n", "gi", ":TSLspImportAll<CR>", opt)
 -- end
+-- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds,opts)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds,opts)
+vim.keymap.set('n', 'zm', require('ufo').openFoldsExceptKinds,opts)
+vim.keymap.set('n', 'zr', require('ufo').closeFoldsWith,opts)
+
 
 -- 上下移动选中文本
 keymap("v", "J", ":move '>+1<CR>gv-gv", opt)
@@ -25,10 +31,10 @@ keymap("i", "<d-z>", "<cmd>undo<cr>", opt)
 keymap("i", "<d-s-z>", "<cmd>redo<cr>", opt)
 -- 窗口
 -- alt + hjkl  窗口之间跳转
-keymap("n", "<m-h>", "<C-w>h", opt)
-keymap("n", "<m-j>", "<C-w>j", opt)
-keymap("n", "<m-k>", "<C-w>k", opt)
-keymap("n", "<m-l>", "<C-w>l", opt)
+keymap({"n","i","t"}, "<m-h>", "<C-w>h", opt)
+keymap({"n","i","t"}, "<m-j>", "<C-w>j", opt)
+keymap({"n","i","t"}, "<m-k>", "<C-w>k", opt)
+keymap({"n","i","t"}, "<m-l>", "<C-w>l", opt)
 vim.api.nvim_set_keymap('n', '<leader>h', ':FocusSplitLeft<CR>', opt)
 vim.api.nvim_set_keymap('n', '<leader>j', ':FocusSplitDown<CR>', opt)
 vim.api.nvim_set_keymap('n', '<leader>k', ':FocusSplitUp<CR>', opt)
@@ -126,8 +132,8 @@ keymap("v", "p", '"_dP',opt)
 -- keymap({ "i", "v", "n" }, "<C-w>", "<cmd>bd<cr><esc>", { desc = "Close buffer" })
 -- keymap({ "i", "v", "n" }, "<C-M-w>", "<cmd>bd!<cr><esc>", { desc = "Close buffer" })
 -- Exit neovim
-keymap({ "i", "v", "n","t" }, "<C-q>", "<cmd>q<cr>", opt,{ desc = "Exit Vim" })
-keymap({ "i", "v", "n","t"}, "<C-M-q>", "<cmd>qa!<cr>", opt,{ desc = "Exit Vim" })
+-- keymap({ "i", "v", "n","t" }, "<C-q>", "<cmd>q<cr>", opt,{ desc = "Exit Vim" })
+-- keymap({ "i", "v", "n","t"}, "<C-M-q>", "<cmd>qa!<cr>", opt,{ desc = "Exit Vim" })
 
 -- neo-tree
 -- keymap({ "i", "v", "n" }, "<leader>1", "<cmd>Neotree toggle<cr>", { desc = "Exit Vim" })

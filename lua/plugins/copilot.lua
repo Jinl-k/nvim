@@ -1,7 +1,6 @@
 return {
 	"zbirenbaum/copilot.lua",
 	event = "BufReadPre",
-	-- enabled = false,
 	config = function()
 		require("copilot").setup({
 					cmp = {
@@ -10,11 +9,11 @@ return {
 					},
 					panel = {
 						-- if true, it can interfere with completions in copilot-cmp
-						enabled = false,
+						
 					},
 					suggestion = {
 						-- if true, it can interfere with completions in copilot-cmp
-						enabled = false,
+						
 					},
 					filetypes = {
 						yaml = false,

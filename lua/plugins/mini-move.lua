@@ -1,7 +1,7 @@
 return { 
 	'echasnovski/mini.move',
 	 version = false ,
-	 lazy = false,
+	 event = "VeryLazy",
 	config = function()
 			require("mini.move").setup({
 				mappings = {

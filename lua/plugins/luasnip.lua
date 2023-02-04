@@ -3,7 +3,7 @@ local M = {
     dependencies = {
         "rafamadriz/friendly-snippets",
     },
-		lazy = false,
+		event = "VeryLazy",
     config = function()
 			local snippet_path = os.getenv("HOME") .. "/.config/nvim/snippets/"
 			if not vim.tbl_contains(vim.opt.rtp:get(), snippet_path) then

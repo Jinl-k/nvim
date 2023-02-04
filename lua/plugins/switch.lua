@@ -2,7 +2,7 @@
 return{
 		"AndrewRadev/switch.vim",
     opts = true,
-		lazy = false,
+		event = "VeryLazy",
     -- cmd = { "Switch", "Switch!", "Switch?", "SwitchCase", "SwitchCase!" },
     -- fn = { "switch#Switch" },
     -- keys = { "<Plug>(Switch)" },

@@ -1,8 +1,7 @@
 -- https://github.com/beauwilliams/focus.nvim
 return{
 	'beauwilliams/focus.nvim',
-	lazy = false,
-	-- enabled = false,
+		event = "VeryLazy",
 	config = function()
 		require("focus").setup({
 			bufnew =  false,

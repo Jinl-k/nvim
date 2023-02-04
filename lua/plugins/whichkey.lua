@@ -1,7 +1,7 @@
 -- https://github.com/folke/which-key.nvim
 return {
     'folke/which-key.nvim',
-		lazy = false,
+			event = "VeryLazy",
     config = function()
         require("which-key").setup( {
             window = {
@@ -25,7 +25,7 @@ return {
 						},
             plugins = {
                 spelling = {
-                    enabled = false,
+                    
                 },
 								presets = {
 									operators = true,

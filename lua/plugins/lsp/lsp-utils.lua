@@ -43,12 +43,13 @@ M.on_attach = function(client, bufnr)
 				border = "rounded",
 			},
 		})
-
 	-- Enable inlay hints
 	-- if client.server_capabilities["documentSymbolProvider"] then
   --     require("nvim-navic").attach(client, bufnr)
   -- end
-
+ 		-- if client.server_capabilities["documentSymbolProvider"] then
+    --   require("nvim-navic").attach(client, bufnr)
+    -- end
 	-- 	vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
 	-- 		vim.api.nvim_create_autocmd("LspAttach", {
 	-- 			group = "LspAttach_inlayhints",

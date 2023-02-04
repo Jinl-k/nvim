@@ -3,7 +3,6 @@ local M =  {
     lazy = true,
     dependencies = 'nvim-lua/plenary.nvim',
     cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles' },
-		-- enabled = false,
     -- config = function() require('config.diffview') end
   }
   return M

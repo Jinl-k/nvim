@@ -2,7 +2,6 @@
 -- https://github.com/glepnir/lspsaga.nvim/
 return {
     'glepnir/lspsaga.nvim',
-		-- enabled = false,
     event = 'BufRead',
 		dependencies = { {'nvim-tree/nvim-web-devicons'} },
     config = function()
@@ -93,9 +92,9 @@ return {
 						},
 					},
 					symbol_in_winbar = {
-						in_custom = true,
-						enable = true,
-						separator = "  ",
+						in_custom = false,
+						enable = false,
+						separator = " > ",
 						hide_keyword = false,
 						show_file = true,
 						color_mode = true,
