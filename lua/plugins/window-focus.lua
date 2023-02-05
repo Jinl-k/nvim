@@ -7,7 +7,7 @@ return{
 			bufnew =  false,
 			autoresize = false,
 			compatible_filetrees = {"filetree"},
-			excluded_filetypes = {"toggleterm","neo-tree", 'cmp', 'fterm', 'term', 'harpoon', 'harpoon-menu', 'NvimTree', 'TelescopePrompt',"lspsaga",'NvimCodeActionMenu'}, 
+			excluded_filetypes = {"toggleterm","neo-tree", "neo-tree-popup",'cmp', 'fterm', 'term', 'harpoon', 'harpoon-menu', 'NvimTree', 'TelescopePrompt',"lspsaga",'NvimCodeActionMenu'}, 
 			excluded_buftypes = { 'help','prompt', 'popup'},
 			-- Enable resizing for excluded filetypes using forced_filetypes
 			forced_filetypes = {"dan_repl"},

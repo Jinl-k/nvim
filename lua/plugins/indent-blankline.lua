@@ -28,7 +28,8 @@ local M = {
 				"git",
 				"TelescopePrompt",
 				"flutterToolsOutline",
-				"Neo-Tree", -- for all buffers without a file type
+				'neo-tree', 
+				"neo-tree-popup",
 			},
 	}
 	end,

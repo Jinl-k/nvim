@@ -72,7 +72,8 @@
 -- https://github.com/nvim-telescope/telescope.nvim
 -- https://github.com/nvim-telescope/telescope-file-browser.nvim
 -- https://github.com/ahmedkhalf/project.nvim
-local M = {
+-- https://github.com/jvgrootveld/telescope-zoxide
+return {
 	"nvim-telescope/telescope.nvim",
 	lazy = true,
 	cmd = "Telescope",
@@ -80,6 +81,7 @@ local M = {
 	dependencies = {
 		{ "nvim-tree/nvim-web-devicons" },
 		"nvim-lua/plenary.nvim",
+		"nvim-lua/popup.nvim",
 		{ "ahmedkhalf/project.nvim", event = "BufReadPost" },
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		{ "nvim-telescope/telescope-ui-select.nvim" },
@@ -184,6 +186,31 @@ local M = {
 						},
 					},
 				},
+				zoxide = {
+					prompt_title = "[ Walking on the shoulders of TJ ]",
+					mappings = {
+						default = {
+							after_action = function(selection)
+								print("Update to (" .. selection.z_score .. ") " .. selection.path)
+							end
+						},
+						["<C-s>"] = {
+							before_action = function(selection) 
+								print("before C-s") 
+							end,
+							action = function(selection)
+								vim.cmd("edit " .. selection.path)
+							end
+						},
+						["<C-z>"] = { action = require("telescope._extensions.zoxide.utils").create_basic_command("split") },
+						["<C-b>"] = {
+							keepinsert = true,
+							action = function(selection)
+								-- fb_actions.change_cwd
+							end
+						},
+					},
+				},
 				file_browser = {
 					grouped = true,
 					hidden = false,
@@ -224,7 +251,7 @@ local M = {
 
 			-- All the patterns used to detect root dir, when **"pattern"** is in
 			-- detection_methods
-			patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+			patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json",".vscode",".idea" },
 
 			-- Table of lsp clients to ignore by name
 			-- eg: { "efm", ... }
@@ -251,6 +278,7 @@ local M = {
 			-- telescope
 			datapath = vim.fn.stdpath("data"),
     }
+
 		telescope.load_extension("fzf")
 		telescope.load_extension("ui-select")
 		telescope.load_extension("file_browser")
@@ -259,7 +287,22 @@ local M = {
 		require("telescope").load_extension("frecency")
 		require("telescope").load_extension("live_grep_args")
 		-- require("telescope").load_extension("undo")
+		vim.keymap.set("n", "<leader>cd", telescope.extensions.zoxide.list)
 	end,
 }
-
-return M
+-- zoxide
+-- ["<C-s>"] = { action = z_utils.create_basic_command("split") },
+--     ["<C-v>"] = { action = z_utils.create_basic_command("vsplit") },
+--     ["<C-e>"] = { action = z_utils.create_basic_command("edit") },
+--     ["<C-b>"] = {
+--       keepinsert = true,
+--       action = function(selection)
+--         builtin.file_browser({ cwd = selection.path })
+--       end
+--     },
+--     ["<C-f>"] = {
+--       keepinsert = true,
+--       action = function(selection)
+--         builtin.find_files({ cwd = selection.path })
+--       end
+--     }

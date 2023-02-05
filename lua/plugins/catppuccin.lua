@@ -76,6 +76,9 @@ return {
 				highlight_overrides = {
 					mocha = function(cp)
 						return {
+							NeoTreeGitModified = { fg = cp.lavender, bg = cp.none },		
+							NeoTreeGitUnstaged = { fg = cp.peach, bg = cp.none },					 
+							NeoTreeGitUntracked = { fg = cp.peach, bg = cp.none },							
 							-- 多光标
 							VM_Mono_hl = { fg = cp.base, bg = cp.blue },
 							VM_insert_hl = { fg = cp.base, bg = cp.red },

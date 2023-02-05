@@ -3,7 +3,7 @@ return {
     event = "VeryLazy",
 		keys ={
 			{
-				"<leader>3",
+				"<leader>7",
 				mode = "n",
         "<Plug>(leap-cross-window)",
 			},

@@ -31,6 +31,9 @@ return {
             "TelescopePrompt",
             "TelescopeResults",
             "",
+						'neo-tree', 
+						"neo-tree-popup",
+						
         },
     })
 	end

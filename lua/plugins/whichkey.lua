@@ -17,7 +17,7 @@ return {
 							spacing = 3, -- spacing between columns
 							align = "left", -- align columns left, center or right
 						},
-            disable = { filetypes = { "neo-tree","NvimTree" } },
+            disable = { filetypes = { "neo-tree","NvimTree", "neo-tree-popup", } },
 						icons = {
 							breadcrumb = "",
 							separator = "",
