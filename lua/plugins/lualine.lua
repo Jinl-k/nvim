@@ -2,6 +2,12 @@
 local M = {
 	"nvim-lualine/lualine.nvim",
 	event = "VeryLazy",
+	dependencies = {
+    "nvim-tree/nvim-web-devicons",
+    -- "nvim-lua/lsp-status.nvim",
+    "folke/noice.nvim",
+    -- "SmiteshP/nvim-navic",
+  },
 	opts = function()
 		-- local navic = require("nvim-navic")
 		local function diff_source()
@@ -85,12 +91,14 @@ local M = {
 
 		local branch = {
 			'branch',
-			color = { bg = "#a6e3a1", colors.white },
+			-- color = { bg = colors.white},
+			color = { colors.white, fg = "#80A7EA" },
 			separator = { left = "", right = "" },
 		}
 
 		local diff = {
 			"diff",
+			symbols = { added = ' ', modified = '柳', removed = ' ' },
 			color = { colors.white, colors.white },
 			separator = { left = "", right = "" },
 		}
@@ -157,6 +165,22 @@ local M = {
 					-- space,
 					branch,
 					diff,
+
+					-- {
+					-- 	require "noice".api.statusline.command.get,
+					-- 	cond = require "noice".api.statusline.command.has,
+					-- 	color = { fg = "#6E6C7E" },
+					-- },
+					-- {
+					-- 	require "noice".api.statusline.mode.get,
+					-- 	cond = require "noice".api.statusline.mode.has,
+					-- 	color = { fg = "#6E6C7E" },
+					-- },
+					-- {
+					-- 	require "noice".api.statusline.search.get,
+					-- 	cond = require "noice".api.statusline.search.has,
+					-- 	color = { fg = "#6E6C7E" },
+					-- },
 				},
 				lualine_x = {
 					space,

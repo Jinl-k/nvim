@@ -1,3 +1,4 @@
+-- https://github.com/folke/lazy.nvim
 -- bootstrap from github
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

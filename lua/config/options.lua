@@ -99,7 +99,7 @@ vim.opt.smartcase = true
 vim.opt.termguicolors = true
 vim.opt.signcolumn = "yes"
 vim.opt.backup = false                          -- creates a backup file
-vim.opt.cmdheight = 0                           -- more space in the neovim command line for displaying messages
+vim.opt.cmdheight = 1                           -- more space in the neovim command line for displaying messages
 vim.opt.completeopt = { "menu","menuone", "noselect" } -- mostly just for cmp
 vim.opt.conceallevel = 0                        -- so that `` is visible in markdown files
 vim.g.encoding = "UTF-8"
@@ -136,18 +136,34 @@ vim.opt.iskeyword:append("-")                   -- treats words with `-` as sing
 vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters which describes how automatic formatting is to be done
 vim.opt.linebreak = true
 
+local keymap = vim.keymap.set
+local opt = {noremap = true,silent = true}
 if vim.fn.exists("g:neovide") == 1 then
+	keymap({"n","i"}, "<d-k>", "<cmd>BufferLineCycleNext<cr>",opt)
+	keymap({"n","i"}, "<d-j>", "<cmd>BufferLineCyclePrev<cr>",opt)
+	keymap("n", '<d-s-n>', ':call vm#commands#add_cursor_down(0, v:count1)<cr>', opt)
+	keymap("n", '<d-s-p>', ':call vm#commands#add_cursor_up(0, v:count1)<cr>', opt)
+	keymap("n", "<d-[>", "g;",opt)
+	keymap("n", "<d-]>", "g,",opt)
 	vim.g.neovide_cursor_vfx_mode = "pixiedust"
-	vim.g.neovide_transparency = 0.0
-	vim.g.transparency = 0.1
-	vim.g.neovide_background_color = '#313445' 
+	vim.g.neovide_transparency = 0
+	vim.g.transparency = 0.2
+	vim.g.neovide_background_color = '#3A3C4D' 
+	-- Helper function for transparency formatting
+-- local alpha = function()
+--   return string.format("%x", math.floor(255 * vim.g.neovide_transparency or 0.6))
+-- end
+-- vim.g.neovide_transparency = 0.7
+-- vim.g.transparency = 0.6
+-- vim.g.neovide_background_color = "#28292E" .. alpha()
 	vim.g.neovide_remember_window_size = true
+	vim.g.neovide_hide_mouse_when_typing = true
 	vim.g.neovide_cursor_animation_length = 0.05
 	vim.g.neovide_cursor_trail_length = 0.02
 	vim.g.neovide_refresh_rate = 60
 	vim.g.neovide_refresh_rate_idle = 5
-  vim.g.neovide_floating_blur_amount_x = 2.0
-  vim.g.neovide_floating_blur_amount_y = 2.0
+  vim.g.neovide_floating_blur_amount_x = 20.0
+  vim.g.neovide_floating_blur_amount_y = 20.0
 	vim.g.neovide_input_use_logo = true
 	vim.g.neovide_input_macos_alt_is_meta = true
   vim.opt.guifont = { "FiraCode Nerd Font", ":h15" }

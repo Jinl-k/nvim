@@ -65,7 +65,7 @@ return {
 			end
 
 			dashboard.section.buttons.val = {
-				button("", "Session", "<cmd>Telescope persisted<cr>"),
+				button("", "Session", "<cmd>Telescope session-lens search_session<cr>"),
 				button("", "Project find", "<C-p>"),
 				button("", "File Browser"),
 				-- button("space f r", "  File frecency", "<cmd>Telescope frecency<cr>"),

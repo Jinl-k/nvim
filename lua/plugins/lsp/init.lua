@@ -20,21 +20,12 @@ local M = {
         lsp_utils.setup()
         mason_lspconfig.setup({
             ensure_installed = {
-							-- "clangd",
 							"tsserver",
-							-- "pyright",
-							"sumneko_lua",
-							-- "eslint",
-							-- "bashls",
-							-- "yamlls",
 							"jsonls",
 							"cssls",
-							-- "taplo",
 							"html",
-							-- "graphql",
-							-- "tailwindcss",
 							"volar",
-							-- "jdtls",
+							"emmet_ls"
 					},
         })
 
@@ -45,32 +36,32 @@ local M = {
                     capabilities = lsp_utils.capabilities,
                 })
             end,
-            ["sumneko_lua"] = function ()
-                lspconfig.sumneko_lua.setup({
-                    on_attach = lsp_utils.on_attach,
-                    capabilities = lsp_utils.capabilities,
-                    filetypes = { "lua" },
-										single_file_support = true,
-                    cmd = { "lua-language-server" },
-										root_dir = util.root_pattern(".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git"),
-                    settings = {
-                      Lua = {
-                        diagnostics = { globals = { "vim" } },
-                        workspace = {
-                          library = {
-                            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-                          },
-                          maxPreload = 100000,
-                          preloadFileSize = 10000,
-                        },
-                        telemetry = { enable = false },
-                        -- Do not override treesitter lua highlighting with sumneko lua highlighting
-                        semantic = { enable = false },
-                      },
-                    },
-                })
-            end,
+            -- ["sumneko_lua"] = function ()
+            --     lspconfig.sumneko_lua.setup({
+            --         on_attach = lsp_utils.on_attach,
+            --         capabilities = lsp_utils.capabilities,
+            --         filetypes = { "lua" },
+						-- 				single_file_support = true,
+            --         cmd = { "lua-language-server" },
+						-- 				root_dir = util.root_pattern(".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git"),
+            --         settings = {
+            --           Lua = {
+            --             diagnostics = { globals = { "vim" } },
+            --             workspace = {
+            --               library = {
+            --                 [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+            --                 [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+            --               },
+            --               maxPreload = 100000,
+            --               preloadFileSize = 10000,
+            --             },
+            --             telemetry = { enable = false },
+            --             -- Do not override treesitter lua highlighting with sumneko lua highlighting
+            --             semantic = { enable = false },
+            --           },
+            --         },
+            --     })
+            -- end,
             ["html"] = function()
                 lspconfig.html.setup({
 									cmd = { "vscode-html-language-server", "--stdio" },

@@ -6,6 +6,17 @@
 			-- enabled =false,
 		opts ={
 			options = {
+				max_name_length = 14,
+				max_prefix_length = 13,
+				color_icons = true,
+				show_buffer_icons = true,
+				show_buffer_close_icons = true,
+				show_buffer_default_icon = true,
+				show_tab_indicators = true,
+				enforce_regular_tabs = true,
+				persist_buffer_sort = true,
+				always_show_bufferline = true,
+			
 				themable = true,
 				close_command = "bdelete! %d",
 				show_close_icon = true,
@@ -19,6 +30,7 @@
 				right_trunc_marker = "",
 				separator_style = "thin",
 				indicator = { icon = "▎", style = "icon" },
+				highlights = {},
         -- 使用 nvim 内置lsp
         diagnostics = "nvim_lsp",
         -- 左侧让出 nvim-tree 的位置
@@ -68,29 +80,4 @@
 				}
     	}
 		},
-		-- config = function(opts)
-		-- 	require("bufferline").setup(opts)
-		-- end
   }
-
--- bufferline.setup {
---   options = {
---     numbers = 'ordinal',
---     offsets = { { filetype = "alpha", text = "", padding = 1 } },
---     buffer_close_icon = "",
---     modified_icon = "",
---     close_icon = "",
---     left_trunc_marker = "",
---     right_trunc_marker = "",
---     max_name_length = 18,
---     max_prefix_length = 15,
---     tab_size = 20,
---     show_tab_indicators = true,
---     enforce_regular_tabs = false,
---     view = "multiwindow",
---     show_buffer_close_icons = true,
---     separator_style = "thin",
---     always_show_bufferline = true,
---     diagnostics = 'nvim_lsp',
---   }
--- }

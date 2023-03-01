@@ -95,6 +95,17 @@ local M = {
         },
     },
     config = function(_, opts)
+				require("nvim-ts-autotag").setup({
+					filetypes = {
+						"html",
+						"javascript",
+						"javascriptreact",
+						"typescript",
+						"typescriptreact",
+						"vue",
+						"xml",
+					},
+				})
         require("nvim-treesitter.configs").setup(opts)
         require("treesitter-context").setup({
 					enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)

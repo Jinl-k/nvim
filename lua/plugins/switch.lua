@@ -78,6 +78,5 @@ return{
 						function()
                 vim.fn["switch#Switch"]({ definitions = vim.g.variable_style_switch_definitions })
             end, { silent = true },{ description = "Switch variable naming style"})
-
     end,
 }

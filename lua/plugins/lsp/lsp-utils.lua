@@ -22,13 +22,22 @@ M.setup = function()
 		severity_sort = true,
 	})
 
-	-- ---- sign column
-	-- local signs = require("config.utils").lsp_signs
 
-	-- for type, icon in pairs(signs) do
-	-- 	local hl = "DiagnosticSign" .. type
+	-- Set icons for sidebar.
+	local diagnostic_icons = {
+			Error = "",
+			Warn = "",
+			Info = "ﬤ",
+			Hint = "",
+	}
+	-- for _type, icon in pairs(diagnostic_icons) do
+	-- 	local hl = ("DiagnosticSign%s"):format(_type)
 	-- 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 	-- end
+	for type, icon in pairs(diagnostic_icons) do
+		local hl = "DiagnosticSign" .. type
+		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+	end
 end
 
 M.on_attach = function(client, bufnr)
@@ -43,26 +52,12 @@ M.on_attach = function(client, bufnr)
 				border = "rounded",
 			},
 		})
-	-- Enable inlay hints
+
+
 	-- if client.server_capabilities["documentSymbolProvider"] then
   --     require("nvim-navic").attach(client, bufnr)
   -- end
- 		-- if client.server_capabilities["documentSymbolProvider"] then
-    --   require("nvim-navic").attach(client, bufnr)
-    -- end
-	-- 	vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
-	-- 		vim.api.nvim_create_autocmd("LspAttach", {
-	-- 			group = "LspAttach_inlayhints",
-	-- 			callback = function(args)
-	-- 				if not (args.data and args.data.client_id) then
-	-- 					return
-	-- 				end
 
-	-- 				local bufnr = args.buf
-	-- 				local client = vim.lsp.get_client_by_id(args.data.client_id)
-	-- 				require("lsp-inlayhints").on_attach(client, bufnr)
-	-- 			end,
-	-- 		})
 	-- Enable completion triggered by <c-x><c-o>
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 

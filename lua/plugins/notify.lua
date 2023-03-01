@@ -4,6 +4,7 @@ return {
 	-- event = "BufWinEnter",
 	-- lazy = false,
 	-- priority = 90,
+	enabled = false,
 	config = function()
 		local notify = require("notify")
 		notify.setup({

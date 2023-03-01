@@ -1,45 +1,26 @@
 -- https://github.com/olimorris/persisted.nvim
 -- https://github.com/rmagatti/auto-session
 return {
-  "olimorris/persisted.nvim",
+  "rmagatti/auto-session",
 	event = "VeryLazy",
+	cmd = { "SaveSession", "RestoreSession", "DeleteSession" },
 	keys = {
-					{ "<leader>4", "<CMD>SessionSave<CR>"},
-					{ "<leader>5","<CMD>SessionLoad<CR>"},
-					{ "<leader>6","<CMD>SessionDelete<CR>"},
+					{ "<leader>4", "<CMD>SaveSession<CR>"},
+					{ "<leader>5","<CMD>RestoreSession<CR>"},
+					{ "<leader>6","<CMD>DeleteSession<CR>"},
+					{ "<leader>S","<cmd>Telescope session-lens search_session<cr>"},
+					
 	},
   config = function()
-    require("persisted").setup({
-				save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"),
-        use_git_branche = true,
-        command = "VimLeavePre",
-				allowed_dirs = {
-					"~/.session",
-				},
-				silent = true,
-        autosave = true,
-				autoload = false,
-				should_autosave = function()
-    -- do not autosave if the alpha dashboard is the current filetype
-				if vim.bo.filetype == "alpha" then
-						return false
-					end
-					return true
-				end,
-        after_save = function()
-            vim.cmd("nohlsearch")
-        end,
-				telescope = {
-					before_source = function()
-						-- Close all open buffers
-						-- Thanks to https://github.com/avently
-						vim.api.nvim_input("<ESC>:%bd<CR>")
-					end,
-					after_source = function(session)
-						print("Loaded session " .. session.name)
-					end,
-				},
+		require("auto-session").setup({
+			log_level = "error",
+			auto_session_enable_last_session = true,
+			auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
+			auto_session_enabled = true,
+			auto_save_enabled = true,
+			auto_restore_enabled = true,
+			auto_session_suppress_dirs = nil,
+			auto_session_use_git_branch = true,
 		})
-    require("telescope").load_extension("persisted") -- To load the telescope extension
   end,
 }

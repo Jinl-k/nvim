@@ -3,23 +3,9 @@
 return {
     'glepnir/lspsaga.nvim',
     event = 'BufRead',
-		dependencies = { {'nvim-tree/nvim-web-devicons'} },
+		enabled = false,
+		dependencies = { {'nvim-tree/nvim-web-devicons'} , {"nvim-treesitter/nvim-treesitter"}},
     config = function()
-				local function set_sidebar_icons()
-					-- Set icons for sidebar.
-					local diagnostic_icons = {
-						  Error = "",
-							Warn = "",
-							Info = "ﬤ",
-							Hint = "",
-					}
-					for type, icon in pairs(diagnostic_icons) do
-						local hl = "DiagnosticSign" .. type
-						vim.fn.sign_define(hl, { text = icon, texthl = hl })
-					end
-				end
-				set_sidebar_icons()
-
         require('lspsaga').setup({
 					preview = {
 						lines_above = 1,

@@ -1,7 +1,8 @@
 
 return{
 	'mg979/vim-visual-multi',
-		event = "VeryLazy",
+	event = "VeryLazy",
+		-- enabled = false,
 	config = function()
 		-- vim.g.VM_Extend_hl = "VM_Extend_hl"
     -- vim.g.VM_Cursor_hl = "VM_Cursor_hl"

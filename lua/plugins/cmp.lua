@@ -74,11 +74,11 @@ local M ={
 								priority_weight = 2,
 								comparators = {
 										compare.recently_used,
-										require("copilot_cmp.comparators").prioritize,
-										require("copilot_cmp.comparators").score,
 										compare.offset,
 										compare.exact,
 										compare.lsp_scores,
+										require("copilot_cmp.comparators").prioritize,
+										require("copilot_cmp.comparators").score,
 										compare.kind,
 										compare.sort_text,
 										compare.length,
@@ -86,12 +86,12 @@ local M ={
 								},
 						},
             mapping = cmp.mapping.preset.insert({
-								["<CR>"] = cmp.mapping.confirm({  behavior = cmp.ConfirmBehavior.Replace,select = true }),
+								["<CR>"] = cmp.mapping.confirm({ select = true }),
+								-- ["<CR>"] = cmp.mapping.confirm({  behavior = cmp.ConfirmBehavior.Replace,select = true }),
                 ["<C-p>"] = cmp.mapping.select_prev_item(),
                 ["<C-n>"] = cmp.mapping.select_next_item(),
                 ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                 ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                ["<C-Space>"] = cmp.mapping.complete(),
                 ["<C-e>"] = cmp.mapping.close(),
 								["<Tab>"] = cmp.mapping(function(fallback)
 									if cmp.visible() then
@@ -113,10 +113,10 @@ local M ={
 								end, { "i", "s" }),
             }),
             sources = cmp.config.sources({
-								{ name = "copilot"},
 								{ name = "luasnip" },
 								{ name = "nvim_lsp" },
 								{ name = "nvim_lua" },
+								{ name = "copilot"},
 								{ name = "path"},
                 { name = "nvim_lsp_signature_help" },
                 { name = "buffer" },

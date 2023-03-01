@@ -8,15 +8,18 @@ local opt = {noremap = true,silent = true}
 --   mapbuf("n", "gi", ":TSLspImportAll<CR>", opt)
 -- end
 -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds,opts)
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds,opts)
-vim.keymap.set('n', 'zm', require('ufo').openFoldsExceptKinds,opts)
-vim.keymap.set('n', 'zr', require('ufo').closeFoldsWith,opts)
+keymap('n', 'zR', require('ufo').openAllFolds,opts)
+keymap('n', 'zM', require('ufo').closeAllFolds,opts)
+keymap('n', 'zm', require('ufo').openFoldsExceptKinds,opts)
+keymap('n', 'zr', require('ufo').closeFoldsWith,opts)
 
-
+-- 删除光标左/右的内容
+keymap("n", "dL", "d$", opt)
+keymap("n", "dH", "d0", opt)
+keymap("n", "yy", "^y$", opt)
 -- 上下移动选中文本
-keymap("v", "J", ":move '>+1<CR>gv-gv", opt)
-keymap("v", "K", ":move '<-2<CR>gv-gv", opt)
+-- keymap("v", "J", ":move '>+1<CR>gv-gv", opt)
+-- keymap("v", "K", ":move '<-2<CR>gv-gv", opt)
 -- magic search
 keymap("n", "/", "/\\v", opt)
 keymap("v", "/", "/\\v", opt)
@@ -25,7 +28,7 @@ keymap("n", "<leader>nh", ":nohl<CR>",opt)
 -- Clear search results
 keymap("n", "<esc>", "<cmd>noh<cr>",opt)
 -- Remap command key
-keymap("n", "<leader><leader>", ":",opt)
+-- keymap("n", "<leader><leader>", ":",opt)
 keymap("n", "<leader><esc>", ":qa!<cr>",opt)
 keymap("i", "<d-z>", "<cmd>undo<cr>", opt)
 keymap("i", "<d-s-z>", "<cmd>redo<cr>", opt)
@@ -40,9 +43,11 @@ vim.api.nvim_set_keymap('n', '<leader>j', ':FocusSplitDown<CR>', opt)
 vim.api.nvim_set_keymap('n', '<leader>k', ':FocusSplitUp<CR>', opt)
 vim.api.nvim_set_keymap('n', '<leader>l', ':FocusSplitRight<CR>', opt)
 
+
+
 -- -- 关闭左/右侧标签页
--- map("n", "<leader>bh", ":BufferLineCloseLeft<CR>", opt)
--- map("n", "<leader>bl", ":BufferLineCloseRight<CR>", opt)
+keymap("n", "<leader>bh", ":BufferLineCloseLeft<CR>", opt)
+keymap("n", "<leader>bl", ":BufferLineCloseRight<CR>", opt)
 -- 关闭当前 buffer
 keymap({"n","i","t"}, "<c-q>", "<cmd>BufferDelete<cr>",opt)
 -- -- 关闭除当前外的其他标签页
@@ -50,23 +55,22 @@ keymap("n", "<leader>bo", ":BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>", o
 -- 选择一个标签页关闭
 keymap("n", "<leader>bq", ":BufferLinePickClose<CR>", opt)
 -- Navigate buffers
-keymap({"n","i"}, "<d-k>", "<cmd>BufferLineCycleNext<cr>",opt)
-keymap({"n","i"}, "<d-j>", "<cmd>BufferLineCyclePrev<cr>",opt)
-
+keymap({"n","i"}, "<m-i>", "<cmd>BufferLineCycleNext<cr>",opt)
+keymap({"n","i"}, "<m-u>", "<cmd>BufferLineCyclePrev<cr>",opt)
+keymap("n", "<leader>lp", ":BufferLinePick<CR>", opt)
 keymap("n", "qw", "<C-w>c",opt) -- 关闭当前窗口 
 keymap("n", "<leader>W", "<C-w>o",opt) -- 关闭除当前的其他窗口 
 -- keymap("n", "<leader>rv", "<C-w>v",opt) -- 水平新增窗口 
 -- keymap("n", "<leader>rh", "<C-w>s",opt) -- 垂直新增窗口
 keymap("n", "<leader>bp", ":BrowserPreview<CR>", opt)
 -- 多光标
-keymap("n", '<d-s-n>', ':call vm#commands#add_cursor_down(0, v:count1)<cr>', opt)
-keymap("n", '<d-s-p>', ':call vm#commands#add_cursor_up(0, v:count1)<cr>', opt)
+keymap("n", '<m-s-n>', ':call vm#commands#add_cursor_down(0, v:count1)<cr>', opt)
+keymap("n", '<m-s-p>', ':call vm#commands#add_cursor_up(0, v:count1)<cr>', opt)
 -- 插入模式下粘贴
 vim.api.nvim_set_keymap("i", '<d-v>', '<esc>\"+pa', opt)
 -- code run
 keymap("n", '<c-i>', '<cmd>RunCode<CR>', opt)
 keymap('n', '<leader>rF', '<cmd>RunFile<CR>', opt)
-keymap('n', '<leader>rtf', '<cmd>RunFile tab<CR>', opt)
 keymap('n', '<leader>rP', '<cmd>RunProject<CR>', opt)
 keymap('n', '<leader>rc', '<cmd>RunClose<CR>', opt)
 
@@ -141,8 +145,8 @@ keymap("v", "p", '"_dP',opt)
 keymap("n", "<C-d>", "<C-d>zz",opt)
 keymap("n", "<C-u>", "<C-u>zz",opt)
 -- 上次光标编辑位置
-keymap("n", "<D-[>", "g;",opt)
-keymap("n", "<D-]>", "g,",opt)
+keymap("n", "<m-[>", "g;",opt)
+keymap("n", "<m-]>", "g,",opt)
 
 
 
@@ -158,10 +162,10 @@ keymap("n", "<D-]>", "g,",opt)
 			t = { "<cmd>Telescope lsp_type_definitions<cr>", "Type Definition" },
 			D = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
 			i = { "<cmd>Telescope lsp_implementations<cr>", "Implementation" },
-			k = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
+			-- k = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
 			K = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
-			l = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Line Diagnostics" },
-			L = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Location List" },
+			-- l = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Line Diagnostics" },
+			-- L = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Location List" },
 			n = { "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>", "Next Diagnostic" },
 			p = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>", "Previous Diagnostic" },
 			q = { "<cmd>lua vim.lsp.diagnostic.set_qflist()<cr>", "Quick Fix List" },
@@ -188,7 +192,7 @@ keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>",opt)
 keymap("n", "ga", "<cmd>Lspsaga rename<CR>",opt)
 -- Rename word in whole project
 keymap("n", "ga", "<cmd>Lspsaga rename ++project<CR>",opt)
-keymap("n", "<leader>sl", "<cmd>Lspsaga show_line_diagnostics<CR>",opt)
+keymap("n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>",opt)
 -- -- Show cursor diagnostic
 -- -- also like show_line_diagnostics  support pass ++unfocus
 -- keymap("n", "<leader>sc", "<cmd>Lspsaga show_cursor_diagnostics<CR>",opt)
@@ -206,12 +210,12 @@ keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>",opt)
 keymap("n","<leader>o", "<cmd>Lspsaga outline<CR>",opt)
 
 -- Float terminal
-keymap({"n", "t"}, "<leader>tt", "<cmd>Lspsaga term_toggle<CR>",opt)
-keymap({"n", "t"}, "<leader>th", "<Cmd>ToggleTerm direction=horizontal<CR>",opt)
-keymap({"n", "t"}, "<leader>tv", "<Cmd>ToggleTerm direction=vertical<CR>",opt)
-keymap({"n", "t"}, "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>",opt)
-keymap({"n", "t"}, "<leader>tt", "<Cmd>ToggleTerm<CR>",opt)
-keymap({"n", "t"}, "<leader>tg", "<Cmd>lua toggle_lazygit()<CR>",opt)
+-- vim.api.nvim_set_keymap("t", "<leader>T", "<C-\\><C-n>", {noremap = true, silent = true}) 
+keymap({"n"}, "<leader>th", "<Cmd>ToggleTerm direction=horizontal<CR>",opt)
+keymap({"n"}, "<leader>tv", "<Cmd>ToggleTerm direction=vertical<CR>",opt)
+keymap({"n"}, "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>",opt)
+keymap({"n"}, "<leader>tt", "<Cmd>ToggleTerm<CR>",opt)
+keymap({"n"}, "<leader>tg", "<Cmd>lua toggle_lazygit()<CR>",opt)
 local _lazygit = nil
 _G.toggle_lazygit = function()
 	if not _lazygit then
@@ -224,18 +228,8 @@ _G.toggle_lazygit = function()
 	end
 	_lazygit:toggle()
 end
--- function _G.set_terminal_keymaps()
---   local opts = {buffer = 0}
---   vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
---   vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
---   vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
---   vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
---   vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
---   vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
--- end
 
--- -- if you only want these mappings for toggle term use term://*toggleterm#* instead
--- vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+
 
 
 
@@ -259,9 +253,8 @@ keymap("n", "<leader>fc", function()
 end, opt)
 
 -- Lsp formatting
-keymap("n", "<leader>fa", function()
+keymap("n", "<leader>fa", function() 
 	vim.lsp.buf.format({ async = false })
-	-- vim.api.nvim_command("write",opt)
 end, opt,{ desc = "Lsp formatting" })
 
 -- -- Open quickfix list

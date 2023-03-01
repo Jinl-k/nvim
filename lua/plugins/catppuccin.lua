@@ -65,8 +65,8 @@ return {
 							overlay1 = "#988BA2",
 							overlay0 = "#6E6C7E",
 							surface2 = "#6E6C7E",
-							-- surface1 = "#575268",
-							-- surface0 = "#8BBDE7",
+							surface1 = "#575268",
+							surface0 = "#8BBDE7",
 
 							base = "#1E1E2E",
 							mantle = "#1A1826",
@@ -102,11 +102,11 @@ return {
 							FloatBorder = { fg = cp.blue },
 							TabLineFill = { bg = cp.black },
         			TabLineSel = { fg = cp.green, bg = cp.surface1 },
-							LspInlayHint = { bg = cp.none, fg = "#474A5C" },
+							LspInlayHint = { bg = cp.none, fg = cp.overlay2 },
 							NormalFloat = { fg = cp.text, bg = transparent_background and cp.none},
 							CursorLineNr = { fg = cp.blue},
 							Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
-							IncSearch = { bg = cp.pink, fg = cp.surface1 },
+							IncSearch = { bg = cp.peach, fg = cp.surface1 },
 							Keyword = { fg = cp.pink },
 							Type = { fg = cp.blue },
 							Typedef = { fg = cp.yellow },
@@ -114,10 +114,11 @@ return {
 
 							BufferLineIndicatorSelected = { fg = cp.peach, bg = cp.none },
 							BufferLineSeparatorSelected = { fg = cp.peach, bg = cp.none },
-							BufferLineSeparator = { fg = cp.base, bg = cp.none },
-							BufferLineSeparatorVisible = { fg = cp.base, bg = cp.mantle },
+							BufferLineSeparator = { fg = cp.surface1, bg = cp.none },
+							-- BufferLineSeparatorVisible = { fg = cp.red, bg = cp.mantle },
 							BufferLineCloseButtonSelected = { fg = cp.red, bg = cp.none },
 							BufferLineModifiedSelected = { fg = cp.green, bg = cp.none },
+
 							-- For native lsp configs.
 							DiagnosticVirtualTextError = { bg = cp.none },
 							DiagnosticVirtualTextWarn = { bg = cp.none },
@@ -138,82 +139,47 @@ return {
 							-- For trouble.nvim
 							TroubleNormal = { bg = cp.none },
 
-							-- -- For treesitter.
+								-- For treesitter.
 							["@field"] = { fg = cp.rosewater },
 							["@property"] = { fg = cp.yellow },
 
 							["@include"] = { fg = cp.teal },
-							-- ["@operator"] = { fg = cp.sky },
 							["@keyword.operator"] = { fg = cp.sky },
 							["@punctuation.special"] = { fg = cp.maroon },
 
-							-- ["@float"] = { fg = cp.peach },
-							-- ["@number"] = { fg = cp.peach },
-							-- ["@boolean"] = { fg = cp.peach },
-
 							["@constructor"] = { fg = cp.lavender },
-							-- ["@constant"] = { fg = cp.peach },
-							-- ["@conditional"] = { fg = cp.mauve },
-							-- ["@repeat"] = { fg = cp.mauve },
 							["@exception"] = { fg = cp.peach },
 
 							["@constant.builtin"] = { fg = cp.lavender },
-							["@function.builtin"] = { fg = cp.peach, style = { "italic" } },
-							["@type.builtin"] = { fg = cp.yellow, style = { "italic" } },
 							["@type.qualifier"] = { link = "@keyword" },
 							["@variable.builtin"] = { fg = cp.red, style = { "italic" } },
 
-							-- ["@function"] = { fg = cp.blue },
-							-- ["@function.macro"] = { fg = cp.red, style = {} },
-							-- -- ["@parameter"] = { fg = cp.rosewater },
+							["@function.macro"] = { fg = cp.red, style = {} },
+							["@parameter"] = { fg = cp.rosewater },
 							["@keyword"] = { fg = cp.red, style = { "italic" } },
 							["@keyword.function"] = { fg = cp.maroon },
 							["@keyword.return"] = { fg = cp.pink, style = {} },
+							["@method"] = { fg = cp.blue, style = { "italic" } },
+							["@namespace"] = { fg = cp.rosewater, style = {} },
 
-							-- -- ["@text.note"] = { fg = cp.base, bg = cp.blue },
-							-- -- ["@text.warning"] = { fg = cp.base, bg = cp.yellow },
-							-- -- ["@text.danger"] = { fg = cp.base, bg = cp.red },
-							-- -- ["@constant.macro"] = { fg = cp.mauve },
+							["@punctuation.delimiter"] = { fg = cp.teal },
+							["@punctuation.bracket"] = { fg = cp.overlay2 },
+							["@type"] = { fg = cp.yellow },
+							["@variable"] = { fg = cp.text },
+							["@tag.attribute"] = { fg = cp.mauve, style = { "italic" } },
+							["@tag"] = { fg = cp.peach },
+							["@tag.delimiter"] = { fg = cp.maroon },
+							["@text"] = { fg = cp.text },
 
-							-- -- ["@label"] = { fg = cp.blue },
-							-- ["@method"] = { fg = cp.blue, style = { "italic" } },
-							-- ["@namespace"] = { fg = cp.rosewater, style = {} },
+							["@function.builtin.bash"] = { fg = cp.red, style = { "italic" } },
+							["@parameter.bash"] = { fg = cp.yellow, style = { "italic" } },
 
-							-- ["@punctuation.delimiter"] = { fg = cp.teal },
-							-- ["@punctuation.bracket"] = { fg = cp.overlay2 },
-							-- -- ["@string"] = { fg = cp.green },
-							-- -- ["@string.regex"] = { fg = cp.peach },
-							-- ["@type"] = { fg = cp.yellow },
-							-- ["@variable"] = { fg = cp.text },
-							-- ["@tag.attribute"] = { fg = cp.mauve, style = { "italic" } },
-							-- ["@tag"] = { fg = cp.peach },
-							-- ["@tag.delimiter"] = { fg = cp.maroon },
-							-- ["@text"] = { fg = cp.text },
+							["@field.lua"] = { fg = cp.lavender },
+							["@constructor.lua"] = { fg = cp.flamingo },
 
-							-- -- ["@text.uri"] = { fg = cp.rosewater, style = { "italic", "underline" } },
-							-- -- ["@text.literal"] = { fg = cp.teal, style = { "italic" } },
-							-- -- ["@text.reference"] = { fg = cp.lavender, style = { "bold" } },
-							-- -- ["@text.title"] = { fg = cp.blue, style = { "bold" } },
-							-- -- ["@text.emphasis"] = { fg = cp.maroon, style = { "italic" } },
-							-- -- ["@text.strong"] = { fg = cp.maroon, style = { "bold" } },
-							-- -- ["@string.escape"] = { fg = cp.pink },
-
-							-- -- ["@property.toml"] = { fg = cp.blue },
-							-- -- ["@field.yaml"] = { fg = cp.blue },
-
-							-- -- ["@label.json"] = { fg = cp.blue },
-
-							-- ["@function.builtin.bash"] = { fg = cp.red, style = { "italic" } },
-							-- ["@parameter.bash"] = { fg = cp.yellow, style = { "italic" } },
-
-							-- ["@field.lua"] = { fg = cp.lavender },
-							-- ["@constructor.lua"] = { fg = cp.flamingo },
+							["@constant.java"] = { fg = cp.teal },
 
 							["@property.typescript"] = { fg = cp.lavender, style = { "italic" } },
-							["@constructor.typescript"] = { fg = cp.lavender },
-
-							["@constructor.tsx"] = { fg = cp.lavender },
-							["@tag.attribute.tsx"] = { fg = cp.mauve },
 
 							["@type.css"] = { fg = cp.lavender },
 							["@property.css"] = { fg = cp.yellow, style = { "italic" } },
@@ -223,7 +189,6 @@ return {
 							["@property.cpp"] = { fg = cp.text },
 							["@type.builtin.cpp"] = { fg = cp.yellow, style = {} },
 
-							-- ["@symbol"] = { fg = cp.flamingo },
 						}
 					end,
 				},

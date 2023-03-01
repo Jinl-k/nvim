@@ -4,7 +4,7 @@ return  {
 			"MunifTanjim/nui.nvim",
 			"folke/noice.nvim"
 		},
-		-- enabled = false,
+		enabled = false,
 		-- lazy = false,
 		event = "VimEnter",
 		config = function()

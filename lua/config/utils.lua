@@ -138,7 +138,6 @@ M.lsp_servers = {
     -- "clangd",
     "tsserver",
     -- "pyright",
-    -- "sumneko_lua",
     -- "eslint",
     -- "bashls",
     -- "yamlls",
