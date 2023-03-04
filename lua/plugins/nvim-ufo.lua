@@ -5,7 +5,7 @@ return{
 	{'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}},
 	 event = { "VeryLazy" },
 	config = function()
-		function fold_virtual_text_handler(virtual_text, lnum, end_lnum, width, truncate)
+		function  fold_virtual_text_handler(virtual_text, lnum, end_lnum, width, truncate)
 				local new_virtual_text = {}
 				local suffix = ("   %d"):format(end_lnum - lnum)
 				local suffix_width = vim.fn.strdisplaywidth(suffix)
@@ -32,27 +32,17 @@ return{
 				table.insert(new_virtual_text, { suffix, "MoreMsg" })
 				return new_virtual_text
 		end
+		local  filetype_fold_config = {
+        markdown = { "treesitter", "indent" },
+    }
 		require("ufo").setup({
 				open_fold_hl_timeout = 0,
+        close_fold_kinds = {},
         ---@diagnostic disable-next-line: unused-local
         provider_selector = function(bufnr, filetype, buftype)
-						return {'treesitter', 'indent'}
-				end,
+            return filetype_fold_config[filetype] or { "lsp", "indent" }
+        end,
         fold_virt_text_handler = fold_virtual_text_handler,
-				close_fold_kinds = {'imports', 'comment'},
-				-- preview = {
-				-- 		win_config = {
-				-- 				border = {"↖", "─" ,"┐", "│", "┘", "─", "└", "│"},
-				-- 				winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-				-- 				winblend = 0
-				-- 		},
-				-- 		mappings = {
-				-- 				scrollU = '<C-u>',
-				-- 				scrollD = '<C-d>',
-				-- 				jumpTop = '[',
-				-- 				jumpBot = ']'
-				-- 		}
-				-- },
 		})
 	end
 }

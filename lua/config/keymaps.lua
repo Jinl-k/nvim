@@ -10,8 +10,8 @@ local opt = {noremap = true,silent = true}
 -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
 keymap('n', 'zR', require('ufo').openAllFolds,opts)
 keymap('n', 'zM', require('ufo').closeAllFolds,opts)
-keymap('n', 'zm', require('ufo').openFoldsExceptKinds,opts)
-keymap('n', 'zr', require('ufo').closeFoldsWith,opts)
+keymap('n', 'zr', require('ufo').openFoldsExceptKinds,opts)
+keymap('n', 'zm', require('ufo').closeFoldsWith,opts)
 
 -- 删除光标左/右的内容
 keymap("n", "dL", "d$", opt)
@@ -115,6 +115,7 @@ keymap({ "i","c", "t" }, "<c-k>", "<up>",opt)
 keymap({ "i","c", "t" }, "<c-j>", "<down>",opt)	
 keymap({ "i","c", "t" }, "<c-l>", "<right>",opt)
 keymap({ "i","c", "t" }, "<c-h>", "<left>",opt)
+keymap('i', "<s-cr>", "<esc>o",opt)
 -- Select all
 keymap("n", "<C-a>", "ggVG<cr>",opt ,{ desc = "Select all" })
 
@@ -163,7 +164,7 @@ keymap("n", "<m-]>", "g,",opt)
 			D = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
 			i = { "<cmd>Telescope lsp_implementations<cr>", "Implementation" },
 			-- k = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
-			K = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
+			k = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
 			-- l = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Line Diagnostics" },
 			-- L = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Location List" },
 			n = { "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>", "Next Diagnostic" },
@@ -207,7 +208,7 @@ keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>",opt)
 -- keymap("n", "]E", function()
 --   require("lspsaga.diagnostic",opt):goto_next({ severity = vim.diagnostic.severity.ERROR })
 -- end)
-keymap("n","<leader>o", "<cmd>Lspsaga outline<CR>",opt)
+-- keymap("n","<leader>o", "<cmd>Lspsaga outline<CR>",opt)
 
 -- Float terminal
 -- vim.api.nvim_set_keymap("t", "<leader>T", "<C-\\><C-n>", {noremap = true, silent = true}) 
@@ -253,7 +254,7 @@ keymap("n", "<leader>fc", function()
 end, opt)
 
 -- Lsp formatting
-keymap("n", "<leader>fa", function() 
+keymap("n", "<leader>o", function() 
 	vim.lsp.buf.format({ async = false })
 end, opt,{ desc = "Lsp formatting" })
 

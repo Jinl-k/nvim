@@ -41,25 +41,6 @@ M.setup = function()
 end
 
 M.on_attach = function(client, bufnr)
-		require("lsp_signature").on_attach({
-			bind = true,
-			use_lspsaga = true,
-			floating_window = true,
-			fix_pos = true,
-			hint_enable = true,
-			hi_parameter = "Search",
-			handler_opts = {
-				border = "rounded",
-			},
-		})
-
-
-	-- if client.server_capabilities["documentSymbolProvider"] then
-  --     require("nvim-navic").attach(client, bufnr)
-  -- end
-
-	-- Enable completion triggered by <c-x><c-o>
-	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
 	-- show diagnostics in hover window
 	-- vim.api.nvim_create_autocmd("CursorHold", {

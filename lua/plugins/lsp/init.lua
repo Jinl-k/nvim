@@ -1,11 +1,10 @@
--- https://github.com/ray-x/lsp_signature.nvim
+
 local M = {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
         "williamboman/mason-lspconfig.nvim",
-				'ray-x/lsp_signature.nvim',
 				"lvimuser/lsp-inlayhints.nvim",
     },
 		-- keys ={
@@ -155,17 +154,16 @@ local M = {
                 				importModuleSpecifierPreference = "relative",
             				}, 
 									},
-									root_dir = util.root_pattern("tsconfig.json",".git"),
+									root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
 									single_file_support = true,
 									capabilities = lsp_utils.capabilities,
 									on_attach = lsp_utils.on_attach,
 								})
             end,
 						["volar"] = function()
-									local function get_typescript_server_path(root_dir)
-									local global_ts = '/opt/homebrew/lib/node_modules/typescript/lib'
-									-- Alternative location if installed as root:
-									-- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
+								local function get_typescript_server_path(root_dir)
+									-- local global_ts = '/opt/homebrew/lib/node_modules/typescript/lib'
+									local global_ts = '/Users/kevin/Library/pnpm/global/5/.pnpm/typescript@4.8.4/node_modules/typescript/lib'
 									local found_ts = ''
 									local function check_dir(path)
 										found_ts =  util.path.join(path, 'node_modules', 'typescript', 'lib')
@@ -173,13 +171,12 @@ local M = {
 											return path
 										end
 									end
-										if util.search_ancestors(root_dir, check_dir) then
-											return found_ts
-										else
-											return global_ts
-										end
+									if util.search_ancestors(root_dir, check_dir) then
+										return found_ts
+									else
+										return global_ts
 									end
-
+								end
 
                 lspconfig.volar.setup({
 									cmd = { "vue-language-server", "--stdio" },
@@ -234,17 +231,17 @@ local M = {
 											},
 										},
 									},
-									filetypes = {'vue'},
-									-- filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
+									-- filetypes = {'vue'},
+									filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
 									init_options = {
 										typescript = {
-											-- tsdk = '/Users/kevin/Library/pnpm/global/5/.pnpm/typescript@4.9.4/node_modules/typescript/lib'
-											tsdk = '/opt/homebrew/lib/node_modules/typescript/lib'
+											tsdk = '/Users/kevin/Library/pnpm/global/5/.pnpm/typescript@4.8.4/node_modules/typescript/lib'
+											-- tsdk = '/opt/homebrew/lib/node_modules/typescript/lib'
 										}
 									},
-									root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git", "vite.config.ts", "vite.config.js"),
+									-- root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git", "vite.config.ts", "vite.config.js","vue.config.js"),
 									-- root_dir = util.root_pattern(".git", "vite.config.ts", "vite.config.js"),
-									single_file_support = true,
+									-- single_file_support = true,
 									capabilities = lsp_utils.capabilities,
 									on_attach = lsp_utils.on_attach,
 								})

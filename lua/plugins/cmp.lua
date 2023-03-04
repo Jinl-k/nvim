@@ -15,9 +15,6 @@ local M ={
 			"hrsh7th/cmp-path",
 			"onsails/lspkind.nvim" ,
 			"saadparwaiz1/cmp_luasnip",
-			{					"zbirenbaum/copilot-cmp",
-					after = "copilot.lua",
-			}, 	
     },
     opts = function()
         local cmp = require("cmp")
@@ -34,9 +31,12 @@ local M ={
 					return (diff < 0)
 				end
 
-				require("copilot_cmp").setup({
-						method = "getCompletionsCycling"	
-				})
+				-- tab 换回正常的缩进行为
+				local has_words_before = function()
+					if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+					local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+					return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+				end
 		
 				local icons = {
 						kind = require("config.icons").get("kind", false),
@@ -51,7 +51,6 @@ local M ={
                 end,
             },
             formatting = {
-								insert_text = require("copilot_cmp.format").remove_existing,
 								fields = { "kind", "abbr", "menu" },
 								format = lspkind.cmp_format({
 									-- mode = 'symbol_text', -- show only symbol annotations
@@ -77,8 +76,6 @@ local M ={
 										compare.offset,
 										compare.exact,
 										compare.lsp_scores,
-										require("copilot_cmp.comparators").prioritize,
-										require("copilot_cmp.comparators").score,
 										compare.kind,
 										compare.sort_text,
 										compare.length,
@@ -93,15 +90,22 @@ local M ={
                 ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                 ["<C-f>"] = cmp.mapping.scroll_docs(4),
                 ["<C-e>"] = cmp.mapping.close(),
-								["<Tab>"] = cmp.mapping(function(fallback)
-									if cmp.visible() then
-										cmp.select_next_item()
-									elseif require("luasnip").expand_or_jumpable() then
-										vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
+								["<Tab>"] = vim.schedule_wrap(function(fallback)
+									if cmp.visible() and has_words_before() then
+										cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
 									else
-										fallback()
+										fallback() 
 									end
-								end, { "i", "s" }),
+								end),
+								-- ["<Tab>"] = cmp.mapping(function(fallback)
+								-- 	if cmp.visible() then
+								-- 		cmp.select_next_item()
+								-- 	elseif require("luasnip").expand_or_jumpable() then
+								-- 		vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
+								-- 	else
+								-- 		fallback()
+								-- 	end
+								-- end, { "i", "s" }),
 								["<S-Tab>"] = cmp.mapping(function(fallback)
 									if cmp.visible() then
 										cmp.select_prev_item()
@@ -116,7 +120,6 @@ local M ={
 								{ name = "luasnip" },
 								{ name = "nvim_lsp" },
 								{ name = "nvim_lua" },
-								{ name = "copilot"},
 								{ name = "path"},
                 { name = "nvim_lsp_signature_help" },
                 { name = "buffer" },
@@ -129,11 +132,6 @@ local M ={
 										winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
 								}),
             },
-            experimental = { 
-							ghost_text = {
-                hl_group = "LspCodeLens",
-            	}	 
-						},
         }
     end,
     config = function(_, opts)

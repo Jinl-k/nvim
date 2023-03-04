@@ -111,7 +111,7 @@ return {
 		local fb_actions = require("telescope").extensions.file_browser.actions
 		return {
 			defaults = {
-				initial_mode = "insert",
+				initial_mode = "normal", --insert
 				prompt_prefix = "  ",
 				selection_caret = "  ",
 				entry_prefix = " ",

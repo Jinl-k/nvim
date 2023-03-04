@@ -61,8 +61,10 @@ local M = {
 
 		local filename = {
 			'filename',
-			color = { bg = "#80A7EA", fg = "#242735" },
-			separator = { left = "", right = "" },
+			-- color = { bg = "#80A7EA", fg = "#242735" },
+			color = { bg = "#b4befe", colors.white },
+			-- separator = { left = "", right = "" },
+			separator = { right = "" },
 		}
 
 		local filetype = {
@@ -85,7 +87,7 @@ local M = {
 				return ""
 			end,
 			color = { bg = "#b4befe", colors.white },
-			separator = { right = "" },
+			-- separator = { right = "" },
 		}
 
 
@@ -161,7 +163,7 @@ local M = {
 						-- "diagnostics",
 				},
 				lualine_c = {
-					-- filename,
+					filename,
 					-- space,
 					branch,
 					diff,

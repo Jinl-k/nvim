@@ -177,8 +177,6 @@ return {
 							["@field.lua"] = { fg = cp.lavender },
 							["@constructor.lua"] = { fg = cp.flamingo },
 
-							["@constant.java"] = { fg = cp.teal },
-
 							["@property.typescript"] = { fg = cp.lavender, style = { "italic" } },
 
 							["@type.css"] = { fg = cp.lavender },
