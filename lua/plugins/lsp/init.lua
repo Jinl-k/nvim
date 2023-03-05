@@ -1,4 +1,4 @@
-
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
 local M = {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
@@ -7,10 +7,6 @@ local M = {
         "williamboman/mason-lspconfig.nvim",
 				"lvimuser/lsp-inlayhints.nvim",
     },
-		-- keys ={
-		-- 		{ "<leader>gd","<cmd>Telescope lsp_definitions<cr>"},
-		-- 		{ "<leader>gD","<cmd>lua vim.lsp.buf.declaration()<cr>" },
-		-- },
     config = function(_, opts)
         local mason_lspconfig = require("mason-lspconfig")
         local lspconfig = require("lspconfig")
@@ -19,7 +15,7 @@ local M = {
         lsp_utils.setup()
         mason_lspconfig.setup({
             ensure_installed = {
-							"tsserver",
+							-- "tsserver",
 							"jsonls",
 							"cssls",
 							"html",
@@ -119,47 +115,47 @@ local M = {
 									on_attach = lsp_utils.on_attach,
 								})
             end,
-						["tsserver"] = function()
-                lspconfig.tsserver.setup({
-									settings = {
-										javascript = {
-											inlayHints = {
-												includeInlayEnumMemberValueHints = true,
-												includeInlayFunctionLikeReturnTypeHints = true,
-												includeInlayFunctionParameterTypeHints = true,
-												includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-												includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-												includeInlayPropertyDeclarationTypeHints = true,
-												includeInlayVariableTypeHints = true,
-											},
-										},
-										typescript = {
-											inlayHints = {
-												includeInlayEnumMemberValueHints = true,
-												includeInlayFunctionLikeReturnTypeHints = true,
-												includeInlayFunctionParameterTypeHints = true,
-												includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-												includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-												includeInlayPropertyDeclarationTypeHints = true,
-												includeInlayVariableTypeHints = true,
-											},
-										},
-									},
-									cmd = { "typescript-language-server", "--stdio" },
-									filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
-									init_options = { 
-										hostInfo = "neovim",
-										maxTsServerMemory = 12288,
-            				preferences = {
-                				importModuleSpecifierPreference = "relative",
-            				}, 
-									},
-									root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
-									single_file_support = true,
-									capabilities = lsp_utils.capabilities,
-									on_attach = lsp_utils.on_attach,
-								})
-            end,
+						-- ["tsserver"] = function()
+            --     lspconfig.tsserver.setup({
+						-- 			settings = {
+						-- 				javascript = {
+						-- 					inlayHints = {
+						-- 						includeInlayEnumMemberValueHints = true,
+						-- 						includeInlayFunctionLikeReturnTypeHints = true,
+						-- 						includeInlayFunctionParameterTypeHints = true,
+						-- 						includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+						-- 						includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+						-- 						includeInlayPropertyDeclarationTypeHints = true,
+						-- 						includeInlayVariableTypeHints = true,
+						-- 					},
+						-- 				},
+						-- 				typescript = {
+						-- 					inlayHints = {
+						-- 						includeInlayEnumMemberValueHints = true,
+						-- 						includeInlayFunctionLikeReturnTypeHints = true,
+						-- 						includeInlayFunctionParameterTypeHints = true,
+						-- 						includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+						-- 						includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+						-- 						includeInlayPropertyDeclarationTypeHints = true,
+						-- 						includeInlayVariableTypeHints = true,
+						-- 					},
+						-- 				},
+						-- 			},
+						-- 			cmd = { "typescript-language-server", "--stdio" },
+						-- 			filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+						-- 			init_options = { 
+						-- 				hostInfo = "neovim",
+						-- 				maxTsServerMemory = 12288,
+            -- 				preferences = {
+            --     				importModuleSpecifierPreference = "relative",
+            -- 				}, 
+						-- 			},
+						-- 			root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+						-- 			single_file_support = true,
+						-- 			capabilities = lsp_utils.capabilities,
+						-- 			on_attach = lsp_utils.on_attach,
+						-- 		})
+            -- end,
 						["volar"] = function()
 								local function get_typescript_server_path(root_dir)
 									-- local global_ts = '/opt/homebrew/lib/node_modules/typescript/lib'
@@ -231,7 +227,7 @@ local M = {
 											},
 										},
 									},
-									-- filetypes = {'vue'},
+									-- filetypes = {'vue','json'},
 									filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
 									init_options = {
 										typescript = {
@@ -239,9 +235,9 @@ local M = {
 											-- tsdk = '/opt/homebrew/lib/node_modules/typescript/lib'
 										}
 									},
-									-- root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git", "vite.config.ts", "vite.config.js","vue.config.js"),
+									root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git", "vite.config.ts", "vite.config.js","vue.config.js"),
 									-- root_dir = util.root_pattern(".git", "vite.config.ts", "vite.config.js"),
-									-- single_file_support = true,
+									single_file_support = true,
 									capabilities = lsp_utils.capabilities,
 									on_attach = lsp_utils.on_attach,
 								})

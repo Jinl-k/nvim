@@ -76,6 +76,9 @@ return {
 				highlight_overrides = {
 					mocha = function(cp)
 						return {
+							SubstituteRange = { fg = cp.peach, bg = cp.none },			
+							SubstituteExchange = { fg = cp.peach, bg = cp.none },			
+							
 							NeoTreeGitModified = { fg = cp.lavender, bg = cp.none },		
 							NeoTreeGitUnstaged = { fg = cp.peach, bg = cp.none },					 
 							NeoTreeGitUntracked = { fg = cp.peach, bg = cp.none },							

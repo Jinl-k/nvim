@@ -42,6 +42,17 @@ end
 
 M.on_attach = function(client, bufnr)
 
+	require("lsp_signature").on_attach({
+				bind = true,
+				use_lspsaga = false,
+				floating_window = true,
+				fix_pos = true,
+				hint_enable = true,
+				hi_parameter = "Search",
+				handler_opts = {
+					border = "rounded",
+				},
+			})
 	-- show diagnostics in hover window
 	-- vim.api.nvim_create_autocmd("CursorHold", {
 	-- 	buffer = bufnr,

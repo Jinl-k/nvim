@@ -1,6 +1,7 @@
 return {
 	"williamboman/mason.nvim",
 	dependencies = {
+		'jose-elias-alvarez/null-ls.nvim',
     "jay-babu/mason-null-ls.nvim",
 	},
 	opts = {
@@ -27,7 +28,7 @@ return {
 					"prettier",
 					-- "stylua",
 					-- "tailwindcss-language-server",
-					"typescript-language-server",
+					-- "typescript-language-server",
 					"vue-language-server",
 			}
 			require("mason").setup(opts)

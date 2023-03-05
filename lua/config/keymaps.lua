@@ -157,33 +157,63 @@ keymap("n", "<m-]>", "g,",opt)
 	 wk.register({
 		["<leader>g"] = {
 			name = "LSP",
-			-- a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-			a = { "<cmd>CodeActionMenu<cr>", "Code Action" },
+			a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
 			d = { "<cmd>Telescope lsp_definitions<cr>", "Definition" },
 			t = { "<cmd>Telescope lsp_type_definitions<cr>", "Type Definition" },
 			D = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
 			i = { "<cmd>Telescope lsp_implementations<cr>", "Implementation" },
-			-- k = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
+			-- K = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
 			k = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
 			-- l = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Line Diagnostics" },
 			-- L = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Location List" },
 			n = { "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>", "Next Diagnostic" },
 			p = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>", "Previous Diagnostic" },
 			q = { "<cmd>lua vim.lsp.diagnostic.set_qflist()<cr>", "Quick Fix List" },
-			r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-			R = { "<cmd>Telescope lsp_references<cr>", "References" },
+			R = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+			r = { "<cmd>Telescope lsp_references<cr>", "References" },
 			s = { "<cmd>lua vim.lsp.buf.document_symbol()<cr>", "Document Symbols" },
 			S = { "<cmd>lua vim.lsp.buf.workspace_symbol()<cr>", "Workspace Symbols" },
-		}
+		},
+		["c"]={
+				-- 替换
+				D =  { "<cmd>lua require('substitute').operator()<cr>", '替换模式'},
+				ds = { "<cmd>lua require('substitute').line()<cr>", "替换行" },
+				dS = { "<cmd>lua require('substitute').eol()<cr>", "替换到末尾" },
+				-- 交换
+				c =  {	"<cmd>lua require('substitute.exchange').operator()<cr>","交换模式" },
+				C =  {	"<cmd>lua require('substitute.exchange').line()<cr>","交换行" },
+		},
+		["<leader>c"] = {
+				c = {"<cmd>lua require('substitute.range').operator()<cr>", "命令替换"},
+				C = {"<cmd>lua require('substitute.range').word()<cr>", "替换词"},
+		},
+		-- ["g"]={
+		-- 		d = {'<cmd>lua require("goto-preview",opt).goto_preview_definition()<CR>',"preview_definition"},
+		-- 		t = {'<cmd>lua require("goto-preview",opt).goto_preview_type_definition()<CR>',"preview_type"},
+		-- 		i = {'<cmd>lua require("goto-preview",opt).goto_preview_implementation()<CR>',"preview_implementation"},
+		-- 		-- r = {'<cmd>lua require("goto-preview",opt).goto_preview_references()<CR>', "preview_references"},
+		-- },
 	 })
 
-
-vim.keymap.set('n', 'gd', '<cmd>lua require("goto-preview",opt).goto_preview_definition()<CR>', opt)
-vim.keymap.set('n', 'gt', '<cmd>lua require("goto-preview",opt).goto_preview_type_definition()<CR>', opt)
-vim.keymap.set('n', 'gi', '<cmd>lua require("goto-preview",opt).goto_preview_implementation()<CR>', opt)
-vim.keymap.set('n', 'gr', '<cmd>lua require("goto-preview",opt).goto_preview_references()<CR>', opt)
+-- vim.keymap.set('n', 'gd', '<cmd>lua require("goto-preview",opt).goto_preview_definition()<CR>', opt)
+-- vim.keymap.set('n', 'gt', '<cmd>lua require("goto-preview",opt).goto_preview_type_definition()<CR>', opt)
+-- vim.keymap.set('n', 'gi', '<cmd>lua require("goto-preview",opt).goto_preview_implementation()<CR>', opt)
+-- vim.keymap.set('n', 'gr', '<cmd>lua require("goto-preview",opt).goto_preview_references()<CR>', opt)
 vim.keymap.set('n', '<leader>q', '<cmd>lua require("goto-preview",opt).close_all_win()<CR>', opt)
 -- lspsga
+
+keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>",opt)
+keymap("n", "gA", "<cmd>Lspsaga code_action<CR>",opt)
+keymap("n", "gd", "<cmd>Lspsaga peek_definition<CR>",opt)
+
+-- Go to definition
+-- keymap("n","gd", "<cmd>Lspsaga goto_definition<CR>")
+
+keymap("n", "gt", "<cmd>Lspsaga peek_type_definition<CR>",opt)
+
+-- Go to type definition
+-- keymap("n","gt", "<cmd>Lspsaga goto_type_definition<CR>")
+
 -- Lsp finder find the symbol definition implement reference
 -- if there is no implement it will hide
 -- when you use action in finder like open vsplit then you can
@@ -216,6 +246,7 @@ keymap({"n"}, "<leader>th", "<Cmd>ToggleTerm direction=horizontal<CR>",opt)
 keymap({"n"}, "<leader>tv", "<Cmd>ToggleTerm direction=vertical<CR>",opt)
 keymap({"n"}, "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>",opt)
 keymap({"n"}, "<leader>tt", "<Cmd>ToggleTerm<CR>",opt)
+keymap({"t"}, "tt", "<Cmd>ToggleTerm<CR>",opt)
 keymap({"n"}, "<leader>tg", "<Cmd>lua toggle_lazygit()<CR>",opt)
 local _lazygit = nil
 _G.toggle_lazygit = function()
@@ -309,6 +340,13 @@ keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opt)
 
 keymap("n", "<leader>lu", ":Lazy update<cr>", opt)
 
+-- -- Resize window using <ctrl> arrow keys
+keymap("n", "<S-Up>", "<CMD>resize +2<CR>",opt)
+keymap("n", "<S-Down>", "<CMD>resize -2<CR>",opt)
+keymap("n", "<S-Left>", "<CMD>vertical resize -2<CR>",opt)
+keymap("n", "<S-Right>", "<CMD>vertical resize +2<CR>",opt)
+
+
 -- local wk = require("which-key",opt)
 
 -- vim.o.timeoutlen = 300
@@ -320,11 +358,7 @@ keymap("n", "<leader>lu", ":Lazy update<cr>", opt)
 --   key_labels = { ["<leader>"] = "SPC" },
 -- })
 
--- -- Resize window using <ctrl> arrow keys
--- vim.keymap.set("n", "<S-Up>", "<CMD>resize +2<CR>",opt)
--- vim.keymap.set("n", "<S-Down>", "<CMD>resize -2<CR>",opt)
--- vim.keymap.set("n", "<S-Left>", "<CMD>vertical resize -2<CR>",opt)
--- vim.keymap.set("n", "<S-Right>", "<CMD>vertical resize +2<CR>",opt)
+
 
 -- -- Switch buffers with tab
 -- vim.keymap.set("n", "<S-TAB>", "<CMD>bprevious<CR>",opt)

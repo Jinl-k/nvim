@@ -1,16 +1,16 @@
 
 return {
-  "rmagatti/auto-session",
+  "rmagatti/session-lens",
 	lazy = true,
-	dependencies = 'rmagatti/session-lens',
   config = function()
 		require('session-lens').setup({
-			-- prompt_title = 'YEAH SESSIONS',
+			prompt_title = 'SESSIONS',
 			-- path_display = {'shorten'},
-			theme = 'ivy', -- default is dropdown
-			-- theme_conf = { border = rounded },
-			-- previewer = true
+			-- theme = 'ivy', -- default is dropdown
+			theme_conf = { border = rounded },
+			previewer = false
 		})
+		require('telescope.themes').get_dropdown(theme_conf)
     require("telescope").load_extension("session-lens")
   end,
 }

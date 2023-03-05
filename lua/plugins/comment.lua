@@ -4,22 +4,22 @@ return {
 		event = "BufReadPre",
     keys = {
         {
-            "<C-/>",
+            "<D-/>",
             mode = "n",
             "<Plug>(comment_toggle_linewise_current)",
         },
         {
-            "<C-/>",
+            "<D-/>",
             mode = "x",
             "<Plug>(comment_toggle_linewise_visual)",
         },
         {
-            "<C-M-/>",
+            "<D-M-/>",
             mode = "n",
             "<Plug>(comment_toggle_blockwise_current)",
         },
         {
-            "<C-M-/>",
+            "<D-M-/>",
             mode = "x",
             "<Plug>(comment_toggle_blockwise_visual)",
         },

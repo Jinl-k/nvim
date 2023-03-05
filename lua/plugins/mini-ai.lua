@@ -8,8 +8,8 @@ return {
         n_lines = 500,
 				search_method = 'cover_or_next',
 				-- Next/last variants
-				around_next = 'aj',
-				inside_next = 'ij',
+				around_next = 'aL',
+				inside_next = 'iL',
 				around_last = 'al',
 				inside_last = 'il',
         custom_textobjects = {

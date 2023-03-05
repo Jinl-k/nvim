@@ -3,14 +3,13 @@
 return {
     'glepnir/lspsaga.nvim',
     event = 'BufRead',
-		enabled = false,
 		dependencies = { {'nvim-tree/nvim-web-devicons'} , {"nvim-treesitter/nvim-treesitter"}},
     config = function()
         require('lspsaga').setup({
-					preview = {
-						lines_above = 1,
-						lines_below = 12,
-					},
+					-- preview = {
+					-- 	lines_above = 1,
+					-- 	lines_below = 12,
+					-- },
 					scroll_preview = {
 						scroll_down = "<C-j>",
 						scroll_up = "<C-k>",
@@ -31,24 +30,27 @@ return {
 						quit = "q",
 						close = "<Esc>",
 					},
-					-- code_action = {
-					-- 	num_shortcut = true,
-					-- 	keys = {
-					-- 		quit = "q",
-					-- 		exec = "<CR>",
-					-- 	},
-					-- },
-					-- lightbulb = {
-					-- 	enable = false,
-					-- 	sign = true,
-					-- 	enable_in_insert = true,
-					-- 	sign_priority = 20,
-					-- 	virtual_text = true,
-					-- },
+					code_action = {
+						num_shortcut = true,
+						keys = {
+							quit = "q",
+							exec = "<CR>",
+						},
+					},
+					lightbulb = {
+						enable = false,
+						sign = true,
+						enable_in_insert = true,
+						sign_priority = 20,
+						virtual_text = true,
+					},
 					diagnostic = {
-						twice_into = false,
+						on_insert = true,
+						on_insert_follow = false,
 						show_code_action = true,
 						show_source = true,
+						border_follow = true,
+						jump_num_shortcut = true,
 						keys = {
 							exec_action = "<CR>",
 							quit = "q",
@@ -86,7 +88,6 @@ return {
 						color_mode = true,
 					},
 					ui = {
-						theme = "round",
 						border = "rounded", -- Can be single, double, rounded, solid, shadow.
 						 -- this option only work in neovim 0.9
    				  -- title = true,

@@ -17,7 +17,7 @@ vim.g.maplocalleader = " "
 vim.opt.diffopt = "filler,iwhite,internal,algorithm:patience"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.opt.sessionoptions = "buffers,curdir,folds,help,tabpages,terminal,globals,winsize"
+vim.opt.sessionoptions = "buffers,curdir,folds,help,tabpages,globals,winsize"
 vim.opt.viewoptions = "folds,cursor,curdir,slash,unix"
 vim.opt.jumpoptions = "view"
 vim.opt.foldmethod = "indent" -- indent,expr
@@ -82,7 +82,7 @@ vim.opt.autoindent = true
 vim.opt.cursorline = true
 
 -- 启用鼠标
-vim.opt.mouse:append("a")
+-- vim.opt.mouse:append("a")
 
 -- 系统剪贴板
 vim.opt.clipboard:append("unnamedplus")
