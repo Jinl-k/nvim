@@ -1,95 +1,20 @@
--- local telescope = prequire("telescope")
--- if not telescope then return end
-
--- telescope.setup {
---   defaults = {
---     picker = {
---       hidden = false,
---     },
---     vimgrep_arguments = {
---       "rg",
---       "--color=never",
---       "--no-heading",
---       "--with-filename",
---       "--line-number",
---       "--column",
---       "--no-ignore",
---       "--smart-case",
---       "--hidden",
---     },
---     prompt_prefix = "  ",
---     selection_caret = "  ",
---     entry_prefix = "  ",
---     initial_mode = "insert",
---     selection_strategy = "reset",
---     sorting_strategy = "descending",
---     layout_strategy = "horizontal",
---     layout_config = {
---       horizontal = {
---         prompt_position = "top",
---         preview_width = 0.55,
---         results_width = 0.8
---       },
---       vertical = { mirror = false },
---       width = 0.87,
---       height = 0.80,
---       preview_cutoff = 120
---     },
---     file_sorter = require("telescope.sorters").get_fuzzy_file,
---     file_ignore_patterns = { "node_modules", ".git/", "dist/", "build/" },
---     generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
---     path_display = { "absolute" },
---     winblend = 0,
---     border = {},
---     borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
---     color_devicons = true,
---     use_less = true,
---     set_env = { ["COLORTERM"] = "truecolor" },
---     file_previewer = require("telescope.previewers").vim_buffer_cat.new,
---     grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
---     qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
---     buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
---     mappings = {
---       i = {
---         ["<Tab>"] = "move_selection_next",
---         ["<S-Tab>"] = "move_selection_previous",
---       },
---       n = {
---         ["<Tab>"] = "move_selection_next",
---         ["<S-Tab>"] = "move_selection_previous",
---       },
---     },
---   },
---   extensions = {
---     fzf = {
---       fuzzy = true,
---       override_generic_sorter = true,
---       override_file_sorter = true,
---       case_mode = "smart_case"
---     },
---   }
--- }
 -- https://github.com/nvim-telescope/telescope.nvim
 -- https://github.com/nvim-telescope/telescope-file-browser.nvim
 -- https://github.com/ahmedkhalf/project.nvim
--- https://github.com/jvgrootveld/telescope-zoxide
 return {
 	"nvim-telescope/telescope.nvim",
 	lazy = true,
 	cmd = "Telescope",
-		-- enabled =false,
 	dependencies = {
 		{ "nvim-tree/nvim-web-devicons" },
 		"nvim-lua/plenary.nvim",
 		"nvim-lua/popup.nvim",
 		{ "ahmedkhalf/project.nvim", event = "BufReadPost" },
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-		{ "nvim-telescope/telescope-ui-select.nvim" },
 		{ "nvim-telescope/telescope-file-browser.nvim" },
 		{ "nvim-telescope/telescope-frecency.nvim", dependencies = {
 			{ "kkharji/sqlite.lua" },
 		} },
-		{ "jvgrootveld/telescope-zoxide" },
 		{ "nvim-telescope/telescope-live-grep-args.nvim" },
 	},
 	opts = function()
@@ -98,6 +23,7 @@ return {
 		local telescope_actions = require("telescope.actions.set")
 		local fixfolds = {
 			hidden = true,
+			-- theme = "cursor",
 			attach_mappings = function(_)
 				telescope_actions.select:enhance({
 					post = function()
@@ -117,13 +43,26 @@ return {
 				entry_prefix = " ",
 				scroll_strategy = "limit",
 				results_title = false,
-				layout_strategy = "horizontal",
+				
 				path_display = { "absolute" },
 				file_ignore_patterns = { ".git/", "node_modules","*/dist/*","dist","*/dist",".idea/", ".DS_Store","*/.DS_Store", ".cache", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip","%.yaml"},
+				
+				-- layout_strategy = "horizontal",
+				-- layout_config = {
+				-- 	horizontal = {
+				-- 		preview_width = 0.5,
+				-- 	},
+				-- },
+
+				-- theme
+				layout_strategy = "bottom_pane",
+				-- config
 				layout_config = {
-					horizontal = {
-						preview_width = 0.5,
-					},
+						bottom_pane = {
+								height = 30,
+								preview_cutoff = 100,
+								prompt_position = "bottom",
+						},
 				},
 				file_previewer = require("telescope.previewers").vim_buffer_cat.new,
 				grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
@@ -154,11 +93,7 @@ return {
 					show_unindexed = true,
 					ignore_patterns = { "*.git/*", "*/tmp/*","*/dist/*", "dist","*/dist","tsconfig.json","node_modules", ".cache/.*",".idea/.*",".git/",".DS_Store","*/.DS_Store","pnpm-lock.yaml","%.yaml" },
 				},
-				["ui-select"] = {
-					theme.get_dropdown({
-						-- even more opts
-					}),
-				},
+	
 				live_grep_args = {
 					auto_quoting = true, -- enable/disable auto-quoting
 					-- define mappings, e.g.
@@ -183,31 +118,6 @@ return {
 							-- ["<cr>"] = require("telescope-undo.actions").yank_additions,
 							-- ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
 							-- ["<C-cr>"] = require("telescope-undo.actions").restore,
-						},
-					},
-				},
-				zoxide = {
-					prompt_title = "[ Walking on the shoulders of TJ ]",
-					mappings = {
-						default = {
-							after_action = function(selection)
-								print("Update to (" .. selection.z_score .. ") " .. selection.path)
-							end
-						},
-						["<C-s>"] = {
-							before_action = function(selection) 
-								print("before C-s") 
-							end,
-							action = function(selection)
-								vim.cmd("edit " .. selection.path)
-							end
-						},
-						["<C-z>"] = { action = require("telescope._extensions.zoxide.utils").create_basic_command("split") },
-						["<C-b>"] = {
-							keepinsert = true,
-							action = function(selection)
-								-- fb_actions.change_cwd
-							end
 						},
 					},
 				},
@@ -278,31 +188,11 @@ return {
 			-- telescope
 			datapath = vim.fn.stdpath("data"),
     }
-
 		telescope.load_extension("fzf")
-		telescope.load_extension("ui-select")
 		telescope.load_extension("file_browser")
 		telescope.load_extension("projects")
-		require("telescope").load_extension("zoxide")
 		require("telescope").load_extension("frecency")
 		require("telescope").load_extension("live_grep_args")
 		-- require("telescope").load_extension("undo")
-		vim.keymap.set("n", "<leader>cd", telescope.extensions.zoxide.list)
 	end,
 }
--- zoxide
--- ["<C-s>"] = { action = z_utils.create_basic_command("split") },
---     ["<C-v>"] = { action = z_utils.create_basic_command("vsplit") },
---     ["<C-e>"] = { action = z_utils.create_basic_command("edit") },
---     ["<C-b>"] = {
---       keepinsert = true,
---       action = function(selection)
---         builtin.file_browser({ cwd = selection.path })
---       end
---     },
---     ["<C-f>"] = {
---       keepinsert = true,
---       action = function(selection)
---         builtin.find_files({ cwd = selection.path })
---       end
---     }

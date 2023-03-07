@@ -1,36 +1,28 @@
+-- https://github.com/utilyre/barbecue.nvim
 return {
   "utilyre/barbecue.nvim",
-	-- event = 'VeryLazy',
-	lazy =false,
-	enabled = false,
+  name = "barbecue",
+	event = 'BufRead',
+  version = "*",
   dependencies = {
     "SmiteshP/nvim-navic",
     "nvim-tree/nvim-web-devicons", -- optional dependency
   },
-	config = function()	
+	config = function()
+		-- triggers CursorHold event faster
+		vim.opt.updatetime = 200
+
 		require("barbecue").setup({
 			create_autocmd = false, -- prevent barbecue from updating itself automatically
 			 attach_navic = false,
-			--  custom_section = function(bufnr)
-			-- 	return (
-			-- 		vim.bo[bufnr].readonly
-			-- 			and "%#Error#" .. vim.g.icons.widget.inline.Lock
-			-- 		or ""
-			-- 	) .. " "
-			-- end,
-			-- kinds = vim.g.icons.kind,
-			-- symbols = {
-			-- 	ellipsis = vim.g.icons.layout.Truncation,
-			-- 	separator = vim.g.icons.layout.Nesting,
-			-- 	modified = vim.g.icons.layout.Modified,
-			-- },
 		})
 
 		vim.api.nvim_create_autocmd({
-			"WinResized",
+			"WinScrolled", -- or WinResized on NVIM-v0.9 and higher
 			"BufWinEnter",
 			"CursorHold",
 			"InsertLeave",
+			-- include these if you have set `show_modified` to `true`
 			"BufWritePost",
 			"TextChanged",
 			"TextChangedI",

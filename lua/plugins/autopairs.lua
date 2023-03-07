@@ -1,28 +1,31 @@
 -- https://github.com/windwp/nvim-autopairs
 return {
     "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    opts = {
-        check_ts = true,
-				disable_filetype = { "TelescopePrompt" },
-				ts_config = {
-					lua = { "string", "source" },
-					javascript = { "string", "template_string" },
-					typescript = { "string", "template_string" },
-				},
-				fast_wrap = {
-					map = "<D-e>",
-					chars = { "{", "[", "(", '"', "'" },
-					pattern = [=[[%'%"%>%]%)%}%,]]=],
-					end_key = "$",
-					keys = "qwertyuiopzxcvbnmasdfghjkl",
-					check_comma = true,
-					highlight = "PmenuSel",
-					highlight_grey = "LineNr",
-				},
-    },
+    event = "BufReadPost",
     config = function(_, opts)
-        require("nvim-autopairs").setup(opts)
+				require('nvim-autopairs').setup({
+					check_ts = true,
+					ts_config = {
+						lua = { "string", "source" },
+						javascript = { "string", "template_string" },
+						typescript = { "string", "template_string" },
+					},
+					fast_wrap = {
+						map = "<D-e>",
+						chars = { "{", "[", "(", '"', "'" },
+						pattern = [=[[%'%"%>%]%)%}%,]]=],
+						end_key = "$",
+						keys = "qwertyuiopzxcvbnmasdfghjkl",
+						check_comma = true,
+						highlight = "PmenuSel",
+						highlight_grey = "LineNr",
+					},
+					disable_filetype = { "TelescopePrompt" , "guihua", "guihua_rust", "clap_input" },
+				})
+
+				-- if vim.o.ft == 'clap_input' and vim.o.ft == 'guihua' and vim.o.ft == 'guihua_rust' then
+				-- 		require'cmp'.setup.buffer { completion = {enable = false} }
+				-- end
 				-- If you want insert `(` after select function or method item
 				local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 				local cmp = require("cmp")

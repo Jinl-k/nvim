@@ -76,6 +76,7 @@ return {
 				highlight_overrides = {
 					mocha = function(cp)
 						return {
+
 							SubstituteRange = { fg = cp.peach, bg = cp.none },			
 							SubstituteExchange = { fg = cp.peach, bg = cp.none },			
 							
@@ -245,7 +246,6 @@ return {
 					telescope = true,
 					treesitter_context = true,
 					ts_rainbow = true,
-					vim_sneak = false,
 					vimwiki = false,
 					which_key = false,
 						-- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)

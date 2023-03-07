@@ -157,9 +157,9 @@ keymap("n", "<m-]>", "g,",opt)
 	 wk.register({
 		["<leader>g"] = {
 			name = "LSP",
-			a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-			d = { "<cmd>Telescope lsp_definitions<cr>", "Definition" },
-			t = { "<cmd>Telescope lsp_type_definitions<cr>", "Type Definition" },
+			a = { "<cmd>Lspsaga rename ++project<CR>", "rename ++project" },
+			d = { "<cmd>Lspsaga goto_definition<CR>", "Definition" },
+			t = { "<cmd>Lspsaga goto_type_definition<CR>", "Type Definition" },
 			D = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
 			i = { "<cmd>Telescope lsp_implementations<cr>", "Implementation" },
 			-- K = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
@@ -187,48 +187,26 @@ keymap("n", "<m-]>", "g,",opt)
 				c = {"<cmd>lua require('substitute.range').operator()<cr>", "命令替换"},
 				C = {"<cmd>lua require('substitute.range').word()<cr>", "替换词"},
 		},
-		-- ["g"]={
-		-- 		d = {'<cmd>lua require("goto-preview",opt).goto_preview_definition()<CR>',"preview_definition"},
-		-- 		t = {'<cmd>lua require("goto-preview",opt).goto_preview_type_definition()<CR>',"preview_type"},
-		-- 		i = {'<cmd>lua require("goto-preview",opt).goto_preview_implementation()<CR>',"preview_implementation"},
-		-- 		-- r = {'<cmd>lua require("goto-preview",opt).goto_preview_references()<CR>', "preview_references"},
-		-- },
 	 })
 
 -- vim.keymap.set('n', 'gd', '<cmd>lua require("goto-preview",opt).goto_preview_definition()<CR>', opt)
 -- vim.keymap.set('n', 'gt', '<cmd>lua require("goto-preview",opt).goto_preview_type_definition()<CR>', opt)
 -- vim.keymap.set('n', 'gi', '<cmd>lua require("goto-preview",opt).goto_preview_implementation()<CR>', opt)
 -- vim.keymap.set('n', 'gr', '<cmd>lua require("goto-preview",opt).goto_preview_references()<CR>', opt)
-vim.keymap.set('n', '<leader>q', '<cmd>lua require("goto-preview",opt).close_all_win()<CR>', opt)
--- lspsga
+-- vim.keymap.set('n', '<leader>q', '<cmd>lua require("goto-preview",opt).close_all_win()<CR>', opt)
 
-keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>",opt)
+
+
+--lspsaga
+-- keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>",opt)
 keymap("n", "gA", "<cmd>Lspsaga code_action<CR>",opt)
 keymap("n", "gd", "<cmd>Lspsaga peek_definition<CR>",opt)
-
--- Go to definition
--- keymap("n","gd", "<cmd>Lspsaga goto_definition<CR>")
-
 keymap("n", "gt", "<cmd>Lspsaga peek_type_definition<CR>",opt)
 
--- Go to type definition
--- keymap("n","gt", "<cmd>Lspsaga goto_type_definition<CR>")
-
--- Lsp finder find the symbol definition implement reference
--- if there is no implement it will hide
--- when you use action in finder like open vsplit then you can
--- use <C-t> to jump back
 keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>",opt)
--- Rename
 keymap("n", "ga", "<cmd>Lspsaga rename<CR>",opt)
--- Rename word in whole project
-keymap("n", "ga", "<cmd>Lspsaga rename ++project<CR>",opt)
+
 keymap("n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>",opt)
--- -- Show cursor diagnostic
--- -- also like show_line_diagnostics  support pass ++unfocus
--- keymap("n", "<leader>sc", "<cmd>Lspsaga show_cursor_diagnostics<CR>",opt)
--- Show buffer diagnostic
--- keymap("n", "<leader>sb", "<cmd>Lspsaga show_buf_diagnostics<CR>",opt)
 keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>",opt)
 keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>",opt)
 -- -- Diagnostic jump with filter like Only jump to error
@@ -238,10 +216,13 @@ keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>",opt)
 -- keymap("n", "]E", function()
 --   require("lspsaga.diagnostic",opt):goto_next({ severity = vim.diagnostic.severity.ERROR })
 -- end)
--- keymap("n","<leader>o", "<cmd>Lspsaga outline<CR>",opt)
+keymap("n","<leader>L", "<cmd>Lspsaga outline<CR>",opt)
 
--- Float terminal
--- vim.api.nvim_set_keymap("t", "<leader>T", "<C-\\><C-n>", {noremap = true, silent = true}) 
+
+
+
+
+
 keymap({"n"}, "<leader>th", "<Cmd>ToggleTerm direction=horizontal<CR>",opt)
 keymap({"n"}, "<leader>tv", "<Cmd>ToggleTerm direction=vertical<CR>",opt)
 keymap({"n"}, "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>",opt)

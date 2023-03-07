@@ -41,10 +41,42 @@ return {
 				end
 			end
 
+
+			local null_ls = require("null-ls")
+			-- Please set additional flags for the supported servers here
+			-- Don't specify any config here if you are using the default one.
+			local sources = {
+				null_ls.builtins.formatting.prettier.with({
+					filetypes = {
+						"vue",
+						"typescript",
+						"javascript",
+						"typescriptreact",
+						"javascriptreact",
+						"yaml",
+						"html",
+						"css",
+						"scss",
+						"sh",
+						"markdown",
+					},
+				}),
+			}
+
+			null_ls.setup({
+				border = "rounded",
+				debug = false,
+				log_level = "warn",
+				update_in_insert = false,
+				sources = sources,
+			})
+
 			require("mason-null-ls").setup({
 					ensure_installed = { "stylua", "prettier" },
 					automatic_installation = true,
     			automatic_setup = true,
 			})
+
+			require("mason-null-ls").setup_handlers()
 	end
 }
