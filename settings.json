@@ -1,0 +1,407 @@
+{
+	"terminal.integrated.fontFamily": "FiraCode Nerd Font",
+	"editor.accessibilitySupport": "off",
+	"code-runner.runInTerminal": true,
+	"git.enableSmartCommit": true,
+	"terminal.integrated.cursorBlinking": true,
+	"explorer.confirmDelete": false,
+	"terminal.integrated.fontSize": 13,
+	"editor.suggestSelection": "first",
+	"explorer.confirmDragAndDrop": false,
+	"editor.fontFamily": "ComicShannsMono Nerd Font",
+	"terminal.integrated.cursorStyle": "line",
+	"terminal.integrated.lineHeight": 1.2,
+	"files.exclude": {
+		"**/.classpath": true,
+		"**/.factorypath": true,
+		"**/.project": true,
+		"**/.settings": true,
+		"**/node_modules": false
+	},
+	"git.confirmSync": false,
+	"editor.fontSize": 15,
+	"terminal.integrated.env.osx": {
+		"FIG_NEW_SESSION": "1"
+	},
+	"window.autoDetectHighContrast": false,
+	"typescript.inlayHints.enumMemberValues.enabled": true,
+	"npm.enableRunFromFolder": true,
+	"editor.inlineSuggest.enabled": true,
+	"typescript.enablePromptUseWorkspaceTsdk": true,
+	"typescript.format.insertSpaceAfterConstructor": true,
+	"typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+	"typescript.inlayHints.parameterNames.enabled": "all",
+	"typescript.inlayHints.parameterTypes.enabled": true,
+	"typescript.inlayHints.propertyDeclarationTypes.enabled": true,
+	"typescript.inlayHints.variableTypes.enabled": true,
+	"typescript.suggest.completeFunctionCalls": true,
+	"typescriptHero.imports.disableImportRemovalOnOrganize": true,
+	"typescriptHero.imports.disableImportsSorting": true,
+
+	"eslint.packageManager": "pnpm",
+	"terminal.integrated.enableMultiLinePasteWarning": false,
+	"editor.codeLensFontFamily": "FiraCode Nerd Font",
+
+	// vim配置
+	"vim.easymotionMarkerForegroundColorOneChar": "#EA5377",
+	"vim.incsearch": true,
+	"vim.hlsearch": true,
+	"vim.autoindent": true,
+	"vim.useCtrlKeys": true,
+	"vim.cursorStylePerMode.insert": "line",
+	"vim.cursorStylePerMode.normal": "underline",
+	"vim.cursorStylePerMode.visual": "underline",
+	"vim.cursorStylePerMode.replace": "underline",
+	"vim.cursorStylePerMode.visualblock": "underline",
+	"vim.cursorStylePerMode.visualline": "underline",
+	"vim.leapShowMarkerPosition": "target",
+	"vim.leapBidirectionalSearch": true,
+	"vim.highlightedyank.enable": true,
+	"vim.replaceWithRegister": true,
+	"vim.autoSwitchInputMethod.enable": true,
+	"vim.autoSwitchInputMethod.defaultIM": "com.apple.keylayout.ABC",
+	"vim.autoSwitchInputMethod.obtainIMCmd": "/usr/local/bin/im-select",
+	"vim.autoSwitchInputMethod.switchIMCmd": "/usr/local/bin/im-select {im}",
+	"vim.argumentObjectOpeningDelimiters": ["(", "[", "{"],
+	"vim.argumentObjectClosingDelimiters": [")", "]", "}"],
+	"vim.argumentObjectSeparators": [","],
+	"vim.camelCaseMotion.enable": true,
+	"vim.easymotion": true,
+	"vim.leader": "<Space>",
+	"vim.foldfix": true,
+	"vim.useSystemClipboard": true,
+	"vim.easymotionJumpToAnywhereRegex": "\\b[A-Za-z0-9]|[A-Za-z0-9]\\b|_.|#.|=.|[a-z][A-Z]",
+	"vim.sneak": false,
+	"vim.leap": true,
+	"vim.visualModeKeyBindingsNonRecursive": [
+		{
+			"before": ["H"],
+			"after": ["^"]
+		},
+		{
+			"before": ["L"],
+			"after": ["g", "_"]
+		},
+		{
+			// vim-indent-object
+			"before": ["a", "i"],
+			"after": ["a", "I"]
+		},
+		{
+			// todo 等会看看还需要不
+			"before": ["<Leader>", "f"],
+			"after": ["<leader>", "<leader>", "2s"]
+		},
+		{
+			// 重构手法： 提取函数
+			"before": ["<Leader>", "r", "f"],
+			"commands": [
+				{
+					"command": "editor.action.refactor",
+					"args": {
+						"kind": "refactor.extract.function"
+					}
+				}
+			]
+		},
+		{
+			// 重构手法： 提取变量
+			"before": ["<Leader>", "r", "v"],
+			"commands": ["abracadabra.extract"]
+		},
+		{
+			// 向右侧跳转 利用的 easymotion
+			"before": ["<Leader>", "l"],
+			"after": ["<leader>", "<leader>", "l"]
+		},
+		{
+			// 向左侧跳转 利用的 easymotion
+			"before": ["<Leader>", "h"],
+			"after": ["<leader>", "<leader>", "h"]
+		},
+		{
+			// 基于行的向上跳转 利用的 easymotion
+			"before": ["<Leader>", "k"],
+			"after": ["<leader>", "<leader>", "k"]
+		},
+		{
+			// 基于行的向下跳转 利用的 easymotion
+			"before": ["<Leader>", "j"],
+			"after": ["<leader>", "<leader>", "j"]
+		},
+		{
+			// 基于2个字符的全局跳转 基于 easymotion
+			"before": ["s"],
+			"after": ["<leader>", "<leader>", "2", "s"]
+		},
+		{
+			// 基于单词的跳转 单词首 全局向下 基于 easymotion
+			"before": ["<Leader>", "w"],
+			"after": ["<leader>", "<leader>", "w"]
+		},
+		{
+			// 基于单词的跳转 单词尾 全局向下 基于 easymotion
+			"before": ["<Leader>", "e"],
+			"after": ["<leader>", "<leader>", "e"]
+		},
+		{
+			// 基于单词的跳转 单词首 全局向上 基于 easymotion
+			"before": ["<Leader>", "b"],
+			"after": ["<leader>", "<leader>", "b"]
+		},
+		{
+			// 基于单词的跳转 单词尾 全局向上 基于 easymotion
+			"before": ["<Leader>", "g", "e"],
+			"after": ["<leader>", "<leader>", "g", "e"]
+		}
+	],
+	"vim.operatorPendingModeKeyBindings": [
+		{
+			"before": ["H"],
+			"after": ["^"]
+		},
+		{
+			"before": ["L"],
+			"after": ["g", "_"]
+		},
+		{
+			"before": ["a", "i"],
+			"after": ["a", "I"]
+		}
+	],
+	"vim.insertModeKeyBindingsNonRecursive": [
+		{
+			"before": ["j", "j"],
+			// "after": ["<Esc>"]
+
+			// "commands": ["workbench.action.files.save"]
+			"commands": ["extension.vim_escape"],
+			"when": "editorTextFocus && vim.active && !inDebugRepl"
+		},
+		{
+			"before": ["z", "z"],
+			"commands": ["editor.toggleFold"]
+			// "when": "editorTextFocus && foldingEnabled"
+		}
+		// {
+		//   "before": ["<leader>", "h"],
+		//   "commands": ["workbench.action.previousEditor"]
+		// },
+		// {
+		//   "before": ["<leader>", "l"],
+		//   "commands": ["workbench.action.nextEditor"]
+		// },
+		// {
+		//   "before": ["<leader>", "1"],
+		//   "commands": ["workbench.action.toggleSidebarVisibility"]
+		// }
+	],
+	"vim.normalModeKeyBindingsNonRecursive": [
+		{
+			"before": ["<leader>", "1"],
+			"commands": ["workbench.action.toggleSidebarVisibility"]
+		},
+		{
+			"before": ["z", "z"],
+			"commands": ["editor.toggleFold"]
+		},
+		{
+			"before": ["<Esc>"],
+			"commands": ["workbench.action.files.save"]
+		},
+		{
+			"before": ["<Leader>", "u"],
+			"after": ["~"]
+		},
+		{
+			"before": ["H"],
+			"after": ["^"]
+		},
+		{
+			"before": ["L"],
+			"after": ["g", "_"]
+		},
+		{
+			// 选中一个对象/数组
+			"before": ["<leader>", "s"],
+			"after": ["V", "$", "%"]
+		},
+		{
+			// 向右侧跳转 利用的 easymotion
+			"before": ["<Leader>", "l"],
+			"after": ["<leader>", "<leader>", "l"]
+		},
+		{
+			// 向左侧跳转 利用的 easymotion
+			"before": ["<Leader>", "h"],
+			"after": ["<leader>", "<leader>", "h"]
+		},
+		{
+			// 基于行的向上跳转 利用的 easymotion
+			"before": ["<Leader>", "k"],
+			"after": ["<leader>", "<leader>", "k"]
+		},
+		{
+			// 基于行的向下跳转 利用的 easymotion
+			"before": ["<Leader>", "j"],
+			"after": ["<leader>", "<leader>", "j"]
+		},
+		{
+			// 基于单词的跳转 单词首 全局向下 基于 easymotion
+			"before": ["<Leader>", "w"],
+			"after": ["<leader>", "<leader>", "w"]
+		},
+		{
+			// 基于单词的跳转 单词尾 全局向下 基于 easymotion
+			"before": ["<Leader>", "e"],
+			"after": ["<leader>", "<leader>", "e"]
+		},
+		{
+			// 基于单词的跳转 单词首 全局向上 基于 easymotion
+			"before": ["<Leader>", "b"],
+			"after": ["<leader>", "<leader>", "b"]
+		},
+		{
+			// 基于单词的跳转 单词尾 全局向上 基于 easymotion
+			"before": ["<Leader>", "g", "e"],
+			"after": ["<leader>", "<leader>", "g", "e"]
+		},
+		// 删除一个函数
+		{
+			"before": ["<space>", "d", "j"],
+			"commands": ["delete-function.deleteFunction"]
+		},
+		{
+			// 创建一个函数 光标需要在要创建的函数上
+			"before": ["<Leader>", "c", "f"],
+			"commands": ["hocusPocus.createFunction"]
+		},
+		{
+			// 创建一个变量 光标需要在要创建的函数上
+			"before": ["<Leader>", "c", "v"],
+			"commands": ["hocusPocus.createVariable"]
+		},
+		{
+			// 重构手法： 提取变量
+			"before": ["<Leader>", "r", "v"],
+			"commands": ["abracadabra.extract"]
+		},
+		{
+			"before": ["<Leader>", "g", "g"],
+			"commands": ["workbench.view.scm"]
+		},
+		{
+			// 创建一个文件夹
+			"before": ["<Leader>", "n", "d"],
+			"commands": ["explorer.newFolder"]
+		},
+		{
+			// 创建一个文件
+			"before": ["<Leader>", "n", "f"],
+			"commands": ["explorer.newFile"]
+		},
+		{
+			// 全局格式化代码
+			"before": ["<Leader>", "d", "f"],
+			"commands": ["editor.action.formatDocument"]
+		},
+		{
+			// 重命名
+			"before": ["<Leader>", "r", "n"],
+			"commands": ["abracadabra.renameSymbol"]
+		},
+		{
+			"before": ["<leader>", "d", "f"],
+			"commands": ["delete-function.deleteFunction"]
+		},
+		{
+			"before": ["<leader>", "d"],
+			"after": ["d", "d"]
+		},
+		{
+			"before": ["<leader>", "s"],
+			"after": ["<leader>", "<leader>", "s"]
+		},
+		{
+			"before": ["<leader>", "f"],
+			"after": ["<leader>", "<leader>", "f"]
+		},
+		{
+			"before": ["<leader>", "F"],
+			"after": ["<leader>", "<leader>", "F"]
+		},
+		{
+			"before": ["<Esc>"],
+			"commands": [":nohl"]
+		},
+		{
+			"before": ["<leader>", "h"],
+			"commands": ["workbench.action.previousEditor"]
+		},
+		{
+			"before": ["<leader>", "l"],
+			"commands": ["workbench.action.nextEditor"]
+		}
+		// {
+		//   "before": ["<C-n>"],
+		//   "commands": [":nohl"]
+		// },
+	],
+
+	"catppuccin.italicKeywords": false,
+	"catppuccin.accentColor": "lavender",
+	"terminal.integrated.copyOnSelection": true,
+	"security.workspace.trust.banner": "always",
+	"workbench.iconTheme": "catppuccin-mocha",
+	"eslint.codeActionsOnSave.mode": "problems",
+	"javascript.referencesCodeLens.enabled": true,
+	"javascript.referencesCodeLens.showOnAllFunctions": true,
+	"js/ts.implicitProjectConfig.target": "ESNext",
+	"typescript.referencesCodeLens.enabled": true,
+	"typescript.referencesCodeLens.showOnAllFunctions": true,
+	"prettier.useTabs": true,
+	"editor.renderWhitespace": "none",
+	"prettier.printWidth": 100,
+	"totalTypeScript.hideAllTips": false,
+	"totalTypeScript.hideBasicTips": false,
+	"totalTypeScript.hiddenTips": [
+		"basic-types",
+		"array-type",
+		"function-return-type",
+		"typing-function-parameters",
+		"passing-generics-to-types",
+		"literal-type",
+		"union-type",
+		"any-type"
+	],
+	"github.copilot.enable": {
+		"*": true,
+		"yaml": false,
+		"plaintext": false,
+		"markdown": false,
+		"typescript": false
+	},
+	"colorize.include": ["**/*.js", "**/*.css", "**/*.scss", "**/*.sass", "**/*.less", "**/*.styl"],
+	"color-highlight.markerType": "underline",
+	"console-ninja.featureSet": "Community",
+	"git.ignoreRebaseWarning": true,
+	"css.lint.unknownAtRules": "ignore",
+	"catppuccin.workbenchMode": "flat",
+	"editor.formatOnType": false, // optional
+	"editor.formatOnSaveMode": "file", // required to format on save
+	"files.autoSave": "onFocusChange",
+	"prettier.singleQuote": true,
+	"prettier.trailingComma": "all",
+	"prettier.vueIndentScriptAndStyle": true,
+	"livePreview.tasks.runTaskWithExternalPreview": true,
+	"workbench.colorTheme": "Catppuccin Mocha",
+	"editor.formatOnSave": true,
+	"editor.formatOnPaste": true,
+	"notebook.formatOnSave.enabled": true,
+	"editor.stickyScroll.enabled": true,
+	"editor.guides.bracketPairs": "active",
+	"prettier.jsxSingleQuote": true,
+	"prettier.prettierPath": "/opt/homebrew/lib/node_modules/prettier",
+	"prettier.singleAttributePerLine": true, // optional but recommended
+	"editor.defaultFormatter": "esbenp.prettier-vscode"
+}
