@@ -1,0 +1,173 @@
+"" Source your .vimrc
+/Users/kevin/Downloads/Untitled.json"source ~/.vimrc
+"nnoremap <SPACE> <Nop>
+let mapleader = " "
+Plug '<extension-github-reference>'
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=30
+set rtp+=/opt/homebrew/opt/fzf
+" Do incremental searching.
+" 剪贴板与系统剪贴板同步
+set clipboard+=unnamedplus,unnamed
+set showmode
+set so=5
+set nu
+set hlsearch                    " highlight searches
+set nohlsearch
+set incsearch                   " do incremental searching, search as you type
+set ignorecase
+set smartcase
+set notimeout
+set number
+set relativenumber
+set history=200
+" J 将选中的内容拼成一行"
+set ideajoin
+set ideamarks
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+
+" ================================================================================================
+" = 插件配置 =====================================
+" ================================================================================================
+set keep-english-in-normal
+"set keep-english-in-normal-and-restore-in-insert
+let keep_input_source_in_normal="com.apple.keylayout.ABC"
+"let context_aware=1
+
+Plug 'tpope/vim-surround'
+Plug 'terryma/vim-multiple-cursors'
+map nc <A-n>
+map nx <A-x>
+map np <A-p>
+
+" 选中所有单词光标
+set multicursor
+map q <Plug>(multicursor-ms/)
+"map <leader>qz <Plug>(multisursor-mcv)
+"map <leader>qZ <Plug>(multicursor-mcr)
+
+Plug 'tpope/vim-commentary'
+" gcc, gc + motion
+
+Plug 'vim-scripts/ReplaceWithRegister'
+" Replace with register content, gr, grr
+
+Plug 'vim-scripts/argtextobj.vim'
+let g:argtextobj_pairs="[:],(:),<:>,{:}"
+" aa,ia
+Plug 'kana/vim-textobj-entire'
+" ae: 当前文件整个内容; ie: 当前文件整个内容但不含首尾空行
+Plug 'dbakker/vim-paragraph-motion'
+Plug 'michaeljsmith/vim-indent-object'
+" ai, ii, aI
+
+Plug 'tommcdo/vim-exchange'
+"cx :On the first use, define the first {motion} to exchange. On the second use, define the second {motion} and perform the exchange.
+"cxx :Like cx, but use the current line.
+"X :Like cx, but for Visual mode.
+"cxc :Clear any {motion} pending for exchange.
+"exchanging two words using cxiw
+"map <leader>c cxc
+
+Plug 'machakann/vim-highlightedyank'
+let g:highlightedyank_highlight_color = "rgba(160, 160, 160, 155)"
+packadd matchit
+let b:matchit_ignorecase=1
+"Type s and two chars to start sneaking in forward direction
+"Type S and two chars to start sneaking in backward direction"
+set sneak
+set quickscope
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:qs_primary_color = '#EA3323'
+let g:qs_secondary_color = '#4573E8'
+"Plug 'easymotion/vim-easymotion'
+"nmap <leader>g <Action>(AceLineAction)
+"map <leader>s <Plug>(easymotion-s)
+"map <leader>e <Plug>(easymotion-f)
+" KJump
+nmap <leader>s <Action>(KJumpAction)
+nmap <leader>W <Action>(KJumpAction.Word0)
+nmap <leader>w <Action>(KJumpAction.Word1)
+nmap <leader>l <Action>(KJumpAction.Line)
+
+Plug 'preservim/nerdtree'
+map <leader>1 :NERDTreeToggle<CR>
+
+" ================================================================================================
+" = 快捷键配置=====================================
+" ================================================================================================
+"  快速到行首
+noremap H ^
+"  快速到行尾
+noremap L g_
+" 取消搜索高亮
+"noremap <ESC> :nohlsearch<CR>
+" 在插入模式下快速到行尾和行首
+imap <C-h> <Left>
+imap <C-j> <Down>
+imap <C-k> <Up>
+imap <C-l> <Right>
+imap <C-w> <Home>
+imap <C-e> <End>
+"水平垂直分屏
+map <leader>\ <Action>(SplitHorizontally)
+map <leader>/ <Action>(SplitVertically)
+"map <A-l> <Action>(NextTab)
+"map <A-h> <Action>(PreviousTab)
+" 关闭除当前标签页外的所有标签页
+map <leader>tw <Action>(CloseAllEditorsButActive)
+map <leader>ta <Action>(CloseAllEditors)
+map <leader>tr <Action>(ReopenClosedTab)
+" 展开 折叠
+map zz <Action>(CollapseRegion)
+map Z <Action>(ExpandRegion)
+" 打开终端"
+map <leader>t <Action>(ActivateTerminalToolWindow)
+
+nmap <leader>ff <Action>(GotoFile)
+nmap <leader>fl <Action>(SelectInProjectView)
+nmap <leader>fa <Action>(GotoAction)
+nmap <leader>fp <Action>(OpenProjectWindows)
+nmap <leader>fu <Action>(FindUsages)
+
+" 在括号后插入
+nmap <leader>i f(a
+nmap <leader>p <Action>(EditorBackwardParagraph)
+nmap <leader>n <Action>(EditorForwardParagraph)
+"跳回上次编辑的地方 last changed in current buffer(file)
+nmap ga '.
+nmap gd <Action>(GotoDeclaration)
+nmap gD <Action>(QuickImplementations)
+nmap gk <Action>(ExpressionTypeInfo)
+nmap gm <action>(MethodUp)
+nmap gi <action>(GotoImplementation)
+map gh <Action>(ShowErrorDescription)
+" bookmark in whole program
+nmap ma <action>(ToggleBookmark)
+nmap ml <action>(ShowBookmarks)
+nmap ms mS
+nmap 's 'S
+nmap md mD
+nmap 'd 'D
+nmap mf mF
+nmap 'f 'F
+
+map <leader>db <Action>(Debug)
+map <leader>b <Action>(ToggleLineBreakpoint)
+
+map <leader>ra <Action>(RenameElement)
+map <leader>c <Action>(Stop)
+map <leader>z <Action>(ToggleDistractionFreeMode)
+map <leader>a <Action>(Annotate)
+map <leader>h <Action>(Vcs.ShowTabbedFileHistory)
+map <S-Space> <Action>(GotoNextError)
+map <leader>o <Action>(FileStructurePopup)
+map <leader>rc <Action>(RunClass)
+map <leader>rr <Action>(Rerun)
+
+imap jj <Esc>
