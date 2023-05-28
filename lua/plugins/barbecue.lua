@@ -6,7 +6,6 @@ return {
   version = "*",
   dependencies = {
     "SmiteshP/nvim-navic",
-    "nvim-tree/nvim-web-devicons", -- optional dependency
   },
 	config = function()
 		-- triggers CursorHold event faster
@@ -14,11 +13,12 @@ return {
 
 		require("barbecue").setup({
 			create_autocmd = false, -- prevent barbecue from updating itself automatically
-			 attach_navic = false,
+			--  attach_navic = false,
 		})
 
 		vim.api.nvim_create_autocmd({
-			"WinScrolled", -- or WinResized on NVIM-v0.9 and higher
+			-- "WinScrolled", -- or WinResized on NVIM-v0.9 and higher
+			"WinResized",
 			"BufWinEnter",
 			"CursorHold",
 			"InsertLeave",

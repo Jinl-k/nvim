@@ -136,12 +136,12 @@ M.colors = {
 
 M.lsp_servers = {
     -- "clangd",
-    "tsserver",
+    -- "tsserver",
     -- "pyright",
     -- "eslint",
     -- "bashls",
     -- "yamlls",
-    "jsonls",
+    -- "jsonls",
     "cssls",
     -- "taplo",
     "html",

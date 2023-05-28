@@ -2,6 +2,7 @@
 return {
   "rmagatti/session-lens",
 	lazy = true,
+	enabled = false,
   config = function()
 		require('session-lens').setup({
 			prompt_title = 'SESSIONS',

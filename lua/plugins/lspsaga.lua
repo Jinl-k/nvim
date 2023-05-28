@@ -2,8 +2,11 @@
 -- https://github.com/glepnir/lspsaga.nvim/
 return {
     'glepnir/lspsaga.nvim',
-    event = 'BufRead',
-		dependencies = { {'nvim-tree/nvim-web-devicons'} , {"nvim-treesitter/nvim-treesitter"}},
+    event = "LspAttach",
+		dependencies = { 
+			'nvim-tree/nvim-web-devicons' , 
+			"nvim-treesitter/nvim-treesitter"
+		},
     config = function()
         require('lspsaga').setup({
 					-- preview = {
@@ -16,11 +19,16 @@ return {
 					},
 					request_timeout = 2000,
 					finder = {
-						edit = { "o", "<CR>" },
-						vsplit = "s",
-						split = "i",
-						tabe = "t",
-						quit = { "q", "<ESC>" },
+						keys = {
+							jump_to = 'p',
+							expand_or_jump = 'o',
+							vsplit = 's',
+							split = 'i',
+							tabe = 't',
+							tabnew = 'r',
+							quit = { 'q', '<ESC>' },
+							close_in_preview = '<ESC>',
+						},
 					},
 					definition = {
 						edit = "<C-c>o",
@@ -32,6 +40,7 @@ return {
 					},
 					code_action = {
 						num_shortcut = true,
+						show_server_name = true,
 						keys = {
 							quit = "q",
 							exec = "<CR>",
@@ -99,6 +108,7 @@ return {
 						diagnostic = "",
 						incoming = "",
 						outgoing = "",
+						hover = ' ',
 						-- colors = {
 						-- 	normal_bg = "#61AFEF",
 						-- 	title_bg = "#61AFEF",

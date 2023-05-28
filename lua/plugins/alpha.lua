@@ -1,7 +1,6 @@
 return {
     'goolord/alpha-nvim',
-    lazy = true,
-		
+    -- lazy = true,
 		event = "BufWinEnter",
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function() 
@@ -65,8 +64,9 @@ return {
 			end
 
 			dashboard.section.buttons.val = {
-				button("", "Session", "<cmd>Telescope session-lens search_session<cr>"),
-				button("", "Project find", "<C-p>"),
+				-- button("", "Session", "<cmd>Telescope session-lens search_session<cr>"),
+				button("", "Session", "<cmd>Telescope persisted<CR>"),
+				button("", "Projects", "<c-p>"),
 				button("", "File Browser"),
 				-- button("space f r", "  File frecency", "<cmd>Telescope frecency<cr>"),
 				-- button("space f e", "  File history", "<cmd>Telescope oldfiles<cr>"),

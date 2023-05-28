@@ -44,6 +44,7 @@ return {
 						["."] = false,
 						["dap-repl"] = false,
 					},
+					-- copilot_node_command = "/opt/homebrew/opt/node@18/bin/node", -- Node.js version must be > 16.x
 			})
 	end
 }

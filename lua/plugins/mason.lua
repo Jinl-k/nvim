@@ -22,9 +22,10 @@ return {
 					"css-lsp",
 					-- "eslint-lsp",
 					"html-lsp",
-					"json-lsp",
-					"lua-language-server",
+					-- "json-lsp",
+					-- "lua-language-server",
 					-- "markdownlint",
+					"emmet-ls",
 					"prettier",
 					-- "stylua",
 					-- "tailwindcss-language-server",
@@ -68,15 +69,13 @@ return {
 				debug = false,
 				log_level = "warn",
 				update_in_insert = false,
-				sources = sources,
+				sources = {},
 			})
 
 			require("mason-null-ls").setup({
-					ensure_installed = { "stylua", "prettier" },
-					automatic_installation = true,
-    			automatic_setup = true,
+				ensure_installed = { "prettier" },
+				automatic_installation = true,
+				handlers = {},
 			})
-
-			require("mason-null-ls").setup_handlers()
 	end
 }

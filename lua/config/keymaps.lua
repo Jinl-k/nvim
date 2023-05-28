@@ -44,7 +44,6 @@ vim.api.nvim_set_keymap('n', '<leader>k', ':FocusSplitUp<CR>', opt)
 vim.api.nvim_set_keymap('n', '<leader>l', ':FocusSplitRight<CR>', opt)
 
 
-
 -- -- 关闭左/右侧标签页
 keymap("n", "<leader>bh", ":BufferLineCloseLeft<CR>", opt)
 keymap("n", "<leader>bl", ":BufferLineCloseRight<CR>", opt)
@@ -86,7 +85,7 @@ keymap("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>" ,opt)
 keymap("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>" ,opt )
 keymap("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>" ,opt )
 keymap("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>" ,opt )
-keymap("n", "gR", "<cmd>TroubleToggle lsp_references<cr>" ,opt )
+-- keymap("n", "gR", "<cmd>TroubleToggle lsp_references<cr>" ,opt )
 -- Better up/down
 keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -151,6 +150,7 @@ keymap("n", "<m-]>", "g,",opt)
 
 
 
+
 -- lsp
 	local wk = require("which-key",opt)
 	-- Mappings.
@@ -166,11 +166,11 @@ keymap("n", "<m-]>", "g,",opt)
 			k = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
 			-- l = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Line Diagnostics" },
 			-- L = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Location List" },
-			n = { "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>", "Next Diagnostic" },
-			p = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>", "Previous Diagnostic" },
-			q = { "<cmd>lua vim.lsp.diagnostic.set_qflist()<cr>", "Quick Fix List" },
+			-- n = { "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>", "Next Diagnostic" },
+			-- p = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>", "Previous Diagnostic" },
+			-- q = { "<cmd>lua vim.lsp.diagnostic.set_qflist()<cr>", "Quick Fix List" },
 			R = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-			r = { "<cmd>Telescope lsp_references<cr>", "References" },
+			-- r = { "<cmd>Telescope lsp_references<cr>", "References" },
 			s = { "<cmd>lua vim.lsp.buf.document_symbol()<cr>", "Document Symbols" },
 			S = { "<cmd>lua vim.lsp.buf.workspace_symbol()<cr>", "Workspace Symbols" },
 		},
@@ -195,11 +195,14 @@ keymap("n", "<m-]>", "g,",opt)
 -- vim.keymap.set('n', 'gr', '<cmd>lua require("goto-preview",opt).goto_preview_references()<CR>', opt)
 -- vim.keymap.set('n', '<leader>q', '<cmd>lua require("goto-preview",opt).close_all_win()<CR>', opt)
 
-
-
+keymap("n", "go", function()
+	require("nvim-navbuddy").open()
+end, opt)
 --lspsaga
+keymap("n", "gr", "<cmd>Telescope lsp_references<cr>",opt)
 -- keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>",opt)
 keymap("n", "gA", "<cmd>Lspsaga code_action<CR>",opt)
+-- keymap("n", "gA", "<cmd>CodeActionMenu<CR>",opt)
 keymap("n", "gd", "<cmd>Lspsaga peek_definition<CR>",opt)
 keymap("n", "gt", "<cmd>Lspsaga peek_type_definition<CR>",opt)
 
@@ -210,12 +213,12 @@ keymap("n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>",opt)
 keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>",opt)
 keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>",opt)
 -- -- Diagnostic jump with filter like Only jump to error
--- keymap("n", "[E", function()
---   require("lspsaga.diagnostic",opt):goto_prev({ severity = vim.diagnostic.severity.ERROR })
--- end)
--- keymap("n", "]E", function()
---   require("lspsaga.diagnostic",opt):goto_next({ severity = vim.diagnostic.severity.ERROR })
--- end)
+keymap("n", "[E", function()
+  require("lspsaga.diagnostic",opt):goto_prev({ severity = vim.diagnostic.severity.ERROR })
+end)
+keymap("n", "]E", function()
+  require("lspsaga.diagnostic",opt):goto_next({ severity = vim.diagnostic.severity.ERROR })
+end)
 keymap("n","<leader>L", "<cmd>Lspsaga outline<CR>",opt)
 
 
@@ -249,7 +252,8 @@ end
 -- -- Telescope
 keymap("n","<C-e>", ":Telescope file_browser<CR>" ,opt)
 keymap("n","<leader>ff", "<cmd>Telescope find_files<cr>" ,opt)
-keymap("n","<C-p>", ":lua require('telescope').extensions.projects.projects()<CR>" ,opt)
+-- keymap("n","<C-p>", ":lua require('telescope').extensions.projects.projects()<CR>" ,opt)
+vim.api.nvim_set_keymap('n','<C-p>',":lua require'telescope'.extensions.project.project{}<CR>",opt)
 -- keymap("n","<C-P>", "<cmd>lua require('telescope.builtin').commands()<cr>" ,opt)
 keymap("n","<leader>fr", "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>" ,opt)
 -- 全部文件查找字符

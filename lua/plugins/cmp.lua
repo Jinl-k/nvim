@@ -124,7 +124,7 @@ local M ={
                 { name = "nvim_lsp_signature_help" },
                 { name = "buffer" },
             }),
-            window = {
+            window = {    
 								completion = cmp.config.window.bordered({
                 		winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
 								}),

@@ -8,6 +8,7 @@ M.capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 M.setup = function()
 	vim.diagnostic.config({
 		virtual_text = { prefix = "", source = "always" },
+		-- virtual_text = false,
 		float = {
 			focusable = true,
 			style = "minimal",
@@ -58,6 +59,7 @@ M.on_attach = function(client, bufnr)
       require("nvim-navic").attach(client, bufnr)
     end
 
+		-- require("nvim-navbuddy").attach(client, bufnr)
 
 	-- show diagnostics in hover window
 	-- vim.api.nvim_create_autocmd("CursorHold", {
